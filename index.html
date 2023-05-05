@@ -15,14 +15,47 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="/styles.css" />
+    <!--=============== MAIN JS ===============-->
     <script src="js/main.js" defer></script>
-  </body>
 
     <title>Responsive portfolio website - Bedimcode</title>
   </head>
   <body>
     <!--==================== HEADER ====================-->
-    <header class="header" id="header"></header>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="/" class="nav__logo"> Anshuman <span>Mahato</span> </a>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="#about" class="nav__link">About</a>
+            </li>
+            <li class="nav__item">
+              <a href="#services" class="nav__link">Services</a>
+            </li>
+            <li class="nav__item">
+              <a href="#projects" class="nav__link">Projects</a>
+            </li>
+            <li class="nav__item">
+              <a href="#contact" class="nav__link">Contact</a>
+            </li>
+          </ul>
+
+          <!-- Close Button-->
+          <div class="nav__close" id="nav-close">
+            <i class="ri-close-line"></i>
+          </div>
+        </div>
+
+        <!-- Toggle button -->
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="ri-menu-line"></i>
+        </div>
+      </nav>
+    </header>
 
     <!--==================== MAIN ====================-->
     <main class="main">
@@ -54,7 +87,5 @@
     <script src=""></script>
 
     <!--=============== EMAIL JS ===============-->
-
-    <!--=============== MAIN JS ===============-->
-    
+  </body>
 </html>
