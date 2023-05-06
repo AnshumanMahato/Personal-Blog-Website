@@ -283,6 +283,10 @@ svg {
 .about__description {
   margin-bottom: 2rem;
   color: rgb(168, 168, 168);
+  text-align: justify;
+}
+.about__description p:not(:last-child) {
+  margin-bottom: 1rem;
 }
 .about__image {
   justify-self: center;
