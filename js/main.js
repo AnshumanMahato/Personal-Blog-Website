@@ -38,14 +38,14 @@ const sendEmail = (e) => {
 
   emailjs
     .sendForm(
-      "service_ottane4",
-      "template_m8i8y7q",
+      "service_pj7c7ya",
+      "template_2b120vj",
       "#contact-form",
-      "Jm5SxpFzmgzFMgwy4"
+      "1-Dellt368ShRX4KX"
     )
     .then(
       () => {
-        contactMessage.textContent = "Message Sent successfully";
+        contactMessage.textContent = "Message Sent successfully ✅";
 
         setTimeout(() => {
           contactMessage.textContent = "";
@@ -53,7 +53,7 @@ const sendEmail = (e) => {
         contactForm.reset();
       },
       () => {
-        contactMessage.textContent = "Message not Sent (server error)";
+        contactMessage.textContent = "Message not Sent (server error) ❌";
       }
     );
 };
