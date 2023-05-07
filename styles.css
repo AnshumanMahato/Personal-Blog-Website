@@ -379,53 +379,66 @@ svg {
   background-color: var(--container-color);
 }
 .projects__container {
-  row-gap: 2rem;
+  display: flex;
   justify-content: center;
-  padding-block: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 2rem;
 }
 .projects__card {
-  position: relative;
+  flex-basis: 20rem;
   border-radius: 1rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  border: 2px solid var(--body-color);
+  transition: border 0.4s;
+}
+
+.projects__card:not(:last-child) {
+  margin-right: 2rem;
+}
+.projects__card:hover {
+  border: 2px solid var(--first-color);
+}
+
+.projects__image {
+  width: 100%;
+  height: 10rem;
 }
 .projects__img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
-.projects__modal {
-  position: absolute;
-  left: 0;
-  bottom: -100%;
-  width: 100%;
-  height: 100%;
-
-  background: linear-gradient(
-    180deg,
-    hsla(0, 0%, 0%, 0) 0%,
-    hsla(var(--hue), 70%, 40%, 0.8) 120%
-  );
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 1rem;
+.projects__desc {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  transition: bottom 0.4s;
+  padding: 1.5rem;
+  background-color: var(--body-color);
+}
+.projects__cta {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.projects__button {
+  padding: 0.5rem 1.5rem;
 }
 
-.projects__subtitle,
-.projects__button {
-  color: var(--title-color);
-  font-size: var(--small-font-size);
-}
-.projects__subtitle {
-  display: block;
-  margin-bottom: 0.25rem;
-}
 .projects__title {
-  font-size: var(--h1-font-size);
+  font-size: 1.5rem;
   margin-bottom: 0.75rem;
+  text-align: center;
+  color: var(--title-color);
+}
+
+.projects__about {
+  text-align: justify;
+  color: rgb(124, 123, 121);
+  margin-bottom: 1rem;
 }
 .projects__button {
   display: flex;
@@ -436,9 +449,9 @@ svg {
 .projects__button i {
   font-size: 1.25rem;
 }
-.projects__card:hover .projects__modal {
+/* .projects__card:hover .projects__modal {
   bottom: 0;
-}
+} */
 .contact__container {
   padding-top: 1rem;
 }
@@ -573,7 +586,6 @@ svg {
   .about__ontainer,
   .skills__container,
   .services__container,
-  .projects__container,
   .contact__container {
     grid-template-columns: 360px;
     justify-content: center;
@@ -607,8 +619,7 @@ svg {
   .about__data {
     order: 1;
   }
-  .services__container,
-  .projects__container {
+  .services__container {
     grid-template-columns: repeat(2, 352px);
   }
 }
@@ -698,11 +709,6 @@ svg {
     padding: 3.5rem 2rem;
   }
 
-  .projects__container {
-    grid-template-columns: repeat(3, 350px);
-    row-gap: 3rem;
-    padding-block: 2.5rem 4rem;
-  }
   .projects__button {
     font-size: var(--normal-font-size);
   }
