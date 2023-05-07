@@ -203,7 +203,7 @@ svg {
 }
 .home,
 .skills,
-.contact {
+.projects {
   background-color: var(--container-color);
 }
 .home__container {
@@ -466,8 +466,7 @@ svg {
 .contact__input {
   padding: 1rem 1.25rem;
   border-radius: 0.5rem;
-  /* background-color: var(--container-color); */
-  background-color: var(--body-color);
+  background-color: var(--container-color);
   color: var(--title-color);
 }
 .contact__input::placeholder {
@@ -490,7 +489,7 @@ svg {
   color: var(--title-color);
 }
 .footer {
-  /* background-color: var(--container-color); */
+  background-color: var(--container-color);
   padding-block: 3.5rem 2rem;
 }
 .footer__container {
