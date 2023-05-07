@@ -80,7 +80,7 @@ const scrollActive = () => {
         ".nav__menu a[href*=" + sectionId + "]"
       );
 
-    if (scrollY > scctionTop && scrollY <= sectionTop + sectionHeight) {
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
       sectionsClass.classList.add("active-link");
     } else {
       sectionsClass.classList.remove("active-link");
