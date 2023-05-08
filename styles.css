@@ -155,6 +155,7 @@ svg {
 .nav__logo {
   color: var(--title-color);
   font-weight: var(--font-medium);
+  font-size: var(--h3-font-size);
 }
 .nav__logo span {
   color: var(--first-color);
