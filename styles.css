@@ -750,6 +750,18 @@ svg {
     margin: 0;
     justify-self: flex-end;
   }
+  .footer__copy > a,
+  .footer__copy > a:link,
+  .footer__copy > a:visited {
+    text-decoration: none;
+    color: hsl(var(--hue), 100%, 40%);
+    transition: all 0.4s;
+  }
+  .footer__copy > a:hover,
+  .footer__copy > a:active {
+    color: var(--title-color);
+    background-color: hsl(var(--hue), 100%, 40%);
+  }
   .scrollup {
     right: 3rem;
   }
