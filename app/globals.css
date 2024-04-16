@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  *,
+  *::after,
+  *::before {
+    @apply m-0;
+    @apply p-0;
+    @apply box-border;
+  }
+
+  html {
+    @apply text-[62.5%];
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply relative;
+    @apply w-[100vw];
+    @apply min-h-screen;
+    @apply overflow-x-hidden;
+    @apply font-normal;
+    @apply text-primary-dark;
+    @apply bg-background-dark;
+  }
+}
+
+@layer components {
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
