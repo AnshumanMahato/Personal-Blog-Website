@@ -1,9 +1,10 @@
+import { IoHomeOutline, IoMenu } from "react-icons/io5";
+
 function Header() {
   return (
-    <header className="p-[2rem]">
-      <div className="text-[1.5rem] leading-[140%] text-white font-semibold">
-        Anshuman <span className="text-accent-dark">Mahato</span>
-      </div>
+    <header className="flex justify-between items-center  p-[2rem] text-[2.5rem] leading-[140%] text-white font-semibold">
+      <IoHomeOutline />
+      <IoMenu />
     </header>
   );
 }
