@@ -15,7 +15,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const classes = classNames(inter.className, "antialiased");
+  const classes = classNames(
+    inter.className,
+    "antialiased",
+    "flex",
+    "flex-col",
+    "min-h-screen",
+    "items-center"
+  );
 
   return (
     <html lang="en">
