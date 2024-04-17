@@ -21,7 +21,8 @@ export default function RootLayout({
     "flex",
     "flex-col",
     "min-h-screen",
-    "items-center"
+    "items-center",
+    "gap-[4rem]"
   );
 
   return (

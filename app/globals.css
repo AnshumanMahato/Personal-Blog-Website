@@ -24,6 +24,7 @@
     @apply font-normal;
     @apply text-primary-dark;
     @apply bg-background-dark;
+    @apply font-normal;
   }
 }
 
