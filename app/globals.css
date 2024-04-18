@@ -22,6 +22,8 @@
     @apply overflow-x-hidden;
     @apply font-normal;
     @apply text-primary-dark;
+    @apply text-[1.2rem];
+    @apply leading-[150%];
     @apply bg-background-dark;
     @apply font-normal;
   }

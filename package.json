@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "load-skills": "ts-node ./scripts/loadSkills.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -24,6 +25,7 @@
     "eslint-config-next": "14.1.4",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
