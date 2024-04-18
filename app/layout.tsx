@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <div
           id="root"
-          className="flex flex-col justify-between items-center min-h-screen w-full gap-[4rem]"
+          className="flex flex-col justify-between items-center min-h-screen w-full"
         >
           <Header />
           {children}

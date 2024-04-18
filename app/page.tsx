@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center w-full max-w-[800px] px-[2rem] text-center gap-[4rem]">
+    <main className="flex flex-col items-center w-full max-w-[800px] px-[2rem] text-center gap-[5rem] mt-[3.5rem] mb-[6rem]">
       <Section>
         <div className="w-[10rem] h-[10rem] bg-secondary-light rounded-full"></div>
         <h1 className="text-white text-[1.8rem] font-semibold leading-[150%]">
@@ -55,23 +55,14 @@ export default function Home() {
           out.
         </p>
         <p>You can find me here.</p>
-        <div className="flex gap-[3rem] text-[2rem]">
-          <Link
-            href="https://twitter.com/AnshumanMahato_"
-            className="hover:text-accent-dark transition-colors duration-200"
-          >
+        <div className="flex gap-[3rem] text-[2rem] text-accent-dark">
+          <Link href="https://twitter.com/AnshumanMahato_">
             <FaXTwitter />
           </Link>
-          <Link
-            href="https://www.linkedin.com/in/anshuman-mahato/"
-            className="hover:text-accent-dark transition-colors duration-200"
-          >
+          <Link href="https://www.linkedin.com/in/anshuman-mahato/">
             <FaLinkedin />
           </Link>
-          <Link
-            href="mailto:anshuman.mahato0935@gmail.com"
-            className="hover:text-accent-dark transition-colors duration-200"
-          >
+          <Link href="mailto:anshuman.mahato0935@gmail.com">
             <IoMailOutline />
           </Link>
         </div>
