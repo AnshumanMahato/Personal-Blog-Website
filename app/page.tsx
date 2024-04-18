@@ -3,7 +3,7 @@ import Section from "./ui/Section";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center w-full max-w-[800px] px-[2rem] text-center gap-[4rem]">
+    <main className="flex flex-col items-center w-full max-w-[800px] px-[2rem] text-center gap-[4rem]">
       <Section>
         <div className="w-[10rem] h-[10rem] bg-secondary-light rounded-full"></div>
         <h1 className="test-white text-[1.8rem] font-semibold leading-[150%]">

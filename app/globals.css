@@ -19,7 +19,6 @@
   body {
     @apply relative;
     @apply w-[100vw];
-    @apply min-h-screen;
     @apply overflow-x-hidden;
     @apply font-normal;
     @apply text-primary-dark;

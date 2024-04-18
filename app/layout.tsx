@@ -15,22 +15,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const classes = classNames(
-    inter.className,
-    "antialiased",
-    "flex",
-    "flex-col",
-    "min-h-screen",
-    "items-center",
-    "gap-[4rem]"
-  );
-
   return (
     <html lang="en">
-      <body className={classes}>
-        <Header />
-        {children}
-        <Footer />
+      <body className={`${inter.className} antialiased`}>
+        <div
+          id="root"
+          className="flex flex-col justify-between items-center min-h-screen w-full gap-[4rem]"
+        >
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
