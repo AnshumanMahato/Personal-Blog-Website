@@ -14,7 +14,7 @@ function SectionLink({
     "text-accent-dark text-[1.4rem] font-medium",
     "relative px-[1rem] py-[2px] overflow-hidden",
     "before:absolute before:top-0 before:-left-full before:w-full before:h-full before:block before:bg-accent-dark before:z-0",
-    "hover:text-background-dark hover:before:left-0 before:transition-all before:duration-[0.2s]"
+    "hover:text-background-dark hover:before:left-0 before:transition-all before:duration-200"
   );
 
   return (

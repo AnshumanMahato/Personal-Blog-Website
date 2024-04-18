@@ -1,8 +1,11 @@
+import { FaXTwitter, FaLinkedin } from "react-icons/fa6";
+import { IoMailOutline } from "react-icons/io5";
 import Section from "@/app/ui/Section";
 import SectionHeading from "@/app/ui/SectionHeading";
 import SectionLink from "@/app/ui/SectionLink";
 import skills from "@/app/lib/skills.json";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -42,6 +45,36 @@ export default function Home() {
         </div>
         <p>Here are some of the things that I have worked on till now.</p>
         <SectionLink href="/projects">Checkout my Projects {"-->"}</SectionLink>
+      </Section>
+      <Section>
+        <SectionHeading>Connect With Me</SectionHeading>
+        <p>
+          Currently, I am open for Web Developer roles. I am open to
+          internships, jobs and freelance opportunities. So, if you have
+          anything and think I might be appropriate for the task, please reach
+          out.
+        </p>
+        <p>You can find me here.</p>
+        <div className="flex gap-[3rem] text-[2rem]">
+          <Link
+            href="https://twitter.com/AnshumanMahato_"
+            className="hover:text-accent-dark transition-colors duration-200"
+          >
+            <FaXTwitter />
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/anshuman-mahato/"
+            className="hover:text-accent-dark transition-colors duration-200"
+          >
+            <FaLinkedin />
+          </Link>
+          <Link
+            href="mailto:anshuman.mahato0935@gmail.com"
+            className="hover:text-accent-dark transition-colors duration-200"
+          >
+            <IoMailOutline />
+          </Link>
+        </div>
       </Section>
     </main>
   );
