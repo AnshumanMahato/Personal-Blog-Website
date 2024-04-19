@@ -33,15 +33,18 @@ export default function Home() {
         </p>
         <p>I usually work with these technologies.</p>
         <div className="flex flex-wrap gap-[1.6rem] justify-center">
-          {skills.map((skill) => (
-            <Image
-              key={skill}
-              src={`/assets/skill-icons/${skill}`}
-              alt={skill}
-              width={22}
-              height={22}
-            />
-          ))}
+          {skills.map((skill) => {
+            const [skillName, skillIcon] = skill;
+            return (
+              <Image
+                key={skillName}
+                src={`/assets/skill-icons/${skillIcon}`}
+                alt={skillName}
+                width={22}
+                height={22}
+              />
+            );
+          })}
         </div>
         <p>Here are some of the things that I have worked on till now.</p>
         <SectionLink href="/projects">Checkout my Projects {"-->"}</SectionLink>
