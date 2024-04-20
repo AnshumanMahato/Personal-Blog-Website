@@ -38,7 +38,7 @@ function Header() {
                 href="/about"
                 className="hover:text-accent-dark transition-colors duration-200"
               >
-                About
+                About Me
               </Link>
             </li>
             <li>
