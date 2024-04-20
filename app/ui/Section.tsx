@@ -8,7 +8,7 @@ function Section({
   className?: string;
 }) {
   const classes = classNames(
-    "flex flex-col items-center w-full gap-[2rem]",
+    "flex flex-col items-center w-full gap-[2rem] xs:gap-[4rem]",
     className
   );
 

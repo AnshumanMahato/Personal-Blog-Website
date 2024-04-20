@@ -23,6 +23,7 @@
     @apply font-normal;
     @apply text-primary-dark;
     @apply text-[1.2rem];
+    @apply xs:text-[1.6rem];
     @apply leading-[150%];
     @apply bg-background-dark;
     @apply font-normal;

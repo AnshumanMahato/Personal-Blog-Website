@@ -9,10 +9,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center w-full max-w-[800px] px-[2rem] text-center gap-[5rem] mt-[3.5rem] mb-[6rem]">
+    <main className="flex flex-col items-center w-full max-w-[800px] px-[2rem] text-center gap-[10rem] mt-[3.5rem] mb-[6rem]">
       <Section>
-        <div className="w-[10rem] h-[10rem] bg-secondary-light rounded-full"></div>
-        <h1 className="text-white text-[1.8rem] font-semibold leading-[150%]">
+        <div className="w-[10rem] h-[10rem] xs:w-[15rem] xs:h-[15rem] sm:w-[20rem] sm:h-[20rem] bg-secondary-light rounded-full"></div>
+        <h1 className="text-white text-[1.8rem] xs:text-[2.4rem] font-semibold leading-[150%]">
           Hey! 👋 Myself <span className="text-accent-dark">Anshuman.</span>
           <br />
           It’s nice to meet you!
@@ -32,17 +32,22 @@ export default function Home() {
           build Telegram Chatbots and write Web Scrapping scripts.
         </p>
         <p>I usually work with these technologies.</p>
-        <div className="flex flex-wrap gap-[1.6rem] justify-center">
+        <div className="flex flex-wrap gap-[1.6rem] xs:gap-[2.5rem] sm:gap-[3.5rem] justify-center">
           {skills.map((skill) => {
             const [skillName, skillIcon] = skill;
             return (
-              <Image
+              <div
                 key={skillName}
-                src={`/assets/skill-icons/${skillIcon}`}
-                alt={skillName}
-                width={22}
-                height={22}
-              />
+                className="relative w-[22px] h-[22px] xs:w-[27px] xs:h-[27px] sm:w-[36px] sm:h-[36px]"
+              >
+                <Image
+                  src={`/assets/skill-icons/${skillIcon}`}
+                  alt={skillName}
+                  sizes="22px, (min-width: 375px) 27px, (min-width: 640px) 36px"
+                  fill
+                  objectFit="contain"
+                />
+              </div>
             );
           })}
         </div>
@@ -58,7 +63,7 @@ export default function Home() {
           out.
         </p>
         <p>You can find me here.</p>
-        <div className="flex gap-[3rem] text-[2rem] text-accent-dark">
+        <div className="flex gap-[3rem] text-[2rem] xs:text-[2.5rem] text-accent-dark">
           <Link href="https://twitter.com/AnshumanMahato_">
             <FaXTwitter />
           </Link>

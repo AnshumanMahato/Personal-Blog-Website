@@ -11,8 +11,8 @@ function SectionLink({
   children: React.ReactNode;
 }) {
   const classes: string = classNames(
-    "text-accent-dark text-[1.4rem] font-medium",
-    "relative px-[1rem] py-[2px] overflow-hidden",
+    "text-accent-dark text-[1.2rem] xs:text-[1.6rem] font-medium",
+    "relative px-[8px] py-[2px] overflow-hidden",
     "before:absolute before:top-0 before:-left-full before:w-full before:h-full before:block before:bg-accent-dark before:z-0",
     "hover:text-background-dark hover:before:left-0 before:transition-all before:duration-200"
   );
