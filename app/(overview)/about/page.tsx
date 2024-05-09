@@ -35,7 +35,7 @@ function About() {
           </p>
         </div>
       </section>
-      <section className="flex flex-col items-start gap-[1.5rem]">
+      <section className="flex flex-col items-start gap-[1.5rem] w-min">
         <SocialLink
           href="https://github.com/AnshumanMahato"
           icon={<FiGithub />}
