@@ -1,8 +1,11 @@
-function PageHeading({ children }: Readonly<{ children: React.ReactNode }>) {
+function PageHeading({ children }: { children: string }) {
+  const highlight = children.split(" ").pop()!;
+  const heading = children.replace(highlight, "");
   return (
-    <h2 className="uppercase leading-[150%] text-[1.2rem] tracking-[5.4px] xs:text-[1.6rem] xs:tracking-[7.2px] pl-[5px] xs:pl-[1rem]">
-      {children}
-    </h2>
+    <h1 className="text-white font-light text-[4.8rem] leading-[120%]">
+      {heading}
+      <span className="text-accent-dark">{highlight}</span>
+    </h1>
   );
 }
 
