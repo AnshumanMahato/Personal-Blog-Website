@@ -9,7 +9,7 @@ function About() {
     <>
       <section className="col-span-full flex flex-col gap-[2rem]">
         <PageSubheading>About Me</PageSubheading>
-        <div className=" w-full h-[17.5rem] xs:h-[22.5rem] bg-secondary-light rounded-[1rem] sm:rounded-[2rem]"></div>
+        <div className=" w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 bg-secondary-light rounded-[1rem] sm:rounded-[2rem]"></div>
       </section>
       <section className="flex flex-col gap-[4rem]">
         <PageHeading>I&apos;m Anshuman.</PageHeading>
@@ -35,7 +35,7 @@ function About() {
           </p>
         </div>
       </section>
-      <section className="flex flex-col items-start gap-[1.5rem] w-min">
+      <section className="flex flex-col items-start gap-[1.5rem] w-min md:[justify-self:end] md:mt-[2.5rem]">
         <SocialLink
           href="https://github.com/AnshumanMahato"
           icon={<FiGithub />}

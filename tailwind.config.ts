@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
+import aspectRatio from "@tailwindcss/aspect-ratio";
 
 const config: Config = {
   content: [
@@ -33,6 +34,9 @@ const config: Config = {
       ...defaultTheme.screens,
     },
   },
-  plugins: [],
+  corePlugins: {
+    aspectRatio: false,
+  },
+  plugins: [aspectRatio],
 };
 export default config;

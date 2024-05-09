@@ -13,7 +13,7 @@ function SocialLink({
   return (
     <Link
       href={href}
-      className="flex gap-[8px] items-center text-[1.2rem] leading-[150%] text-secondary-dark hover:text-accent-dark transition-colors duration-300"
+      className="flex gap-[8px] items-center text-secondary-dark hover:text-accent-dark transition-colors duration-300"
     >
       {icon}
       <span>{children}</span>
