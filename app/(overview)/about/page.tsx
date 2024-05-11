@@ -1,16 +1,17 @@
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
 import PageHeading from "@/app/ui/PageHeading";
-import PageSubheading from "@/app/ui/PageSubheading";
 import SocialLink from "@/app/ui/SocialLink";
+import PageBanner from "@/app/ui/PageBanner";
 
 function About() {
   return (
     <>
-      <section className="col-span-full flex flex-col gap-[2rem]">
-        <PageSubheading>About Me</PageSubheading>
-        <div className=" w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 bg-secondary-light rounded-[1rem] sm:rounded-[2rem]"></div>
-      </section>
+      <PageBanner
+        title="About Me"
+        coverImage="/next.svg"
+        coverImageAlt="next"
+      />
       <section className="flex flex-col gap-[4rem]">
         <PageHeading>I&apos;m Anshuman.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
@@ -35,7 +36,7 @@ function About() {
           </p>
         </div>
       </section>
-      <section className="flex flex-col items-start gap-[1.5rem] w-min md:[justify-self:end] md:mt-[2.5rem]">
+      <section className="md:sticky top-32 md:row-start-2 md:col-start-2 flex flex-col items-start gap-[1.5rem] w-min h-min md:[justify-self:end] md:mt-[2.5rem]">
         <SocialLink
           href="https://github.com/AnshumanMahato"
           icon={<FiGithub />}
