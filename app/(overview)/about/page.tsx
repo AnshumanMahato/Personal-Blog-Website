@@ -1,10 +1,30 @@
-import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
+import { MdOutlineEmail } from "react-icons/md";
 import PageHeading from "@/app/ui/PageHeading";
-import SocialLink from "@/app/ui/SocialLink";
 import PageBanner from "@/app/ui/PageBanner";
+import Section from "@/app/ui/Section";
+import PageCTA from "@/app/ui/PageCTA";
 
 function About() {
+  const socials = [
+    {
+      href: "https://twitter.com/AnshumanMahato_",
+      icon: <FaXTwitter />,
+      handle: "@AnshumanMahato_",
+    },
+    {
+      href: "https://www.linkedin.com/in/anshuman-mahato/",
+      icon: <FiLinkedin />,
+      handle: "/anshuman-mahato",
+    },
+    {
+      href: "mailto:anshuman.mahato0935@gmail.com",
+      icon: <MdOutlineEmail />,
+      handle: "hi@anshumanmahato.me",
+    },
+  ];
+
   return (
     <>
       <PageBanner
@@ -12,7 +32,7 @@ function About() {
         coverImage="/next.svg"
         coverImageAlt="next"
       />
-      <section className="flex flex-col gap-[4rem]">
+      <Section>
         <PageHeading>I&apos;m Anshuman.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
           <p>
@@ -35,27 +55,8 @@ function About() {
             developer.
           </p>
         </div>
-      </section>
-      <section className="md:sticky top-32 md:row-start-2 md:col-start-2 flex flex-col items-start gap-[1.5rem] w-min h-min md:[justify-self:end] md:mt-[2.5rem]">
-        <SocialLink
-          href="https://github.com/AnshumanMahato"
-          icon={<FiGithub />}
-        >
-          /Anshuman Mahato
-        </SocialLink>
-        <SocialLink
-          href="https://www.linkedin.com/in/anshuman-mahato/"
-          icon={<FiLinkedin />}
-        >
-          /anshuman-mahato
-        </SocialLink>
-        <SocialLink
-          href="https://twitter.com/AnshumanMahato_"
-          icon={<FaXTwitter />}
-        >
-          @AnshumanMahato_
-        </SocialLink>
-      </section>
+      </Section>
+      <PageCTA links={socials} />
     </>
   );
 }

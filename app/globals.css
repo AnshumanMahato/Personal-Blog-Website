@@ -19,7 +19,7 @@
   body {
     @apply relative;
     @apply w-[100vw];
-    @apply overflow-x-hidden;
+    @apply overflow-x-clip;
     @apply font-normal;
     @apply text-primary-dark;
     @apply text-[1.2rem];
