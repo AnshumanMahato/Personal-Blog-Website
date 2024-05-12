@@ -4,7 +4,7 @@ export default function DetailsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="w-full max-w-[800px] px-[2rem] xs:px-[3rem] bg-primary-light">
+    <main className="w-full max-w-[830px] px-[2rem] xs:px-[3rem] bg-primary-light">
       {children}
     </main>
   );

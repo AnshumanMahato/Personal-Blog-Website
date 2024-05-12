@@ -19,7 +19,7 @@ function Header() {
 
   return (
     <>
-      <header className="relative z-50 flex justify-between items-center  p-[2rem] xs:p-[3rem] text-[2.5rem] xs:text-[3rem] leading-[140%] w-full max-w-[800px]">
+      <header className="relative z-50 flex justify-between items-center  p-[2rem] xs:p-[3rem] text-[2.5rem] xs:text-[3rem] leading-[140%] w-full max-w-[830px]">
         <Link
           href="/"
           className="hover:text-accent-dark transition-colors duration-200"

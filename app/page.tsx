@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center w-full max-w-[800px] px-[2rem] xs:px-[3rem] text-center gap-[10rem] mt-[3.5rem] mb-[6rem]">
+    <main className="flex flex-col items-center w-full max-w-[830px] px-[2rem] xs:px-[3rem] text-center gap-[10rem] mt-[3.5rem] mb-[6rem]">
       <Section>
         <div className="w-[10rem] h-[10rem] xs:w-[15rem] xs:h-[15rem] sm:w-[20rem] sm:h-[20rem] bg-secondary-light rounded-full"></div>
         <h1 className="text-white text-[1.8rem] xs:text-[2.4rem] font-semibold leading-[150%]">
