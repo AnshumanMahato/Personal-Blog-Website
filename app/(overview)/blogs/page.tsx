@@ -4,10 +4,7 @@ import PageBanner from "@/app/ui/PageBanner";
 import PageCTA from "@/app/ui/PageCTA";
 import PageHeading from "@/app/ui/PageHeading";
 import Section from "@/app/ui/Section";
-import { FaXTwitter } from "react-icons/fa6";
 import { FaHashnode, FaDev } from "react-icons/fa6";
-import { FiLinkedin } from "react-icons/fi";
-import { MdOutlineEmail } from "react-icons/md";
 
 function Blogs() {
   const socials = [
