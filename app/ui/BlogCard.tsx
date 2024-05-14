@@ -1,7 +1,7 @@
 function BlogCard() {
   return (
     <div className="w-full max-w-[64rem] flex flex-col gap-[5px] p-[8px] xs:p-[1rem] sm:pl-[2rem] sm:pr-[7rem] border-b-[1px] border-b-secondary-dark">
-      <h3 className="text-white text-[1.6rem] xs:text-[2.4rem] leading-[150%]">
+      <h3 className="text-white text-[1.6rem] xs:text-[2rem] leading-[150%]">
         Blog Heading
       </h3>
       <div className="text-[1.2rem] min-[430px]:text-[1.6rem] leading-[150%] flex gap-[5px] sm:gap-[2rem] items-center text-secondary-dark">

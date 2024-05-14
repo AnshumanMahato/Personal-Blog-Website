@@ -3,6 +3,7 @@ import CardContainer from "@/app/ui/CardContainer";
 import PageBanner from "@/app/ui/PageBanner";
 import PageCTA from "@/app/ui/PageCTA";
 import PageHeading from "@/app/ui/PageHeading";
+import ProjectCard from "@/app/ui/ProjectCard";
 import Section from "@/app/ui/Section";
 import { FaGithub } from "react-icons/fa6";
 import { SiFrontendmentor } from "react-icons/si";
@@ -38,12 +39,12 @@ function Projects() {
         </div>
       </Section>
       <CardContainer>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
       </CardContainer>
       <PageCTA links={socials} />
     </>
