@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next\" \"pnpm codegen --watch\" --names next,codegen",
+    "codegen": "graphql-codegen --config codegen.yml",
     "load-skills": "ts-node ./scripts/loadSkills.ts",
     "build": "next build",
     "start": "next start",
@@ -18,11 +19,16 @@
     "react-icons": "^5.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typed-document-node": "^5.0.6",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8.4.38",
