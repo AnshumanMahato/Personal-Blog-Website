@@ -1,5 +1,9 @@
 {
   "name": "anshumanmahato.github.io",
+  "author": {
+    "name": "Anshuman Mahato",
+    "email": "anshuman.mahato0935@gmail.com"
+  },
   "version": "2.0.0",
   "private": true,
   "scripts": {
