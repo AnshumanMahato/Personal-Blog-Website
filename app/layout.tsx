@@ -1,14 +1,41 @@
 import type { Metadata } from "next";
-import classNames from "classnames";
+import request from "graphql-request";
 import Footer from "@/app/ui/Footer";
 import { inter } from "@/app/ui/fonts";
 import Header from "@/app/ui/Header";
 import "./globals.css";
+import {
+  PublicationByHostDocument,
+  PublicationByHostQuery,
+  PublicationByHostQueryVariables,
+} from "./schema/graphql";
 
-export const metadata: Metadata = {
-  title: "Anshuman Mahato",
-  description: "Web Developer | Blogger | Open Source Enthusiast",
+const getMetadata = async (): Promise<Metadata> => {
+  const GQL_ENDPOINT: string = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT!;
+
+  const data = await request<
+    PublicationByHostQuery,
+    PublicationByHostQueryVariables
+  >(GQL_ENDPOINT, PublicationByHostDocument, {
+    host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST!,
+  });
+
+  const { publication } = data;
+
+  //TODO: Replace with actual data from publication
+  return {
+    title: "Anshuman Mahato",
+    description: "Web Developer | Blogger | Open Source Enthusiast",
+    twitter: {
+      card: "summary_large_image",
+      site: "@AnshumanMahato_",
+      title: "Anshuman Mahato",
+      description: "Web Developer | Blogger | Open Source Enthusiast",
+    },
+  };
 };
+
+export const metadata: Promise<Metadata> = (async () => await getMetadata())();
 
 export default function RootLayout({
   children,
