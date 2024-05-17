@@ -962,7 +962,7 @@ type DomainStatus {
   """A flag indicating the status of a publication domain"""
   status: CustomDomainStatus!
   """
-  A timestamp indicating when the domain was verified. 
+  A timestamp indicating when the domain was verified.
   It is only present if the domain is verified.
   """
   verifiedAt: DateTime
@@ -1651,6 +1651,12 @@ type MyUser implements IUser & Node {
   dateJoined: DateTime
   """Whether or not the user is deactivated."""
   deactivated: Boolean!
+  drafts(
+    """A cursor to the last item in the previous page."""
+    after: String
+    """The number of posts to return."""
+    first: Int!
+  ): UserDraftConnection!
   """The users who are following this user"""
   followers(
     """The page number that should be returned."""
@@ -3658,6 +3664,24 @@ type UserConnection implements PageConnection {
   pageInfo: OffsetPageInfo!
   """The total number of documents in the connection."""
   totalDocuments: Int!
+}
+
+"""Drafts that belong to a user."""
+type UserDraftConnection implements Connection {
+  """A list of edges."""
+  edges: [UserDraftEdge!]!
+  """Generic information to aid in pagination."""
+  pageInfo: PageInfo!
+  """The total number of documents in the connection."""
+  totalDocuments: Int!
+}
+
+"""A generic type which holds a draft during pagination."""
+type UserDraftEdge implements Edge {
+  """A cursor for use in pagination."""
+  cursor: String!
+  """The item at the end of UserDraftEdge."""
+  node: Draft!
 }
 
 """Contains a node of type user and cursor for pagination."""

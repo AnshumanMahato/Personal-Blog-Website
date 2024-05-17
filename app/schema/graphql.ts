@@ -1788,6 +1788,7 @@ export type MyUser = IUser & Node & {
   dateJoined?: Maybe<Scalars['DateTime']['output']>;
   /** Whether or not the user is deactivated. */
   deactivated: Scalars['Boolean']['output'];
+  drafts: UserDraftConnection;
   /** The users who are following this user */
   followers: UserConnection;
   /** The number of users that follow the requested user. Visible in the user's profile. */
@@ -1817,6 +1818,16 @@ export type MyUser = IUser & Node & {
   tagsFollowing: Array<Tag>;
   /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
   username: Scalars['String']['output'];
+};
+
+
+/**
+ * Basic information about the authenticated user.
+ * User must be authenticated to use this type.
+ */
+export type MyUserDraftsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  first: Scalars['Int']['input'];
 };
 
 
@@ -3809,6 +3820,26 @@ export type UserConnection = PageConnection & {
   pageInfo: OffsetPageInfo;
   /** The total number of documents in the connection. */
   totalDocuments: Scalars['Int']['output'];
+};
+
+/** Drafts that belong to a user. */
+export type UserDraftConnection = Connection & {
+  __typename?: 'UserDraftConnection';
+  /** A list of edges. */
+  edges: Array<UserDraftEdge>;
+  /** Generic information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The total number of documents in the connection. */
+  totalDocuments: Scalars['Int']['output'];
+};
+
+/** A generic type which holds a draft during pagination. */
+export type UserDraftEdge = Edge & {
+  __typename?: 'UserDraftEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of UserDraftEdge. */
+  node: Draft;
 };
 
 /** Contains a node of type user and cursor for pagination. */
