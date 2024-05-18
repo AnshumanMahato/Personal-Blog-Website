@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaHashnode, FaDev } from "react-icons/fa6";
 import BlogCard from "@/app/ui/BlogCard";
 import CardContainer from "@/app/ui/CardContainer";
@@ -12,6 +12,11 @@ import getPosts from "@/app/actions/getPosts";
 import { PageInfo, PostFragment } from "@/app/schema/graphql";
 
 function Blogs() {
+  const [posts, setPosts] = useState<PostFragment[]>([]);
+  const [pageInfo, setPageInfo] = useState<PageInfo>({
+    hasNextPage: false,
+    endCursor: "",
+  });
   const socials = [
     {
       href: "https://dev.to/anshumanmahato",
@@ -25,13 +30,17 @@ function Blogs() {
     },
   ];
 
-  const [posts, setPosts] = useState<PostFragment[]>([]);
-  const [pageInfo, setPageInfo] = useState<PageInfo>({});
+  const getNextPage = useCallback(async () => {
+    const newPosts = await getPosts(pageInfo.endCursor!);
+    setPosts((currPosts) => [...currPosts, ...(newPosts?.posts ?? [])]);
+    setPageInfo(newPosts?.pageInfo ?? { hasNextPage: false, endCursor: "" });
+  }, [pageInfo.endCursor]);
+
   useEffect(() => {
     (async () => {
       const posts = await getPosts();
       setPosts(posts?.posts ?? []);
-      setPageInfo(posts?.pageInfo ?? {});
+      setPageInfo(posts?.pageInfo ?? { hasNextPage: false, endCursor: "" });
     })();
   }, []);
 
@@ -47,7 +56,10 @@ function Blogs() {
           </p>
         </div>
       </Section>
-      <CardContainer>
+      <CardContainer
+        hasNextPage={pageInfo.hasNextPage}
+        getNextPage={getNextPage}
+      >
         {posts.map((post) => (
           <BlogCard key={post.slug} post={post} />
         ))}
