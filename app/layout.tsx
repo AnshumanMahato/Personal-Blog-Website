@@ -22,13 +22,12 @@ const getMetadata = async (): Promise<Metadata> => {
         host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
       },
     }),
+    cache: "force-cache",
   });
 
   const { data } = await response.json();
 
   const { publication } = data;
-
-  console.log("executed", publication);
 
   //TODO: Replace with actual data from publication
   return {
