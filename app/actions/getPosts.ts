@@ -26,7 +26,6 @@ async function getPosts(after?: string): Promise<PostsInfo | null> {
       },
     }),
     cache: "force-cache",
-    next: { revalidate: 3600 },
   });
 
   const {
