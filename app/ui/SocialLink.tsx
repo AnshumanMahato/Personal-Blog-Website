@@ -1,15 +1,13 @@
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 
-function SocialLink({
-  href,
-  icon,
-  children,
-}: {
+type Props = Readonly<{
   href: Url;
   icon: React.ReactNode;
   children: React.ReactNode;
-}) {
+}>;
+
+function SocialLink({ href, icon, children }: Props) {
   return (
     <Link
       href={href}

@@ -1,14 +1,12 @@
 import Image from "next/image";
 
-function PageBanner({
-  title,
-  coverImage,
-  coverImageAlt,
-}: {
+type Props = Readonly<{
   title: string;
   coverImage: string;
   coverImageAlt: string;
-}) {
+}>;
+
+function PageBanner({ title, coverImage, coverImageAlt }: Props) {
   return (
     <section className="col-span-full flex flex-col gap-[2rem]">
       <h2 className="uppercase leading-[150%] text-[1.2rem] tracking-[5.4px] xs:text-[1.6rem] xs:tracking-[7.2px] pl-[5px] xs:pl-[1rem]">

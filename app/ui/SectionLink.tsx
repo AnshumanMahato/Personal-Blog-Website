@@ -3,13 +3,12 @@ import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 import React from "react";
 
-function SectionLink({
-  href,
-  children,
-}: {
+type Props = Readonly<{
   href: Url;
   children: React.ReactNode;
-}) {
+}>;
+
+function SectionLink({ href, children }: Props) {
   const classes: string = classNames(
     "text-accent-dark text-[1.2rem] xs:text-[1.6rem] font-medium",
     "relative px-[8px] py-[2px] overflow-hidden",

@@ -1,6 +1,10 @@
 import { PostFragment } from "../schema/graphql";
 
-function BlogCard({ post }: { post: PostFragment }) {
+type Props = Readonly<{
+  post: PostFragment;
+}>;
+
+function BlogCard({ post }: Props) {
   return (
     <div className="cursor-pointer w-full max-w-[64rem] flex flex-col gap-[5px] p-[8px] xs:p-[1rem] sm:p-[2rem] sm:pr-[7rem] border-b-[1px] border-b-secondary-dark">
       <h3 className="text-white text-[1.6rem] xs:text-[2rem] leading-[150%]">

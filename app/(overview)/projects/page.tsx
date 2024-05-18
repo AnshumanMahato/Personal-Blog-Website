@@ -1,4 +1,3 @@
-import BlogCard from "@/app/ui/BlogCard";
 import CardContainer from "@/app/ui/CardContainer";
 import PageBanner from "@/app/ui/PageBanner";
 import PageCTA from "@/app/ui/PageCTA";

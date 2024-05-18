@@ -43,11 +43,11 @@ const getMetadata = async (): Promise<Metadata> => {
 
 export const metadata: Promise<Metadata> = (async () => await getMetadata())();
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+type Props = {
+  children: Readonly<React.ReactNode>;
+};
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>

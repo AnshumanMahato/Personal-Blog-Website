@@ -1,12 +1,11 @@
 import classNames from "classnames";
 
-function Section({
-  children,
-  className,
-}: {
+type Props = Readonly<{
   children: React.ReactNode;
   className?: string;
-}) {
+}>;
+
+function Section({ children, className }: Props) {
   const classes = classNames(
     "flex flex-col items-center w-full gap-[2rem] xs:gap-[4rem]",
     className

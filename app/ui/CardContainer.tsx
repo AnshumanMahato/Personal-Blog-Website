@@ -1,14 +1,12 @@
 import Section from "./Section";
 
-function CardContainer({
-  children,
-  hasNextPage,
-  getNextPage,
-}: {
+type Props = Readonly<{
   children: React.ReactNode;
   hasNextPage: boolean | null | undefined;
   getNextPage: () => void;
-}) {
+}>;
+
+function CardContainer({ children, hasNextPage, getNextPage }: Props) {
   return (
     <Section className="!gap-[1rem] xs:!gap-[2rem] sm:!gap-[3rem] col-span-full">
       {children}

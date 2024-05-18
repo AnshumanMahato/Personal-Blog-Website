@@ -1,4 +1,6 @@
-function PageHeading({ children }: { children: string }) {
+type Props = Readonly<{ children: string }>;
+
+function PageHeading({ children }: Props) {
   const highlight = children.split(" ").pop()!;
   const heading = children.replace(highlight, "");
   return (
