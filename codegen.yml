@@ -6,7 +6,6 @@ generates:
       - schema-ast
     config:
       includeDirectives: true
-      documentMode: string
   ./app/schema/graphql.ts:
     plugins:
       - typescript
