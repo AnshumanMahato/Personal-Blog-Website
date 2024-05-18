@@ -1,10 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { FaHashnode, FaDev } from "react-icons/fa6";
 import BlogCard from "@/app/ui/BlogCard";
 import CardContainer from "@/app/ui/CardContainer";
 import PageBanner from "@/app/ui/PageBanner";
 import PageCTA from "@/app/ui/PageCTA";
 import PageHeading from "@/app/ui/PageHeading";
 import Section from "@/app/ui/Section";
-import { FaHashnode, FaDev } from "react-icons/fa6";
+import getPosts from "@/app/actions/getPosts";
+import { PageInfo, PostFragment } from "@/app/schema/graphql";
 
 function Blogs() {
   const socials = [
@@ -20,6 +25,16 @@ function Blogs() {
     },
   ];
 
+  const [posts, setPosts] = useState<PostFragment[]>([]);
+  const [pageInfo, setPageInfo] = useState<PageInfo>({});
+  useEffect(() => {
+    (async () => {
+      const posts = await getPosts();
+      setPosts(posts?.posts ?? []);
+      setPageInfo(posts?.pageInfo ?? {});
+    })();
+  }, []);
+
   return (
     <>
       <PageBanner title="Blogs" coverImage="/next.svg" coverImageAlt="next" />
@@ -33,12 +48,9 @@ function Blogs() {
         </div>
       </Section>
       <CardContainer>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        {posts.map((post) => (
+          <BlogCard key={post.slug} post={post} />
+        ))}
       </CardContainer>
       <PageCTA links={socials} />
     </>

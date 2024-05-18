@@ -7,7 +7,6 @@ import "./globals.css";
 import {
   PublicationByHostDocument,
   PublicationByHostQuery,
-  PublicationByHostQueryVariables,
 } from "./schema/graphql";
 
 const getMetadata = async (): Promise<Metadata> => {
@@ -25,9 +24,9 @@ const getMetadata = async (): Promise<Metadata> => {
     cache: "force-cache",
   });
 
-  const { data } = await response.json();
-
-  const { publication } = data;
+  const {
+    data: { publication },
+  }: { data: PublicationByHostQuery } = await response.json();
 
   //TODO: Replace with actual data from publication
   return {

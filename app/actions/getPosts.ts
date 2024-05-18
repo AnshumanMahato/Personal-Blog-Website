@@ -2,14 +2,13 @@
 
 import {
   PageInfo,
-  Post,
+  PostFragment,
   PostsByPublicationDocument,
   PostsByPublicationQuery,
-  PublicationPostConnection,
-} from "../schema/graphql";
+} from "@/app/schema/graphql";
 
 type PostsInfo = {
-  posts: Post[];
+  posts: PostFragment[];
   pageInfo: PageInfo;
 };
 
@@ -35,9 +34,7 @@ async function getPosts(after?: string): Promise<PostsInfo | null> {
   }: { data: PostsByPublicationQuery } = await response.json();
 
   if (!publication) return null;
-  const posts = (publication.posts.edges ?? []).map(
-    (edge) => edge.node
-  ) as Post[];
+  const posts = (publication.posts.edges ?? []).map((edge) => edge.node);
 
   return {
     posts,
