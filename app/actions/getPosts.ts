@@ -1,13 +1,19 @@
 "use server";
 
 import {
+  PageInfo,
+  Post,
   PostsByPublicationDocument,
   PostsByPublicationQuery,
+  PublicationPostConnection,
 } from "../schema/graphql";
 
-async function getPosts(
-  after?: string
-): Promise<PostsByPublicationQuery["publication"]> {
+type PostsInfo = {
+  posts: Post[];
+  pageInfo: PageInfo;
+};
+
+async function getPosts(after?: string): Promise<PostsInfo | null> {
   const GQL_ENDPOINT: string = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT!;
   const response = await fetch(GQL_ENDPOINT, {
     method: "POST",
@@ -21,13 +27,22 @@ async function getPosts(
       },
     }),
     cache: "force-cache",
+    next: { revalidate: 3600 },
   });
 
   const {
-    data: { publication: posts },
+    data: { publication },
   }: { data: PostsByPublicationQuery } = await response.json();
 
-  return posts;
+  if (!publication) return null;
+  const posts = (publication.posts.edges ?? []).map(
+    (edge) => edge.node
+  ) as Post[];
+
+  return {
+    posts,
+    pageInfo: publication.posts.pageInfo,
+  };
 }
 
 export default getPosts;
