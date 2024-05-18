@@ -6,12 +6,14 @@ generates:
       - schema-ast
     config:
       includeDirectives: true
+      documentMode: string
   ./app/schema/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
       - typed-document-node
     config:
+      documentMode: string
       scalars:
         Date: string
         DateTime: string

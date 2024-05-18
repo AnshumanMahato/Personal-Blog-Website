@@ -13,14 +13,22 @@ import {
 const getMetadata = async (): Promise<Metadata> => {
   const GQL_ENDPOINT: string = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT!;
 
-  const data = await request<
-    PublicationByHostQuery,
-    PublicationByHostQueryVariables
-  >(GQL_ENDPOINT, PublicationByHostDocument, {
-    host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST!,
+  const response = await fetch(GQL_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: PublicationByHostDocument,
+      variables: {
+        host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+      },
+    }),
   });
 
+  const { data } = await response.json();
+
   const { publication } = data;
+
+  console.log("executed", publication);
 
   //TODO: Replace with actual data from publication
   return {
