@@ -1,6 +1,8 @@
 import getSinglePost from "@/app/actions/getSinglePost";
+import Article from "@/app/ui/Article";
 import { addArticleJsonLd } from "@/app/utils/seo/addArticleJsonLd";
 import { ResolvingMetadata } from "next";
+import Link from "next/link";
 
 type Props = Readonly<{
   params: {
@@ -45,9 +47,27 @@ async function BlogPost({ params }: Props) {
   if (!data) return <></>;
   const { post, publication } = data;
 
+  const tagsList = (post?.tags ?? []).map((tag) => (
+    <li key={tag.id}>
+      <Link
+        href={`/tag/${tag.slug}`}
+        className="block rounded-full border px-2 py-1 font-medium hover:bg-slate-50 dark:border-neutral-800 dark:hover:bg-neutral-800 md:px-4"
+      >
+        #{tag.slug}
+      </Link>
+    </li>
+  ));
+
   return (
     <>
-      <div>{params.slug}</div>
+      <Article post={post!} />
+      {(post?.tags ?? []).length > 0 && (
+        <div className="mx-auto w-full text-slate-600 dark:text-neutral-300 md:max-w-screen-md">
+          <ul className="flex flex-row flex-wrap items-center gap-2">
+            {tagsList}
+          </ul>
+        </div>
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
