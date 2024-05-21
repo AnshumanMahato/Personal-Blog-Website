@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 import aspectRatio from "@tailwindcss/aspect-ratio";
+import typography from "@tailwindcss/typography";
+import css from "styled-jsx/css";
 
 const config: Config = {
   content: [
@@ -37,6 +39,7 @@ const config: Config = {
   corePlugins: {
     aspectRatio: false,
   },
-  plugins: [aspectRatio],
+  plugins: [aspectRatio, typography()],
+  darkMode: "selector",
 };
 export default config;

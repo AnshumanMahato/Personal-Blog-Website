@@ -41,4 +41,86 @@
   *::-webkit-scrollbar {
     @apply hidden;
   }
+
+  .hashnode-content-style {
+    @apply prose;
+    @apply break-words;
+    @apply text-primary-dark;
+    @apply first:prose-p:mt-0;
+    @apply prose-img:max-w-full;
+    @apply prose-p:leading-snug;
+    @apply prose-a:underline;
+    @apply hover:prose-a:bg-primary-dark;
+    @apply dark:hover:prose-a:text-accent-dark;
+    @apply dark:hover:prose-a:bg-primary-dark;
+    @apply dark:text-primary-dark;
+    @apply prose-blockquote:leading-snug;
+    @apply prose-a:leading-snug;
+    @apply prose-figure:leading-snug;
+    @apply prose-figcaption:leading-snug;
+    @apply prose-pre:leading-snug;
+    @apply prose-li:leading-snug;
+    @apply prose-ul:leading-snug;
+    @apply prose-ol:leading-snug;
+    @apply prose-th:leading-snug;
+    @apply prose-td:leading-snug;
+    @apply lg:prose-xl;
+    @apply dark:prose-invert;
+    @apply dark:prose-pre:bg-primary-dark;
+    @apply first:prose-h1:mt-0;
+    @apply first:prose-h2:mt-0;
+    @apply first:prose-h3:mt-0;
+    @apply first:prose-h4:mt-0;
+    @apply first:prose-h5:mt-0;
+    @apply text-[1.2rem];
+    @apply xs:text-[1.6rem];
+  }
+
+  /* Override to remove the backtick */
+  .hashnode-content-style
+    :where(code):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::before,
+  .hashnode-content-style
+    :where(code):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::after {
+    content: none;
+  }
+
+  .prose code {
+    border-radius: 0.25rem;
+    font-weight: 400 !important;
+    padding: 0.25rem;
+    --tw-text-opacity: 1;
+    color: rgba(0, 0, 0, var(--tw-text-opacity));
+    font-size: 80%;
+    background: #f0efed;
+  }
+
+  .dark .prose code {
+    --tw-bg-opacity: 1;
+    background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgba(238, 238, 238, var(--tw-text-opacity));
+  }
+
+  .prose pre {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .prose pre code {
+    background-color: transparent;
+    border-radius: 0px;
+    font-weight: 500 !important;
+    padding: 0px;
+    font-size: 100%;
+    color: #fafafa;
+  }
+
+  .dark .prose pre code {
+    background-color: transparent;
+    color: #ddd;
+  }
 }
