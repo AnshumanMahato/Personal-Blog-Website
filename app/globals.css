@@ -108,6 +108,7 @@
   .prose pre {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
+    background-color: #1f2937;
   }
 
   .prose pre code {

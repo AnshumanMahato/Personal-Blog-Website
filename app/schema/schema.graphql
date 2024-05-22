@@ -1088,6 +1088,22 @@ type DraftFeatures {
   tableOfContents: TableOfContentsFeature!
 }
 
+type DraftRevision implements Node {
+  """The content of the draft revision."""
+  content: Content!
+  """The time the revision has been created."""
+  createdAt: DateTime!
+  """The ID of the draft revision."""
+  id: ID!
+}
+
+type DraftRevisionEdge implements Edge {
+  """A cursor for use in pagination."""
+  cursor: String!
+  """A node in the connection containing a draft revision."""
+  node: DraftRevision!
+}
+
 type DraftSettings {
   """A flag to indicate if the comments are disabled for the post."""
   disableComments: Boolean!
@@ -1388,6 +1404,11 @@ type GroupedByTimeVisitors implements Node & Visitors {
   to: DateTime!
   """The aggregated number of visitors."""
   total: Int!
+}
+
+type HeadlessCMSFeature implements Feature {
+  """A flag indicating if the Headless CMS feature is enabled or not."""
+  isEnabled: Boolean!
 }
 
 enum HttpRedirectionType {
@@ -2426,6 +2447,8 @@ type PublicationFeatures {
   audioBlog: AudioBlogFeature! @deprecated(reason: "Audio Blogs are not supported anymore. This field will be removed 18/04/23")
   """Individual styling for the publication."""
   customCSS: CustomCSSFeature!
+  """Headless CMS for the publication."""
+  headlessCMS: HeadlessCMSFeature!
   """
   Newsletter feature for the publication which adds a `/newsletter` route for collecting subscribers and allows sending out newsletters.
   """
