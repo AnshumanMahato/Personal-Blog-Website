@@ -43,15 +43,7 @@ function Article({ post }: Props) {
       <style
         dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}
       ></style>
-      <div>
-        <h1 className="text-4xl leading-tight tracking-tight text-black dark:text-white">
-          {post.title}
-        </h1>
-        {/* <div className="text-neutral-600 dark:text-neutral-400">
-        {Intl.DateTimeFormat().format(new Date(post.publishedAt))}
-      </div> */}
-        <MarkdownToHtml contentMarkdown={post.content.markdown} />
-      </div>
+      <MarkdownToHtml contentMarkdown={post.content.markdown} />
     </>
   );
 }

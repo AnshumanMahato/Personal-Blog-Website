@@ -28,7 +28,7 @@ function BlogBanner({ title, series, coverImage }: Props) {
             </Link>
           </h3>
         )}
-        <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden bg-secondary-light rounded-[1rem] sm:rounded-[2rem]">
+        <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden rounded-[1rem] sm:rounded-[2rem] drop-shadow-sm">
           {coverImage && (
             <Image
               src={coverImage}
