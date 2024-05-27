@@ -1,0 +1,20 @@
+query SeriesPostsByPublication($host: String!, $first: Int!, $after: String) {
+  publication(host: $host) {
+    series(slug: "personalized-feeds") {
+      posts(first: $first, after: $after) {
+        totalDocuments
+        edges {
+          node {
+            ...Post
+            comments(first: 0) {
+              totalDocuments
+            }
+          }
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}
