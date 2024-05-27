@@ -1,25 +1,47 @@
 import Image from "next/image";
+import Link from "next/link";
+import {
+  Series,
+  SeriesConnection,
+  SeriesEdge,
+  SeriesFragment,
+} from "../schema/graphql";
 
 type Props = Readonly<{
   title: string;
-  coverImage: string;
-  coverImageAlt: string;
+  series?: SeriesFragment | null;
+  coverImage?: string;
 }>;
 
-function BlogBanner({ title, coverImage, coverImageAlt }: Props) {
+function BlogBanner({ title, series, coverImage }: Props) {
   return (
     <section className="col-span-full flex flex-col gap-[2rem]">
-      <h2 className="uppercase leading-[150%] text-[1.2rem] tracking-[5.4px] xs:text-[1.6rem] xs:tracking-[7.2px] pl-[5px] xs:pl-[1rem]">
-        {title}
-      </h2>
-      <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden bg-secondary-light rounded-[1rem] sm:rounded-[2rem]">
-        <Image
-          src={coverImage}
-          alt={coverImageAlt}
-          fill
-          className="object-contain object-center"
-        />
+      <div className="flex flex-col gap-[1rem] sm:gap-[2rem]">
+        {series && (
+          <h3 className="capitalize leading-[150%] text-[1.2rem] xs:text-[1.6rem] sm:text-[2rem] pl-[5px] xs:pl-[1rem]">
+            Series:&nbsp;
+            <Link
+              className="hover:text-accent-dark"
+              href={`/blogs/series/${series.slug}`}
+            >
+              {series.name}
+            </Link>
+          </h3>
+        )}
+        <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden bg-secondary-light rounded-[1rem] sm:rounded-[2rem]">
+          {coverImage && (
+            <Image
+              src={coverImage}
+              alt={title}
+              fill
+              className="object-cover object-center"
+            />
+          )}
+        </div>
       </div>
+      <h1 className="sm:mt-[2rem] w-full text-white font-semibold text-[3rem] xs:text-[3.6rem] sm:text-[4.8rem] leading-[120%]">
+        {title}
+      </h1>
     </section>
   );
 }

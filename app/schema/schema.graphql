@@ -1089,6 +1089,8 @@ type DraftFeatures {
 }
 
 type DraftRevision implements Node {
+  """The name of the user who created the revision."""
+  authorName: String!
   """The content of the draft revision."""
   content: Content!
   """The time the revision has been created."""
@@ -3088,6 +3090,7 @@ enum Scope {
   update_reply
   webhook_admin
   write_draft
+  write_draft_revision
   write_post
   write_series
   write_static_page

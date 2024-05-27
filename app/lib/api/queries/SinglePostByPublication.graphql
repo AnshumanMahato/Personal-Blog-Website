@@ -7,6 +7,12 @@ query SinglePostByPublication($slug: String!, $host: String!) {
   }
 }
 
+fragment Series on Series {
+  id
+  name
+  slug
+}
+
 fragment PostFull on Post {
   id
   slug
@@ -15,6 +21,9 @@ fragment PostFull on Post {
   brief
   title
   subtitle
+  series {
+    ...Series
+  }
   hasLatexInPost
   publishedAt
   updatedAt
