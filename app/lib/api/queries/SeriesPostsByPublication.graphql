@@ -1,6 +1,11 @@
-query SeriesPostsByPublication($host: String!, $first: Int!, $after: String) {
+query SeriesPostsByPublication(
+  $host: String!
+  $series: String!
+  $first: Int!
+  $after: String
+) {
   publication(host: $host) {
-    series(slug: "personalized-feeds") {
+    series(slug: $series) {
       posts(first: $first, after: $after) {
         totalDocuments
         edges {
