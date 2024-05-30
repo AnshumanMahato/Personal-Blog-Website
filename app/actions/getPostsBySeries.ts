@@ -6,13 +6,9 @@ import {
   SeriesPostsByPublicationDocument,
   SeriesPostsByPublicationQuery,
 } from "@/app/schema/graphql";
+import PostsInfo from "../@types/PostInfo";
 
-type PostsInfo = {
-  posts: PostFragment[];
-  pageInfo: PageInfo | undefined;
-};
-
-async function getPosts(
+async function getPostsBySeries(
   series: string,
   after?: string
 ): Promise<PostsInfo | null> {
@@ -47,4 +43,4 @@ async function getPosts(
   };
 }
 
-export default getPosts;
+export default getPostsBySeries;

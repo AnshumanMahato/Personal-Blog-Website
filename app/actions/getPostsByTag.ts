@@ -3,18 +3,12 @@
 import {
   PageInfo,
   PostFragment,
-  PostsByPublicationDocument,
-  PostsByPublicationQuery,
   TagPostsByPublicationDocument,
   TagPostsByPublicationQuery,
 } from "@/app/schema/graphql";
+import PostsInfo from "../@types/PostInfo";
 
-type PostsInfo = {
-  posts: PostFragment[];
-  pageInfo: PageInfo;
-};
-
-async function getPosts(
+async function getPostsByTag(
   tagSlug: string,
   after?: string
 ): Promise<PostsInfo | null> {
@@ -47,4 +41,4 @@ async function getPosts(
   };
 }
 
-export default getPosts;
+export default getPostsByTag;

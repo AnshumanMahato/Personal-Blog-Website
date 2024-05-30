@@ -6,13 +6,9 @@ import {
   PostsByPublicationDocument,
   PostsByPublicationQuery,
 } from "@/app/schema/graphql";
+import PostsInfo from "../@types/PostInfo";
 
-type PostsInfo = {
-  posts: PostFragment[];
-  pageInfo: PageInfo;
-};
-
-async function getPosts(after?: string): Promise<PostsInfo | null> {
+async function getAllPosts(after?: string): Promise<PostsInfo | null> {
   const GQL_ENDPOINT: string = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT!;
   const response = await fetch(GQL_ENDPOINT, {
     method: "POST",
@@ -41,4 +37,4 @@ async function getPosts(after?: string): Promise<PostsInfo | null> {
   };
 }
 
-export default getPosts;
+export default getAllPosts;
