@@ -1,22 +1,12 @@
-"use client";
-
-import { useCallback, useEffect, useState } from "react";
 import { FaHashnode, FaDev } from "react-icons/fa6";
-import BlogCard from "@/app/ui/BlogCard";
-import CardContainer from "@/app/ui/CardContainer";
 import PageBanner from "@/app/ui/PageBanner";
 import PageCTA from "@/app/ui/PageCTA";
 import PageHeading from "@/app/ui/PageHeading";
 import Section from "@/app/ui/Section";
-import getPosts from "@/app/actions/getPosts";
-import { PageInfo, PostFragment } from "@/app/schema/graphql";
+import BlogCardContainer from "@/app/ui/BlogCardContainer";
+import getAllPosts from "@/app/actions/getAllPosts";
 
-function Blogs() {
-  const [posts, setPosts] = useState<PostFragment[]>([]);
-  const [pageInfo, setPageInfo] = useState<PageInfo>({
-    hasNextPage: false,
-    endCursor: "",
-  });
+async function Blogs() {
   const socials = [
     {
       href: "https://dev.to/anshumanmahato",
@@ -30,19 +20,7 @@ function Blogs() {
     },
   ];
 
-  const getNextPage = useCallback(async () => {
-    const newPosts = await getPosts(pageInfo.endCursor!);
-    setPosts((currPosts) => [...currPosts, ...(newPosts?.posts ?? [])]);
-    setPageInfo(newPosts?.pageInfo ?? { hasNextPage: false, endCursor: "" });
-  }, [pageInfo.endCursor]);
-
-  useEffect(() => {
-    (async () => {
-      const posts = await getPosts();
-      setPosts(posts?.posts ?? []);
-      setPageInfo(posts?.pageInfo ?? { hasNextPage: false, endCursor: "" });
-    })();
-  }, []);
+  const posts = await getAllPosts();
 
   return (
     <>
@@ -56,14 +34,12 @@ function Blogs() {
           </p>
         </div>
       </Section>
-      <CardContainer
-        hasNextPage={pageInfo.hasNextPage}
-        getNextPage={getNextPage}
-      >
-        {posts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
-        ))}
-      </CardContainer>
+      <BlogCardContainer
+        initialBlogs={posts?.posts ?? []}
+        initialPageInfo={
+          posts?.pageInfo ?? { hasNextPage: false, endCursor: "" }
+        }
+      />
       <PageCTA links={socials} />
     </>
   );
