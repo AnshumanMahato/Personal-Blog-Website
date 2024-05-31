@@ -1,8 +1,6 @@
 "use server";
 
 import {
-  PageInfo,
-  PostFragment,
   TagPostsByPublicationDocument,
   TagPostsByPublicationQuery,
 } from "@/app/schema/graphql";
