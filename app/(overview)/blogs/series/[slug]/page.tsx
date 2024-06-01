@@ -18,7 +18,13 @@ async function BlogsBySeries({ params }: Props) {
 
   return (
     <>
-      <PageBanner title="Blogs" coverImage="/next.svg" coverImageAlt="next" />
+      <PageBanner
+        title="Blogs"
+        coverImage={
+          posts.series?.coverImage || `/api/og?series=${posts.series?.name}`
+        }
+        coverImageAlt="next"
+      />
       <BlogCardContainer
         initialBlogs={posts?.posts ?? []}
         initialPageInfo={

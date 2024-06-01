@@ -18,7 +18,11 @@ async function BlogsByTag({ params }: Props) {
 
   return (
     <>
-      <PageBanner title="Blogs" coverImage="/next.svg" coverImageAlt="next" />
+      <PageBanner
+        title="Tag"
+        coverImage={`/api/og?tag=${params.slug}`}
+        coverImageAlt={params.slug}
+      />
       <BlogCardContainer
         initialBlogs={posts?.posts ?? []}
         initialPageInfo={

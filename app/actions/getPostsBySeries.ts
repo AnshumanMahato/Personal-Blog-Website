@@ -30,14 +30,17 @@ async function getPostsBySeries(
     data: { publication },
   }: { data: SeriesPostsByPublicationQuery } = await response.json();
 
-  if (!publication) return null;
-  const posts = (publication.series?.posts.edges ?? []).map(
-    (edge) => edge.node
-  );
+  if (!publication || !publication.series) return null;
+  const posts = (publication.series.posts.edges ?? []).map((edge) => edge.node);
 
   return {
     posts,
     pageInfo: publication.series?.posts.pageInfo,
+    series: {
+      name: publication.series.name,
+      slug: publication.series.slug,
+      coverImage: publication.series.coverImage,
+    },
   };
 }
 

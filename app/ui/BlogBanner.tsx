@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Series,
-  SeriesConnection,
-  SeriesEdge,
-  SeriesFragment,
-} from "../schema/graphql";
+import { SeriesFragment } from "../schema/graphql";
 
 type Props = Readonly<{
   title: string;
