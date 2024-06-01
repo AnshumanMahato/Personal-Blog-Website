@@ -1,0 +1,12 @@
+fragment RequiredSitemapPostFields on Post {
+  id
+  url
+  slug
+  publishedAt
+  updatedAt
+  tags {
+    id
+    name
+    slug
+  }
+}

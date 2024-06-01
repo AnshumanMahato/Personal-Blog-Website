@@ -4142,7 +4142,13 @@ export type PageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | n
 
 export type PostFragment = { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, comments: { __typename?: 'PostCommentConnection', totalDocuments: number } };
 
+export type PostFullFragment = { __typename?: 'Post', id: string, slug: string, url: string, canonicalUrl?: string | null, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } };
+
 export type PublicationFragment = { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null };
+
+export type RequiredSitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null };
+
+export type SeriesFragment = { __typename?: 'Series', id: string, name: string, slug: string, coverImage?: string | null, createdAt: string, description?: { __typename?: 'Content', markdown: string, html: string } | null };
 
 export type DraftByIdQueryVariables = Exact<{
   id: Scalars['ObjectId']['input'];
@@ -4213,10 +4219,6 @@ export type SinglePostByPublicationQueryVariables = Exact<{
 
 export type SinglePostByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, post?: { __typename?: 'Post', id: string, slug: string, url: string, canonicalUrl?: string | null, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
 
-export type SeriesFragment = { __typename?: 'Series', id: string, name: string, slug: string };
-
-export type PostFullFragment = { __typename?: 'Post', id: string, slug: string, url: string, canonicalUrl?: string | null, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } };
-
 export type SitemapQueryVariables = Exact<{
   host: Scalars['String']['input'];
   postsCount: Scalars['Int']['input'];
@@ -4235,8 +4237,6 @@ export type MoreSitemapPostsQueryVariables = Exact<{
 
 
 export type MoreSitemapPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
-
-export type RequiredSitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null };
 
 export type SlugPostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4298,75 +4298,6 @@ export const PostFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"Post"}) as unknown as TypedDocumentString<PostFragment, unknown>;
-export const PublicationFragmentDoc = new TypedDocumentString(`
-    fragment Publication on Publication {
-  id
-  title
-  displayTitle
-  url
-  metaTags
-  favicon
-  isTeam
-  followersCount
-  descriptionSEO
-  author {
-    name
-    username
-    profilePicture
-    followersCount
-  }
-  ogMetaData {
-    image
-  }
-  preferences {
-    logo
-    darkMode {
-      logo
-    }
-    navbarItems {
-      id
-      type
-      label
-      url
-    }
-  }
-  links {
-    twitter
-    github
-    linkedin
-    hashnode
-  }
-  integrations {
-    umamiWebsiteUUID
-    gaTrackingID
-    fbPixelID
-    hotjarSiteID
-    matomoURL
-    matomoSiteID
-    fathomSiteID
-    fathomCustomDomain
-    fathomCustomDomainEnabled
-    plausibleAnalyticsEnabled
-  }
-}
-    `, {"fragmentName":"Publication"}) as unknown as TypedDocumentString<PublicationFragment, unknown>;
-export const StaticPageFragmentDoc = new TypedDocumentString(`
-    fragment StaticPage on StaticPage {
-  id
-  title
-  slug
-  content {
-    markdown
-  }
-}
-    `, {"fragmentName":"StaticPage"}) as unknown as TypedDocumentString<StaticPageFragment, unknown>;
-export const SeriesFragmentDoc = new TypedDocumentString(`
-    fragment Series on Series {
-  id
-  name
-  slug
-}
-    `, {"fragmentName":"Series"}) as unknown as TypedDocumentString<SeriesFragment, unknown>;
 export const PostFullFragmentDoc = new TypedDocumentString(`
     fragment PostFull on Post {
   id
@@ -4377,7 +4308,9 @@ export const PostFullFragmentDoc = new TypedDocumentString(`
   title
   subtitle
   series {
-    ...Series
+    id
+    name
+    slug
   }
   hasLatexInPost
   publishedAt
@@ -4446,11 +4379,59 @@ export const PostFullFragmentDoc = new TypedDocumentString(`
     }
   }
 }
-    fragment Series on Series {
+    `, {"fragmentName":"PostFull"}) as unknown as TypedDocumentString<PostFullFragment, unknown>;
+export const PublicationFragmentDoc = new TypedDocumentString(`
+    fragment Publication on Publication {
   id
-  name
-  slug
-}`, {"fragmentName":"PostFull"}) as unknown as TypedDocumentString<PostFullFragment, unknown>;
+  title
+  displayTitle
+  url
+  metaTags
+  favicon
+  isTeam
+  followersCount
+  descriptionSEO
+  author {
+    name
+    username
+    profilePicture
+    followersCount
+  }
+  ogMetaData {
+    image
+  }
+  preferences {
+    logo
+    darkMode {
+      logo
+    }
+    navbarItems {
+      id
+      type
+      label
+      url
+    }
+  }
+  links {
+    twitter
+    github
+    linkedin
+    hashnode
+  }
+  integrations {
+    umamiWebsiteUUID
+    gaTrackingID
+    fbPixelID
+    hotjarSiteID
+    matomoURL
+    matomoSiteID
+    fathomSiteID
+    fathomCustomDomain
+    fathomCustomDomainEnabled
+    plausibleAnalyticsEnabled
+  }
+}
+    `, {"fragmentName":"Publication"}) as unknown as TypedDocumentString<PublicationFragment, unknown>;
 export const RequiredSitemapPostFieldsFragmentDoc = new TypedDocumentString(`
     fragment RequiredSitemapPostFields on Post {
   id
@@ -4465,6 +4446,29 @@ export const RequiredSitemapPostFieldsFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"RequiredSitemapPostFields"}) as unknown as TypedDocumentString<RequiredSitemapPostFieldsFragment, unknown>;
+export const SeriesFragmentDoc = new TypedDocumentString(`
+    fragment Series on Series {
+  id
+  name
+  slug
+  description {
+    markdown
+    html
+  }
+  coverImage
+  createdAt
+}
+    `, {"fragmentName":"Series"}) as unknown as TypedDocumentString<SeriesFragment, unknown>;
+export const StaticPageFragmentDoc = new TypedDocumentString(`
+    fragment StaticPage on StaticPage {
+  id
+  title
+  slug
+  content {
+    markdown
+  }
+}
+    `, {"fragmentName":"StaticPage"}) as unknown as TypedDocumentString<StaticPageFragment, unknown>;
 export const DraftByIdDocument = new TypedDocumentString(`
     query DraftById($id: ObjectId!) {
   draft(id: $id) {
@@ -4885,62 +4889,7 @@ export const SinglePostByPublicationDocument = new TypedDocumentString(`
     }
   }
 }
-    fragment Publication on Publication {
-  id
-  title
-  displayTitle
-  url
-  metaTags
-  favicon
-  isTeam
-  followersCount
-  descriptionSEO
-  author {
-    name
-    username
-    profilePicture
-    followersCount
-  }
-  ogMetaData {
-    image
-  }
-  preferences {
-    logo
-    darkMode {
-      logo
-    }
-    navbarItems {
-      id
-      type
-      label
-      url
-    }
-  }
-  links {
-    twitter
-    github
-    linkedin
-    hashnode
-  }
-  integrations {
-    umamiWebsiteUUID
-    gaTrackingID
-    fbPixelID
-    hotjarSiteID
-    matomoURL
-    matomoSiteID
-    fathomSiteID
-    fathomCustomDomain
-    fathomCustomDomainEnabled
-    plausibleAnalyticsEnabled
-  }
-}
-fragment Series on Series {
-  id
-  name
-  slug
-}
-fragment PostFull on Post {
+    fragment PostFull on Post {
   id
   slug
   url
@@ -4949,7 +4898,9 @@ fragment PostFull on Post {
   title
   subtitle
   series {
-    ...Series
+    id
+    name
+    slug
   }
   hasLatexInPost
   publishedAt
@@ -5016,6 +4967,56 @@ fragment PostFull on Post {
         }
       }
     }
+  }
+}
+fragment Publication on Publication {
+  id
+  title
+  displayTitle
+  url
+  metaTags
+  favicon
+  isTeam
+  followersCount
+  descriptionSEO
+  author {
+    name
+    username
+    profilePicture
+    followersCount
+  }
+  ogMetaData {
+    image
+  }
+  preferences {
+    logo
+    darkMode {
+      logo
+    }
+    navbarItems {
+      id
+      type
+      label
+      url
+    }
+  }
+  links {
+    twitter
+    github
+    linkedin
+    hashnode
+  }
+  integrations {
+    umamiWebsiteUUID
+    gaTrackingID
+    fbPixelID
+    hotjarSiteID
+    matomoURL
+    matomoSiteID
+    fathomSiteID
+    fathomCustomDomain
+    fathomCustomDomainEnabled
+    plausibleAnalyticsEnabled
   }
 }`) as unknown as TypedDocumentString<SinglePostByPublicationQuery, SinglePostByPublicationQueryVariables>;
 export const SitemapDocument = new TypedDocumentString(`

@@ -1,0 +1,11 @@
+fragment Series on Series {
+  id
+  name
+  slug
+  description {
+    markdown
+    html
+  }
+  coverImage
+  createdAt
+}
