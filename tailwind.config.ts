@@ -27,8 +27,8 @@ const config: Config = {
         light: "#fafafa",
       },
       accent: {
-        dark: "#17c964",
-        light: "#45d483",
+        light: "#17c964",
+        dark: "#45d483",
       },
     },
     screens: {

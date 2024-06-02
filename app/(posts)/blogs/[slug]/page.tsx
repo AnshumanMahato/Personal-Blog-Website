@@ -52,7 +52,7 @@ async function BlogPost({ params }: Props) {
     <li key={tag.id}>
       <Link
         href={`/blogs/tag/${tag.slug}`}
-        className="block rounded-full hover:text-accent-dark border px-[1rem] py-[5px] font-medium md:px-4"
+        className="block rounded-full hover:text-accent-dark dark:hover:text-accent-dark border px-[1rem] py-[5px] font-medium md:px-4"
       >
         #{tag.slug}
       </Link>

@@ -16,7 +16,7 @@ function BlogBanner({ title, series, coverImage }: Props) {
           <h3 className="capitalize leading-[150%] text-[1.2rem] xs:text-[1.6rem] sm:text-[2rem] pl-[5px] xs:pl-[1rem]">
             Series:&nbsp;
             <Link
-              className="hover:text-accent-dark"
+              className="hover:text-accent-light dark:hover:text-accent-dark"
               href={`/blogs/series/${series.slug}`}
             >
               {series.name}
@@ -34,7 +34,7 @@ function BlogBanner({ title, series, coverImage }: Props) {
           )}
         </div>
       </div>
-      <h1 className="sm:mt-[2rem] w-full text-white font-semibold text-[3rem] xs:text-[3.6rem] sm:text-[4.8rem] leading-[120%]">
+      <h1 className="sm:mt-[2rem] w-full text-black dark:text-white font-semibold text-[3rem] xs:text-[3.6rem] sm:text-[4.8rem] leading-[120%]">
         {title}
       </h1>
     </section>

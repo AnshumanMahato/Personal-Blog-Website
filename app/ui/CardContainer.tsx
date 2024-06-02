@@ -12,7 +12,7 @@ function CardContainer({ children, hasNextPage, getNextPage }: Props) {
       {children}
       {hasNextPage && (
         <button
-          className="px-[1rem] py-[5px] bg-accent-dark text-background-dark font-medium text-[1.4rem] xs:text-[1.8rem] leading-[150%]"
+          className="px-[1rem] py-[5px] bg-accent-light dark:bg-accent-dark text-background-light dark:text-background-dark font-medium text-[1.4rem] xs:text-[1.8rem] leading-[150%]"
           onClick={getNextPage}
         >
           More
