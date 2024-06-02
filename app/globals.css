@@ -38,12 +38,23 @@
   /* ===== Scrollbar CSS ===== */
   /* Firefox */
   * {
-    scrollbar-width: none;
+    scrollbar-width: auto;
   }
 
   /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    @apply hidden;
+  ::-webkit-scrollbar {
+    @apply w-[5px];
+    @apply h-[5px];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary-dark/50;
+    @apply rounded-full;
+  }
+
+  ::sc ::-webkit-scrollbar-track {
+    @apply bg-background-light;
+    @apply dark:bg-background-dark;
   }
 
   .hashnode-content-style {

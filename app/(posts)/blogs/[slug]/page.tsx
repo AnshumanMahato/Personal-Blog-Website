@@ -68,7 +68,7 @@ async function BlogPost({ params }: Props) {
         coverImage={post?.coverImage?.url!}
       />
       <Article post={post!} />
-      {comments > 0 && (
+      {
         <Link
           href={`https://hashnode.com/discussions/post/${post?.id}`}
           target="_blank"
@@ -83,7 +83,7 @@ async function BlogPost({ params }: Props) {
             <RiChat3Line />
           </span>
         </Link>
-      )}
+      }
       {(post?.tags ?? []).length > 0 && (
         <div className="mx-auto w-full text-slate-600 dark:text-neutral-300 md:max-w-screen-md">
           <ul className="flex flex-row flex-wrap items-center gap-[1rem]">
