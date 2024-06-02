@@ -71,6 +71,7 @@ async function BlogPost({ params }: Props) {
       {comments > 0 && (
         <Link
           href={`https://hashnode.com/discussions/post/${post?.id}`}
+          target="_blank"
           className="w-full bg-white/50 dark:bg-black/50 rounded-[1rem] shadow-lg shadow-black/5 dark:shadow-white/5 border border-black/10 dark:border-white/10 p-[2rem] flex justify-between items-center"
         >
           <span className="flex items-center gap-[5px]">
