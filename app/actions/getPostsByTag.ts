@@ -4,7 +4,7 @@ import {
   TagPostsByPublicationDocument,
   TagPostsByPublicationQuery,
 } from "@/app/schema/graphql";
-import PostsInfo from "../@types/PostInfo";
+import PostsInfo from "../@types/PostsInfo";
 
 async function getPostsByTag(
   tagSlug: string,

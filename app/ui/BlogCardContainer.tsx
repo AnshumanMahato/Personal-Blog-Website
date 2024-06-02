@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { PageInfo, PostFragment } from "@/app/schema/graphql";
 import BlogCard from "@/app/ui/BlogCard";
 import CardContainer from "@/app/ui/CardContainer";
-import PostsInfo from "../@types/PostInfo";
+import PostsInfo from "../@types/PostsInfo";
 import getPostsByTag from "../actions/getPostsByTag";
 import getPostsBySeries from "../actions/getPostsBySeries";
 import getAllPosts from "../actions/getAllPosts";

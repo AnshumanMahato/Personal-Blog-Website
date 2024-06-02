@@ -10,6 +10,7 @@ import {
 type PostInfo = {
   post: PostFullFragment | null | undefined;
   publication: PublicationFragment;
+  comments: number;
 };
 
 async function getSinglePost(slug: string): Promise<PostInfo | null> {
@@ -31,11 +32,12 @@ async function getSinglePost(slug: string): Promise<PostInfo | null> {
     data: { publication },
   }: { data: SinglePostByPublicationQuery } = await response.json();
 
-  if (!publication) return null;
+  if (!publication || !publication.post) return null;
 
   return {
     post: publication.post,
     publication,
+    comments: publication.post.comments.totalDocuments,
   };
 }
 

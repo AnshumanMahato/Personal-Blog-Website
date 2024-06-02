@@ -4,7 +4,7 @@ import {
   SeriesPostsByPublicationDocument,
   SeriesPostsByPublicationQuery,
 } from "@/app/schema/graphql";
-import PostsInfo from "../@types/PostInfo";
+import PostsInfo from "../@types/PostsInfo";
 
 async function getPostsBySeries(
   series: string,
