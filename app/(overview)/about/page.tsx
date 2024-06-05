@@ -5,6 +5,11 @@ import PageHeading from "@/app/ui/PageHeading";
 import PageBanner from "@/app/ui/PageBanner";
 import Section from "@/app/ui/Section";
 import PageCTA from "@/app/ui/PageCTA";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `About Me | ${process.env.AUTHOR}`,
+};
 
 function About() {
   const socials = [
