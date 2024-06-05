@@ -62,6 +62,15 @@ async function BlogPost({ params }: Props) {
 
   return (
     <>
+      {/* This is the JSON-LD script that will be added to the head of the page */}
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(addArticleJsonLd(publication, post)),
+          }}
+        />
+      </head>
       <BlogBanner
         title={post?.title!}
         series={post?.series}
@@ -91,12 +100,6 @@ async function BlogPost({ params }: Props) {
           </ul>
         </div>
       )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(addArticleJsonLd(publication, post)),
-        }}
-      />
     </>
   );
 }
