@@ -11,6 +11,8 @@ directive @private on FIELD_DEFINITION | OBJECT
 
 directive @requireAuth(scopes: [Scope!]) on FIELD_DEFINITION | OBJECT
 
+directive @validate(message: String, method: ValidationMethod!) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
 input AddCommentInput {
   contentMarkdown: String!
   postId: ID!
@@ -2358,6 +2360,8 @@ type Publication implements Node {
     first: Int!
   ): PublicationPostConnection!
   postsViaPage(
+    """The filters to be applied to the post list."""
+    filter: PublicationPostsViaPageFilter
     """The page number that should be returned."""
     page: Int!
     """The number of posts to return on a single page."""
@@ -2635,6 +2639,23 @@ type PublicationPostPageConnection implements PageConnection {
   pageInfo: OffsetPageInfo!
   """The total number of posts."""
   totalDocuments: Int!
+}
+
+input PublicationPostsViaPageFilter {
+  """Remove pinned post from the result set."""
+  excludePinnedPosts: Boolean
+  """
+  Filtering by tag slugs and tag IDs will return posts that match either of the filters.
+  
+  It is an "OR" filter and not an "AND" filter.
+  """
+  tagSlugs: [String!]
+  """
+  Filtering by tag slugs and tag IDs will return posts that match either of the filters.
+  
+  It is an "OR" filter and not an "AND" filter.
+  """
+  tags: [ID!]
 }
 
 """
@@ -3003,6 +3024,8 @@ type RestorePostPayload {
 type RoleBasedInvite implements Node {
   """The capacity of how many members to be invited by the link."""
   capacity: Int
+  """The date the invite was created."""
+  createdAt: DateTime
   """The expiry date of the invite."""
   expiryDate: DateTime
   """The ID of the role based invite."""
@@ -3013,6 +3036,10 @@ type RoleBasedInvite implements Node {
   isUnlimitedCapacity: Boolean
   """The role assigned to the user in the publication."""
   role: UserPublicationRole!
+  """
+  The number of members that have already used the link to join the team.
+  """
+  usedCapacity: Int
 }
 
 """Information to help in seo related meta tags."""
@@ -3110,6 +3137,8 @@ type SearchPostConnection implements Connection {
 }
 
 input SearchPostsOfPublicationFilter {
+  """An array of author Ids to filter the posts."""
+  authorIds: [ID!]
   """
   Only return posts that are deleted. Query returns active posts by default, set this to true to return deleted posts.
   """
@@ -3117,7 +3146,7 @@ input SearchPostsOfPublicationFilter {
   """The ID of publications to search from."""
   publicationId: ObjectId!
   """The query to be searched in post."""
-  query: String!
+  query: String
 }
 
 type SearchUser implements Node {
@@ -3855,6 +3884,10 @@ type UserRecommendingPublicationEdge {
   The amount of followers the publication has gained by recommendations from the publication referenced in `node`.
   """
   totalFollowersGained: Int!
+}
+
+enum ValidationMethod {
+  ID
 }
 
 """
