@@ -39,17 +39,16 @@ async function BlogsLayout({ children }: Props) {
   const publication = await getPublication();
   return (
     <>
-      <head>
-        {publication && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(addPublicationJsonLd(publication)),
-            }}
-          />
-        )}
-      </head>
       {children}
+      {publication && (
+        <script
+          id="publication-json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(addPublicationJsonLd(publication)),
+          }}
+        />
+      )}
     </>
   );
 }

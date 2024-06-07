@@ -6,6 +6,7 @@ import PageBanner from "@/app/ui/PageBanner";
 import Section from "@/app/ui/Section";
 import PageCTA from "@/app/ui/PageCTA";
 import { Metadata } from "next";
+import { addAboutJsonLd } from "@/app/utils/seo/addAboutJsonLd";
 
 export const metadata: Metadata = {
   title: `About Me | ${process.env.AUTHOR}`,
@@ -62,6 +63,13 @@ function About() {
         </div>
       </Section>
       <PageCTA links={socials} />
+      <script
+        id="about-json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(addAboutJsonLd()),
+        }}
+      />
     </>
   );
 }
