@@ -2270,6 +2270,11 @@ type Preferences {
   navbarItems: [PublicationNavbarItem!]!
 }
 
+type ProTeamFeature implements Feature {
+  """A flag indicating if the Pro team feature is enabled or not."""
+  isEnabled: Boolean!
+}
+
 """
 Contains basic information about the publication.
 A publication is a blog that can be created for a user or a team.
@@ -2459,6 +2464,8 @@ type PublicationFeatures {
   Newsletter feature for the publication which adds a `/newsletter` route for collecting subscribers and allows sending out newsletters.
   """
   newsletter: NewsletterFeature!
+  """Flag to denote if publication is a pro team's publication."""
+  proTeam: ProTeamFeature!
   """Show the read time for blog posts."""
   readTime: ReadTimeFeature!
   """

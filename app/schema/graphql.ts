@@ -2393,6 +2393,12 @@ export type Preferences = {
   navbarItems: Array<PublicationNavbarItem>;
 };
 
+export type ProTeamFeature = Feature & {
+  __typename?: 'ProTeamFeature';
+  /** A flag indicating if the Pro team feature is enabled or not. */
+  isEnabled: Scalars['Boolean']['output'];
+};
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2627,6 +2633,8 @@ export type PublicationFeatures = {
   headlessCMS: HeadlessCmsFeature;
   /** Newsletter feature for the publication which adds a `/newsletter` route for collecting subscribers and allows sending out newsletters. */
   newsletter: NewsletterFeature;
+  /** Flag to denote if publication is a pro team's publication. */
+  proTeam: ProTeamFeature;
   /** Show the read time for blog posts. */
   readTime: ReadTimeFeature;
   /** Widget that shows up if a text on a blog post is selected. Allows for easy sharing or copying of the selected text. */

@@ -1,0 +1,47 @@
+{
+  "name": "Anshuman Mahato",
+  "headline": "Web Developer | Blogger | Open Source Enthusiast",
+  "location": "India",
+  "photo": "",
+  "email": "hi@anshumanmahato.me",
+  "profession": [
+    "Web Developer",
+    "Frontend DEveloper",
+    "Backend Developer",
+    "Full Stack Developer"
+  ],
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Git",
+    "GitHub",
+    "VS Code",
+    "Netlify",
+    "Vercel",
+    "Heroku",
+    "Figma",
+    "Photoshop",
+    "Illustrator"
+  ],
+  "handles": {
+    "socials": {
+      "facebook": "https://www.facebook.com/anshuman.mahato.7",
+      "instagram": "https://www.instagram.com/anshuman_mahato/",
+      "linkedin": "https://www.linkedin.com/in/anshuman-mahato/",
+      "twitter": "https://twitter.com/AnshumanMahato_"
+    },
+    "blogs": {
+      "hashnode": "https://hashnode.com/@AnshumanMahato",
+      "dev": "https://dev.to/anshumanmahato"
+    },
+    "portfolios": {
+      "github": "https://www.github.com/AnshumanMahato",
+      "frontendmentor": "https://www.frontendmentor.io/profile/AnshumanMahato"
+    }
+  }
+}
