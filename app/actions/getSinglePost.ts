@@ -8,7 +8,7 @@ import {
 } from "@/app/schema/graphql";
 
 type PostInfo = {
-  post: PostFullFragment | null | undefined;
+  post: PostFullFragment;
   publication: PublicationFragment;
   comments: number;
 };
