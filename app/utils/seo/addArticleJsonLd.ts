@@ -4,7 +4,7 @@ export const addArticleJsonLd = (
   publication: PublicationFragment,
   post: PostFullFragment
 ) => {
-  const tags = (post.tags ?? []).map((tag: any) => tag.name);
+  const tags = (post.tags ?? []).map((tag) => tag.name);
   const schema = {
     "@context": "https://schema.org/",
     "@type": "BlogPosting",
@@ -15,6 +15,7 @@ export const addArticleJsonLd = (
     description: post.seo?.description || post.brief,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
+    articleBody: post.content,
     author: {
       "@type": "Person",
       "@id": `https://hashnode.com/@${post.author?.username}`,

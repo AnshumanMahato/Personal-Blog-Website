@@ -1,4 +1,6 @@
-export const addPublicationJsonLd = (publication: any) => {
+import { PublicationFragment } from "@/app/schema/graphql";
+
+export const addPublicationJsonLd = (publication: PublicationFragment) => {
   const schema = {
     "@context": "https://schema.org/",
     "@type": "Blog",
