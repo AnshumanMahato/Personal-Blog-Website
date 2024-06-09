@@ -5,7 +5,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoHomeOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import DarkModeSwitch from "@/app/ui/DarkModeSwitch";
+import DarkModeSwitch from "@/app/components/DarkModeSwitch";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);

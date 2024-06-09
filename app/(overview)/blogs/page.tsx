@@ -1,9 +1,9 @@
 import { FaHashnode, FaDev } from "react-icons/fa6";
-import PageBanner from "@/app/ui/PageBanner";
-import PageCTA from "@/app/ui/PageCTA";
-import PageHeading from "@/app/ui/PageHeading";
-import Section from "@/app/ui/Section";
-import BlogCardContainer from "@/app/ui/BlogCardContainer";
+import PageBanner from "@/app/components/PageBanner";
+import PageCTA from "@/app/components/PageCTA";
+import PageHeading from "@/app/components/PageHeading";
+import Section from "@/app/components/Section";
+import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getAllPosts from "@/app/actions/getAllPosts";
 
 async function Blogs() {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { PostFullFragment } from "@/app/schema/graphql";
-import { MarkdownToHtml } from "@/app/ui/MarkdownToHTML";
+import { MarkdownToHtml } from "@/app/components/MarkdownToHTML";
 import { useEmbeds } from "@/app/utils/renderer/hooks/useEmbeds";
 import handleMathJax from "@/app/utils/handle-math-jax";
 import { loadIframeResizer } from "../utils/renderer/services/embed";

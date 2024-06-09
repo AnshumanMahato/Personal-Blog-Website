@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import PageBanner from "@/app/ui/PageBanner";
-import BlogCardContainer from "@/app/ui/BlogCardContainer";
+import PageBanner from "@/app/components/PageBanner";
+import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getPostsBySeries from "@/app/actions/getPostsBySeries";
 
 type Props = {

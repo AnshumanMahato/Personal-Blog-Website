@@ -1,9 +1,9 @@
-import CardContainer from "@/app/ui/CardContainer";
-import PageBanner from "@/app/ui/PageBanner";
-import PageCTA from "@/app/ui/PageCTA";
-import PageHeading from "@/app/ui/PageHeading";
-import ProjectCard from "@/app/ui/ProjectCard";
-import Section from "@/app/ui/Section";
+import CardContainer from "@/app/components/CardContainer";
+import PageBanner from "@/app/components/PageBanner";
+import PageCTA from "@/app/components/PageCTA";
+import PageHeading from "@/app/components/PageHeading";
+import ProjectCard from "@/app/components/ProjectCard";
+import Section from "@/app/components/Section";
 import { FaGithub } from "react-icons/fa6";
 import { SiFrontendmentor } from "react-icons/si";
 

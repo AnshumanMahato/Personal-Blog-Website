@@ -1,4 +1,5 @@
 import getPublication from "@/app/actions/getPublication";
+import Analytics from "@/app/components/Analytics";
 import { addPublicationJsonLd } from "@/app/utils/seo/addPublicationJsonLd";
 import { Metadata } from "next";
 
@@ -41,13 +42,16 @@ async function BlogsLayout({ children }: Props) {
     <>
       {children}
       {publication && (
-        <script
-          id="publication-json-ld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(addPublicationJsonLd(publication)),
-          }}
-        />
+        <>
+          <script
+            id="publication-json-ld"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(addPublicationJsonLd(publication)),
+            }}
+          />
+          <Analytics publication={{ id: publication.id }} />
+        </>
       )}
     </>
   );

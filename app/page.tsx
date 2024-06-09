@@ -1,8 +1,8 @@
 import { FaXTwitter, FaLinkedin } from "react-icons/fa6";
 import { IoMailOutline } from "react-icons/io5";
-import Section from "@/app/ui/Section";
-import SectionHeading from "@/app/ui/SectionHeading";
-import SectionLink from "@/app/ui/SectionLink";
+import Section from "@/app/components/Section";
+import SectionHeading from "@/app/components/SectionHeading";
+import SectionLink from "@/app/components/SectionLink";
 import skills from "@/app/lib/skills.json";
 import Image from "next/image";
 import Link from "next/link";
