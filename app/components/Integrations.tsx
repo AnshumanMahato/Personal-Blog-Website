@@ -6,7 +6,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Publication } from "../schema/graphql";
+import { Publication } from "@/app/schema/graphql";
 import Script from "next/script";
 
 type Props = Readonly<{
