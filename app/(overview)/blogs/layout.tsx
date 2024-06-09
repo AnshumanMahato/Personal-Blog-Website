@@ -1,5 +1,6 @@
 import getPublication from "@/app/actions/getPublication";
 import Analytics from "@/app/components/Analytics";
+import Integrations from "@/app/components/Integrations";
 import { addPublicationJsonLd } from "@/app/utils/seo/addPublicationJsonLd";
 import { Metadata } from "next";
 
@@ -51,6 +52,12 @@ async function BlogsLayout({ children }: Props) {
             }}
           />
           <Analytics publication={{ id: publication.id }} />
+          <Integrations
+            publication={{
+              integrations: publication.integrations,
+              url: publication.url,
+            }}
+          />
         </>
       )}
     </>

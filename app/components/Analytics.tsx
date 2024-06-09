@@ -1,4 +1,8 @@
-//This component is pulled fron hashnode starter kit
+/*
+  This component is pulled fron hashnode starter kit. 
+  Used for sending analytics data to Hashnode's internal analytics, Google Analytics, 
+  Hashnode's own analytics dashboard, and advanced analytics dashboard.
+ */
 "use client";
 
 import Cookies from "js-cookie";

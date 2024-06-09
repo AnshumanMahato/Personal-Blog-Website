@@ -2,6 +2,7 @@ import getSinglePost from "@/app/actions/getSinglePost";
 import Article from "@/app/components/Article";
 import BlogBanner from "@/app/components/BlogBanner";
 import Analytics from "@/app/components/Analytics";
+import Integrations from "@/app/components/Integrations";
 import { addArticleJsonLd } from "@/app/utils/seo/addArticleJsonLd";
 import { ResolvingMetadata } from "next";
 import { RiChat3Line, RiExternalLinkLine } from "react-icons/ri";
@@ -98,6 +99,12 @@ async function BlogPost({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(addArticleJsonLd(publication, post)),
+        }}
+      />
+      <Integrations
+        publication={{
+          integrations: publication.integrations,
+          url: publication.url,
         }}
       />
       <Analytics publication={{ id: publication.id }} post={{ id: post.id }} />
