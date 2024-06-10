@@ -1,23 +1,11 @@
-query Sitemap(
-  $host: String!
-  $postsCount: Int!
-  $postsAfter: String
-  $staticPagesCount: Int!
-) {
+query Sitemap($host: String!, $first: Int!, $after: String) {
   publication(host: $host) {
     id
     url
-    staticPages(first: $staticPagesCount) {
+    posts(first: $first, after: $after) {
       edges {
         node {
-          slug
-        }
-      }
-    }
-    posts(first: $postsCount, after: $postsAfter) {
-      edges {
-        node {
-          ...RequiredSitemapPostFields
+          ...SitemapPostFields
         }
       }
       pageInfo {
@@ -33,7 +21,7 @@ query MoreSitemapPosts($host: String!, $postsCount: Int!, $postsAfter: String) {
     posts(first: $postsCount, after: $postsAfter) {
       edges {
         node {
-          ...RequiredSitemapPostFields
+          ...SitemapPostFields
         }
       }
       pageInfo {

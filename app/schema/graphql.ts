@@ -4182,9 +4182,9 @@ export type PostFullFragment = { __typename?: 'Post', id: string, slug: string, 
 
 export type PublicationFragment = { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null };
 
-export type RequiredSitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null };
-
 export type SeriesFragment = { __typename?: 'Series', id: string, name: string, slug: string, coverImage?: string | null };
+
+export type SitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null };
 
 export type DraftByIdQueryVariables = Exact<{
   id: Scalars['ObjectId']['input'];
@@ -4257,13 +4257,12 @@ export type SinglePostByPublicationQuery = { __typename?: 'Query', publication?:
 
 export type SitemapQueryVariables = Exact<{
   host: Scalars['String']['input'];
-  postsCount: Scalars['Int']['input'];
-  postsAfter?: InputMaybe<Scalars['String']['input']>;
-  staticPagesCount: Scalars['Int']['input'];
+  first: Scalars['Int']['input'];
+  after?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type SitemapQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, url: string, staticPages: { __typename?: 'StaticPageConnection', edges: Array<{ __typename?: 'StaticPageEdge', node: { __typename?: 'StaticPage', slug: string } }> }, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
+export type SitemapQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, url: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type MoreSitemapPostsQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4272,7 +4271,7 @@ export type MoreSitemapPostsQueryVariables = Exact<{
 }>;
 
 
-export type MoreSitemapPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
+export type MoreSitemapPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type SlugPostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4479,8 +4478,8 @@ export const PublicationFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"Publication"}) as unknown as TypedDocumentString<PublicationFragment, unknown>;
-export const RequiredSitemapPostFieldsFragmentDoc = new TypedDocumentString(`
-    fragment RequiredSitemapPostFields on Post {
+export const SitemapPostFieldsFragmentDoc = new TypedDocumentString(`
+    fragment SitemapPostFields on Post {
   id
   url
   slug
@@ -4491,8 +4490,13 @@ export const RequiredSitemapPostFieldsFragmentDoc = new TypedDocumentString(`
     name
     slug
   }
+  series {
+    id
+    name
+    slug
+  }
 }
-    `, {"fragmentName":"RequiredSitemapPostFields"}) as unknown as TypedDocumentString<RequiredSitemapPostFieldsFragment, unknown>;
+    `, {"fragmentName":"SitemapPostFields"}) as unknown as TypedDocumentString<SitemapPostFieldsFragment, unknown>;
 export const StaticPageFragmentDoc = new TypedDocumentString(`
     fragment StaticPage on StaticPage {
   id
@@ -5065,21 +5069,14 @@ fragment Series on Series {
   coverImage
 }`) as unknown as TypedDocumentString<SinglePostByPublicationQuery, SinglePostByPublicationQueryVariables>;
 export const SitemapDocument = new TypedDocumentString(`
-    query Sitemap($host: String!, $postsCount: Int!, $postsAfter: String, $staticPagesCount: Int!) {
+    query Sitemap($host: String!, $first: Int!, $after: String) {
   publication(host: $host) {
     id
     url
-    staticPages(first: $staticPagesCount) {
+    posts(first: $first, after: $after) {
       edges {
         node {
-          slug
-        }
-      }
-    }
-    posts(first: $postsCount, after: $postsAfter) {
-      edges {
-        node {
-          ...RequiredSitemapPostFields
+          ...SitemapPostFields
         }
       }
       pageInfo {
@@ -5092,13 +5089,18 @@ export const SitemapDocument = new TypedDocumentString(`
   endCursor
   hasNextPage
 }
-fragment RequiredSitemapPostFields on Post {
+fragment SitemapPostFields on Post {
   id
   url
   slug
   publishedAt
   updatedAt
   tags {
+    id
+    name
+    slug
+  }
+  series {
     id
     name
     slug
@@ -5111,7 +5113,7 @@ export const MoreSitemapPostsDocument = new TypedDocumentString(`
     posts(first: $postsCount, after: $postsAfter) {
       edges {
         node {
-          ...RequiredSitemapPostFields
+          ...SitemapPostFields
         }
       }
       pageInfo {
@@ -5124,13 +5126,18 @@ export const MoreSitemapPostsDocument = new TypedDocumentString(`
   endCursor
   hasNextPage
 }
-fragment RequiredSitemapPostFields on Post {
+fragment SitemapPostFields on Post {
   id
   url
   slug
   publishedAt
   updatedAt
   tags {
+    id
+    name
+    slug
+  }
+  series {
     id
     name
     slug
