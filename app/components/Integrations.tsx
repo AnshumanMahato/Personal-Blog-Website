@@ -92,12 +92,12 @@ function Integrations({ publication }: Props) {
         id="google-gtag"
         async
         src={`https://ping.hashnode.com/gtag/js?id=G-72XG3F8LNJ`}
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
       <Script
         id="google-analytics"
         dangerouslySetInnerHTML={{ __html: googleAnalytics }}
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
       {fbPixelID ? (
         <Script
