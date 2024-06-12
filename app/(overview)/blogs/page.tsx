@@ -1,12 +1,12 @@
-import BlogCard from "@/app/ui/BlogCard";
-import CardContainer from "@/app/ui/CardContainer";
-import PageBanner from "@/app/ui/PageBanner";
-import PageCTA from "@/app/ui/PageCTA";
-import PageHeading from "@/app/ui/PageHeading";
-import Section from "@/app/ui/Section";
 import { FaHashnode, FaDev } from "react-icons/fa6";
+import PageBanner from "@/app/components/PageBanner";
+import PageCTA from "@/app/components/PageCTA";
+import PageHeading from "@/app/components/PageHeading";
+import Section from "@/app/components/Section";
+import BlogCardContainer from "@/app/components/BlogCardContainer";
+import getAllPosts from "@/app/actions/getAllPosts";
 
-function Blogs() {
+async function Blogs() {
   const socials = [
     {
       href: "https://dev.to/anshumanmahato",
@@ -20,6 +20,8 @@ function Blogs() {
     },
   ];
 
+  const posts = await getAllPosts();
+
   return (
     <>
       <PageBanner title="Blogs" coverImage="/next.svg" coverImageAlt="next" />
@@ -32,14 +34,12 @@ function Blogs() {
           </p>
         </div>
       </Section>
-      <CardContainer>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </CardContainer>
+      <BlogCardContainer
+        initialBlogs={posts?.posts ?? []}
+        initialPageInfo={
+          posts?.pageInfo ?? { hasNextPage: false, endCursor: "" }
+        }
+      />
       <PageCTA links={socials} />
     </>
   );

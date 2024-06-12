@@ -12,6 +12,7 @@ generates:
       - typescript-operations
       - typed-document-node
     config:
+      documentMode: string
       scalars:
         Date: string
         DateTime: string

@@ -1,5 +1,9 @@
 {
   "name": "anshumanmahato.github.io",
+  "author": {
+    "name": "Anshuman Mahato",
+    "email": "anshuman.mahato0935@gmail.com"
+  },
   "version": "2.0.0",
   "private": true,
   "scripts": {
@@ -13,10 +17,18 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "framer-motion": "^11.1.5",
+    "graphql-request": "^7.0.1",
+    "js-base64": "^3.7.7",
+    "js-cookie": "^3.0.5",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.1.0"
+    "react-icons": "^5.1.0",
+    "rss": "^1.2.2",
+    "sanitize-html": "^2.13.0",
+    "slug": "^9.0.0",
+    "uuid": "^9.0.1",
+    "validator": "^13.12.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
@@ -25,9 +37,12 @@
     "@graphql-codegen/typescript-operations": "^4.2.0",
     "@parcel/watcher": "^2.4.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/rss": "^0.0.32",
+    "@types/sanitize-html": "^2.11.0",
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
     "eslint": "^8",

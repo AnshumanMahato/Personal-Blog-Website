@@ -1,10 +1,16 @@
 import { FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
-import PageHeading from "@/app/ui/PageHeading";
-import PageBanner from "@/app/ui/PageBanner";
-import Section from "@/app/ui/Section";
-import PageCTA from "@/app/ui/PageCTA";
+import PageHeading from "@/app/components/PageHeading";
+import PageBanner from "@/app/components/PageBanner";
+import Section from "@/app/components/Section";
+import PageCTA from "@/app/components/PageCTA";
+import { Metadata } from "next";
+import { addAboutJsonLd } from "@/app/utils/seo/addAboutJsonLd";
+
+export const metadata: Metadata = {
+  title: `About Me | ${process.env.AUTHOR}`,
+};
 
 function About() {
   const socials = [
@@ -57,6 +63,13 @@ function About() {
         </div>
       </Section>
       <PageCTA links={socials} />
+      <script
+        id="about-json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(addAboutJsonLd()),
+        }}
+      />
     </>
   );
 }

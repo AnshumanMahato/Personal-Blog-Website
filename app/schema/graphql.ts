@@ -1,4 +1,4 @@
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -16,6 +16,31 @@ export type Scalars = {
   DateTime: { input: string; output: string; }
   ObjectId: { input: string; output: string; }
   URL: { input: any; output: any; }
+};
+
+export type AcceptInviteToPublicationInput = {
+  /** The invitation token to accept. */
+  inviteToken: Scalars['String']['input'];
+};
+
+/** Response to accepting an invitation to join a publication. */
+export type AcceptInviteToPublicationPayload = {
+  __typename?: 'AcceptInviteToPublicationPayload';
+  /** Signifies if the mutation was successful. */
+  success: Scalars['Boolean']['output'];
+};
+
+/** Input to accept a role based invite. */
+export type AcceptRoleBasedInviteInput = {
+  /** Invite token of the role based invite. */
+  inviteToken: Scalars['String']['input'];
+};
+
+/** Input to toggle role based invite links. */
+export type AcceptRoleBasedInvitePayload = {
+  __typename?: 'AcceptRoleBasedInvitePayload';
+  /** Signifies if the mutation was successful. */
+  success: Scalars['Boolean']['output'];
 };
 
 export type AddCommentInput = {
@@ -137,6 +162,43 @@ export type CancelScheduledDraftPayload = {
   __typename?: 'CancelScheduledDraftPayload';
   /** Payload returned in response of cancel scheduled post mutation. */
   scheduledPost: ScheduledPost;
+};
+
+/** Input to change the role of a user in a publication. */
+export type ChangePublicationMemberRoleInput = {
+  /** The publication ID the user is a member of. */
+  publicationId: Scalars['ID']['input'];
+  /** The role of the user in the publication. */
+  role: UserPublicationRole;
+  /** The username of the user to change the role for. */
+  username: Scalars['String']['input'];
+};
+
+/** Response to changing the role of a user in a publication. */
+export type ChangePublicationMemberRolePayload = {
+  __typename?: 'ChangePublicationMemberRolePayload';
+  /** The updated publication member. */
+  member: PublicationMember;
+};
+
+/** Input to change the privacy state of a user in a publication. */
+export type ChangePublicationMemberVisibilityInput = {
+  /**
+   * The privacy state of the user in the publication.
+   * PRIVATE members are not visible on the members page while PUBLIC members are visible.
+   */
+  privacyState: PublicationMemberPrivacyState;
+  /** The publication ID the user is a member of. */
+  publicationId: Scalars['ID']['input'];
+  /** The username of the user to change the role for. */
+  username: Scalars['String']['input'];
+};
+
+/** Response to changing the privacy state of a user in a publication. */
+export type ChangePublicationMemberVisibilityPayload = {
+  __typename?: 'ChangePublicationMemberVisibilityPayload';
+  /** The updated publication member. */
+  member: PublicationMember;
 };
 
 /**
@@ -832,6 +894,29 @@ export type CreateDraftTagInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** Input to create a role based invite for a publication. */
+export type CreateRoleBasedInviteForPublicationInput = {
+  /** The capacity of how many members to be invited by the link. */
+  capacity?: InputMaybe<Scalars['Int']['input']>;
+  /** Boolean to enable unlimited capacity. */
+  enableUnlimitedCapacity?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The expiry date of the invite. */
+  expiryDate?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Invite token set for the invitation */
+  inviteToken?: InputMaybe<Scalars['String']['input']>;
+  /** The publication ID to create the invite for. */
+  publicationId: Scalars['ID']['input'];
+  /** The role to assign to the user in the publication. */
+  role: UserPublicationInviteRole;
+};
+
+/** Response to creating a role based invite for a publication. */
+export type CreateRoleBasedInviteForPublicationPayload = {
+  __typename?: 'CreateRoleBasedInviteForPublicationPayload';
+  /** The created role based invite. */
+  invite: RoleBasedInvite;
+};
+
 export type CreateSeriesInput = {
   /** The cover image of the series. */
   coverImage?: InputMaybe<Scalars['String']['input']>;
@@ -906,6 +991,7 @@ export type DarkModePreferences = {
   logo?: Maybe<Scalars['String']['output']>;
 };
 
+/** Input to delete a role based invite. */
 export type DeleteRoleBasedInviteInput = {
   /** The ID of the role based invite. */
   inviteId: Scalars['ID']['input'];
@@ -1081,6 +1167,26 @@ export type DraftFeatures = {
   tableOfContents: TableOfContentsFeature;
 };
 
+export type DraftRevision = Node & {
+  __typename?: 'DraftRevision';
+  /** The name of the user who created the revision. */
+  authorName: Scalars['String']['output'];
+  /** The content of the draft revision. */
+  content: Content;
+  /** The time the revision has been created. */
+  createdAt: Scalars['DateTime']['output'];
+  /** The ID of the draft revision. */
+  id: Scalars['ID']['output'];
+};
+
+export type DraftRevisionEdge = Edge & {
+  __typename?: 'DraftRevisionEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** A node in the connection containing a draft revision. */
+  node: DraftRevision;
+};
+
 export type DraftSettings = {
   __typename?: 'DraftSettings';
   /** A flag to indicate if the comments are disabled for the post. */
@@ -1143,6 +1249,17 @@ export enum EmailImportStatus {
   /** Import was successful. New emails have been imported. */
   Success = 'SUCCESS'
 }
+
+/** Invitations that failed to be sent to the user */
+export type FailedInvite = {
+  __typename?: 'FailedInvite';
+  /** The email of the user that failed to invite. */
+  email?: Maybe<Scalars['String']['output']>;
+  /** The reason why the user failed to invite. */
+  errorMessage: Scalars['String']['output'];
+  /** The username of the user that failed to invite. */
+  username?: Maybe<Scalars['String']['output']>;
+};
 
 /** Common fields that describe a feature. */
 export type Feature = {
@@ -1383,6 +1500,12 @@ export type GroupedByTimeVisitors = Node & Visitors & {
   total: Scalars['Int']['output'];
 };
 
+export type HeadlessCmsFeature = Feature & {
+  __typename?: 'HeadlessCMSFeature';
+  /** A flag indicating if the Headless CMS feature is enabled or not. */
+  isEnabled: Scalars['Boolean']['output'];
+};
+
 export enum HttpRedirectionType {
   /** A permanent redirect that corresponds to the 302 HTTP status code. */
   Permanent = 'PERMANENT',
@@ -1488,6 +1611,25 @@ export type IUserPublicationsArgs = {
   first: Scalars['Int']['input'];
 };
 
+/** Input to invite users to a publication. */
+export type InviteUsersToPublicationInput = {
+  /** The publication ID to invite users to. */
+  publicationId: Scalars['ID']['input'];
+  /** The list of users  to invite to the publication. */
+  users: Array<UserInviteInput>;
+};
+
+/** Response to inviting users to a publication. */
+export type InviteUsersToPublicationPayload = {
+  __typename?: 'InviteUsersToPublicationPayload';
+  /** Invites that failed due to an error. */
+  failedInvites: Array<FailedInvite>;
+  /** Signifies if the mutation was successful for all users. */
+  success: Scalars['Boolean']['output'];
+  /** The number of successful invites. */
+  successfulInviteCount: Scalars['Int']['output'];
+};
+
 export type LikeCommentInput = {
   commentId: Scalars['ID']['input'];
   likesCount?: InputMaybe<Scalars['Int']['input']>;
@@ -1531,6 +1673,10 @@ export type MetaTagsInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Accepts an invitation to join a publication. The user is added as a member of the publication. */
+  acceptInviteToPublication: AcceptInviteToPublicationPayload;
+  /** Accepts a role based invite and adds the user as a member of the publication. The user is assigned the role specified in the invite. */
+  acceptRoleBasedInvite: AcceptRoleBasedInvitePayload;
   /** Adds a comment to a post. */
   addComment: AddCommentPayload;
   /** Adds a post to a series. */
@@ -1538,14 +1684,25 @@ export type Mutation = {
   /** Adds a reply to a comment. */
   addReply: AddReplyPayload;
   cancelScheduledDraft: CancelScheduledDraftPayload;
+  /** Changes the role of a user in a publication. */
+  changePublicationMemberRole: ChangePublicationMemberRolePayload;
+  /**
+   * Changes the privacy state of a user in a publication.
+   * PRIVATE members are not visible on the members page while PUBLIC members are visible.
+   */
+  changePublicationMemberVisibility: ChangePublicationMemberVisibilityPayload;
   /** Creates a new draft for a post. */
   createDraft: CreateDraftPayload;
+  /** Creates a role based invite for a publication and returns a link to invite users to a publication. */
+  createRoleBasedInviteForPublication: CreateRoleBasedInviteForPublicationPayload;
   /** Creates a new series. */
   createSeries: CreateSeriesPayload;
   createWebhook: CreateWebhookPayload;
   /** Deletes a role based invite. */
   deleteRoleBasedInvite: DeleteRoleBasedInvitePayload;
   deleteWebhook: DeleteWebhookPayload;
+  /** Invites users to a publication. Either by username or email. */
+  inviteUsersToPublication: InviteUsersToPublicationPayload;
   /** Likes a comment. */
   likeComment: LikeCommentPayload;
   /** Likes a post. */
@@ -1557,10 +1714,14 @@ export type Mutation = {
   /** Creates a new post. */
   publishPost: PublishPostPayload;
   recommendPublications: RecommendPublicationsPayload;
+  /** Resends an invitation to a user to join a publication. The user must have been previously invited. Sends an email to the user. */
+  reinviteUserToPublication: ReinviteUserToPublicationPayload;
   /** Removes a comment from a post. */
   removeComment: RemoveCommentPayload;
   /** Removes a post. */
   removePost: RemovePostPayload;
+  /** Removes a user from a teams publication. */
+  removePublicationMember: RemovePublicationMemberPayload;
   removeRecommendation: RemoveRecommendationPayload;
   /** Removes a reply from a comment. */
   removeReply: RemoveReplyPayload;
@@ -1571,6 +1732,8 @@ export type Mutation = {
   resendWebhookRequest: ResendWebhookRequestPayload;
   /** Restores a deleted post. */
   restorePost: RestorePostPayload;
+  /** Revokes a user invitation that was sent to join a publication. */
+  revokeUserInviteToPublication: RevokeUserInviteToPublicationPayload;
   scheduleDraft: ScheduleDraftPayload;
   subscribeToNewsletter: SubscribeToNewsletterPayload;
   /** Toggle allowContributorEdits flag to allow or restrict external contributors to further edit published articles. */
@@ -1582,6 +1745,8 @@ export type Mutation = {
    * Only available to the authenticated user.
    */
   toggleFollowUser: ToggleFollowUserPayload;
+  /** Toggles role based invite links' active status. Users can join the publication by the invite link only if it is active. */
+  toggleRoleBasedInviteLinks: ToggleRoleBasedInviteLinksPayload;
   triggerWebhookTest: TriggerWebhookTestPayload;
   unsubscribeFromNewsletter: UnsubscribeFromNewsletterPayload;
   /** Updates a comment on a post. */
@@ -1589,9 +1754,21 @@ export type Mutation = {
   updatePost: UpdatePostPayload;
   /** Updates a reply */
   updateReply: UpdateReplyPayload;
+  /** Updates a role based invite for a publication. */
+  updateRoleBasedInvite: UpdateRoleBasedInvitePayload;
   /** Updates a series. */
   updateSeries: UpdateSeriesPayload;
   updateWebhook: UpdateWebhookPayload;
+};
+
+
+export type MutationAcceptInviteToPublicationArgs = {
+  input: AcceptInviteToPublicationInput;
+};
+
+
+export type MutationAcceptRoleBasedInviteArgs = {
+  input: AcceptRoleBasedInviteInput;
 };
 
 
@@ -1615,8 +1792,23 @@ export type MutationCancelScheduledDraftArgs = {
 };
 
 
+export type MutationChangePublicationMemberRoleArgs = {
+  input: ChangePublicationMemberRoleInput;
+};
+
+
+export type MutationChangePublicationMemberVisibilityArgs = {
+  input: ChangePublicationMemberVisibilityInput;
+};
+
+
 export type MutationCreateDraftArgs = {
   input: CreateDraftInput;
+};
+
+
+export type MutationCreateRoleBasedInviteForPublicationArgs = {
+  input: CreateRoleBasedInviteForPublicationInput;
 };
 
 
@@ -1637,6 +1829,11 @@ export type MutationDeleteRoleBasedInviteArgs = {
 
 export type MutationDeleteWebhookArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationInviteUsersToPublicationArgs = {
+  input: InviteUsersToPublicationInput;
 };
 
 
@@ -1670,6 +1867,11 @@ export type MutationRecommendPublicationsArgs = {
 };
 
 
+export type MutationReinviteUserToPublicationArgs = {
+  input: ReinviteUserToPublicationInput;
+};
+
+
 export type MutationRemoveCommentArgs = {
   input: RemoveCommentInput;
 };
@@ -1677,6 +1879,11 @@ export type MutationRemoveCommentArgs = {
 
 export type MutationRemovePostArgs = {
   input: RemovePostInput;
+};
+
+
+export type MutationRemovePublicationMemberArgs = {
+  input: RemovePublicationMemberInput;
 };
 
 
@@ -1710,6 +1917,11 @@ export type MutationRestorePostArgs = {
 };
 
 
+export type MutationRevokeUserInviteToPublicationArgs = {
+  input: RevokeUserInviteToPublicationInput;
+};
+
+
 export type MutationScheduleDraftArgs = {
   input: ScheduleDraftInput;
 };
@@ -1728,6 +1940,11 @@ export type MutationToggleAllowContributorEditsArgs = {
 export type MutationToggleFollowUserArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationToggleRoleBasedInviteLinksArgs = {
+  publicationId: Scalars['ID']['input'];
 };
 
 
@@ -1753,6 +1970,11 @@ export type MutationUpdatePostArgs = {
 
 export type MutationUpdateReplyArgs = {
   input: UpdateReplyInput;
+};
+
+
+export type MutationUpdateRoleBasedInviteArgs = {
+  input: UpdateRoleBasedInviteInput;
 };
 
 
@@ -2000,6 +2222,7 @@ export type PagesPreferences = {
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** Contains the pending invite information. */
 export type PendingInvite = Node & {
   __typename?: 'PendingInvite';
   /** The email of the user that was invited. */
@@ -2010,6 +2233,16 @@ export type PendingInvite = Node & {
   role: UserPublicationRole;
   /** Invited Hashnode user, returns null if the user is not a Hashnode user. */
   user?: Maybe<User>;
+};
+
+export type PendingInviteConnection = PageConnection & {
+  __typename?: 'PendingInviteConnection';
+  /** A list of invites */
+  nodes: Array<PendingInvite>;
+  /** Information to aid in pagination. */
+  pageInfo: OffsetPageInfo;
+  /** The total number of invites. */
+  totalDocuments: Scalars['Int']['output'];
 };
 
 /** Contains basic information about the tag returned by popularTags query. */
@@ -2367,6 +2600,12 @@ export type Preferences = {
   navbarItems: Array<PublicationNavbarItem>;
 };
 
+export type ProTeamFeature = Feature & {
+  __typename?: 'ProTeamFeature';
+  /** A flag indicating if the Pro team feature is enabled or not. */
+  isEnabled: Scalars['Boolean']['output'];
+};
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2412,6 +2651,8 @@ export type Publication = Node & {
   imprintV2?: Maybe<Content>;
   /** The integrations connected to the publication. */
   integrations?: Maybe<PublicationIntegrations>;
+  /** Details of publication invites. Returns null if publication is not a team publication. */
+  invites?: Maybe<PublicationInvite>;
   /** Returns true if GitHub backup is configured and active and false otherwise. */
   isGitHubBackupEnabled: Scalars['Boolean']['output'];
   /** A flag to indicate if the publication is using Headless CMS. This can be used to check if the post redirect needs authentication. */
@@ -2503,6 +2744,7 @@ export type PublicationPostsArgs = {
  * A publication is a blog that can be created for a user or a team.
  */
 export type PublicationPostsViaPageArgs = {
+  filter?: InputMaybe<PublicationPostsViaPageFilter>;
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
@@ -2596,8 +2838,12 @@ export type PublicationFeatures = {
   audioBlog: AudioBlogFeature;
   /** Individual styling for the publication. */
   customCSS: CustomCssFeature;
+  /** Headless CMS for the publication. */
+  headlessCMS: HeadlessCmsFeature;
   /** Newsletter feature for the publication which adds a `/newsletter` route for collecting subscribers and allows sending out newsletters. */
   newsletter: NewsletterFeature;
+  /** Flag to denote if publication is a pro team's publication. */
+  proTeam: ProTeamFeature;
   /** Show the read time for blog posts. */
   readTime: ReadTimeFeature;
   /** Widget that shows up if a text on a blog post is selected. Allows for easy sharing or copying of the selected text. */
@@ -2638,6 +2884,33 @@ export type PublicationIntegrations = {
   umamiWebsiteUUID?: Maybe<Scalars['String']['output']>;
   /** Web Monetization Payment Pointer for integration with Web Monetization. */
   wmPaymentPointer?: Maybe<Scalars['String']['output']>;
+};
+
+/** Contains the publication invite information. */
+export type PublicationInvite = {
+  __typename?: 'PublicationInvite';
+  /**
+   * Signifies if invite links in role-based invites are active.
+   * Users trying to join by role-based invite can only join if this is enabled.
+   */
+  areRoleBasedInviteLinksActive: Scalars['Boolean']['output'];
+  pendingInvites: PendingInviteConnection;
+  /** The paginated list of role based invites. */
+  roleBasedInvites: RoleBasedInviteConnection;
+};
+
+
+/** Contains the publication invite information. */
+export type PublicationInvitePendingInvitesArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/** Contains the publication invite information. */
+export type PublicationInviteRoleBasedInvitesArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
 };
 
 /** Contains publication's layout choices. */
@@ -2692,6 +2965,7 @@ export type PublicationMember = Node & {
   user?: Maybe<User>;
 };
 
+/** Publication member privacy state on members page */
 export enum PublicationMemberPrivacyState {
   /** The member is private and not visible on the members page. */
   Private = 'PRIVATE',
@@ -2777,6 +3051,23 @@ export type PublicationPostPageConnection = PageConnection & {
   pageInfo: OffsetPageInfo;
   /** The total number of posts. */
   totalDocuments: Scalars['Int']['output'];
+};
+
+export type PublicationPostsViaPageFilter = {
+  /** Remove pinned post from the result set. */
+  excludePinnedPosts?: InputMaybe<Scalars['Boolean']['input']>;
+  /**
+   * Filtering by tag slugs and tag IDs will return posts that match either of the filters.
+   *
+   * It is an "OR" filter and not an "AND" filter.
+   */
+  tagSlugs?: InputMaybe<Array<Scalars['String']['input']>>;
+  /**
+   * Filtering by tag slugs and tag IDs will return posts that match either of the filters.
+   *
+   * It is an "OR" filter and not an "AND" filter.
+   */
+  tags?: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 /**
@@ -3047,6 +3338,21 @@ export type RedirectionRule = Node & {
   type: HttpRedirectionType;
 };
 
+/** Input to reinvite a user to a publication. */
+export type ReinviteUserToPublicationInput = {
+  /** The ID of the invitation to resend. */
+  inviteId: Scalars['ID']['input'];
+  /** The publication ID to resend the invitation from. */
+  publicationId: Scalars['ID']['input'];
+};
+
+/** Response to reinviting a user to a publication. */
+export type ReinviteUserToPublicationPayload = {
+  __typename?: 'ReinviteUserToPublicationPayload';
+  /** Signifies if the mutation was successful. */
+  success: Scalars['Boolean']['output'];
+};
+
 export type RemoveCommentInput = {
   id: Scalars['ID']['input'];
 };
@@ -3065,6 +3371,21 @@ export type RemovePostPayload = {
   __typename?: 'RemovePostPayload';
   /** The deleted post. */
   post?: Maybe<Post>;
+};
+
+/** Input to remove a user from a publication. */
+export type RemovePublicationMemberInput = {
+  /** The publication ID the user is a member of. */
+  publicationId: Scalars['ID']['input'];
+  /** The username of the user to remove from the publication. */
+  username: Scalars['String']['input'];
+};
+
+/** Response to removing a user from a publication. */
+export type RemovePublicationMemberPayload = {
+  __typename?: 'RemovePublicationMemberPayload';
+  /** Returns the removed publication member. */
+  member: PublicationMember;
 };
 
 export type RemoveRecommendationInput = {
@@ -3155,10 +3476,28 @@ export type RestorePostPayload = {
   post?: Maybe<Post>;
 };
 
+/** Input to revoke a user invitation to a publication. */
+export type RevokeUserInviteToPublicationInput = {
+  /** The invite ID to revoke. */
+  inviteId: Scalars['ID']['input'];
+  /** The publication ID to revoke the invite from. */
+  publicationId: Scalars['ID']['input'];
+};
+
+/** Response to revoking a user invitation to a publication. */
+export type RevokeUserInviteToPublicationPayload = {
+  __typename?: 'RevokeUserInviteToPublicationPayload';
+  /** Signifies if the mutation was successful. */
+  success: Scalars['Boolean']['output'];
+};
+
+/** Contains the role based invite information. */
 export type RoleBasedInvite = Node & {
   __typename?: 'RoleBasedInvite';
   /** The capacity of how many members to be invited by the link. */
   capacity?: Maybe<Scalars['Int']['output']>;
+  /** The date the invite was created. */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** The expiry date of the invite. */
   expiryDate?: Maybe<Scalars['DateTime']['output']>;
   /** The ID of the role based invite. */
@@ -3169,6 +3508,18 @@ export type RoleBasedInvite = Node & {
   isUnlimitedCapacity?: Maybe<Scalars['Boolean']['output']>;
   /** The role assigned to the user in the publication. */
   role: UserPublicationRole;
+  /** The number of members that have already used the link to join the team. */
+  usedCapacity?: Maybe<Scalars['Int']['output']>;
+};
+
+export type RoleBasedInviteConnection = PageConnection & {
+  __typename?: 'RoleBasedInviteConnection';
+  /** A list of invites */
+  nodes: Array<RoleBasedInvite>;
+  /** Information to aid in pagination. */
+  pageInfo: OffsetPageInfo;
+  /** The total number of invites. */
+  totalDocuments: Scalars['Int']['output'];
 };
 
 /** Information to help in seo related meta tags. */
@@ -3222,10 +3573,12 @@ export enum Scope {
   AssignProPublications = 'assign_pro_publications',
   ChangeProSubscription = 'change_pro_subscription',
   CreatePro = 'create_pro',
+  DeleteDraft = 'delete_draft',
   DocsEditorOrOwner = 'docs_editor_or_owner',
   DocsOwner = 'docs_owner',
   ImportSubscribersToPublication = 'import_subscribers_to_publication',
   InvitedTeamUser = 'invited_team_user',
+  MoveDraft = 'move_draft',
   PublicationAdmin = 'publication_admin',
   PublicationMember = 'publication_member',
   PublishComment = 'publish_comment',
@@ -3239,10 +3592,12 @@ export enum Scope {
   Signup = 'signup',
   TeamHashnode = 'team_hashnode',
   UpdateComment = 'update_comment',
+  UpdateDraft = 'update_draft',
   UpdatePost = 'update_post',
   UpdateReply = 'update_reply',
   WebhookAdmin = 'webhook_admin',
   WriteDraft = 'write_draft',
+  WriteDraftRevision = 'write_draft_revision',
   WritePost = 'write_post',
   WriteSeries = 'write_series',
   WriteStaticPage = 'write_static_page',
@@ -3263,12 +3618,14 @@ export type SearchPostConnection = Connection & {
 };
 
 export type SearchPostsOfPublicationFilter = {
+  /** An array of author Ids to filter the posts. */
+  authorIds?: InputMaybe<Array<Scalars['ID']['input']>>;
   /** Only return posts that are deleted. Query returns active posts by default, set this to true to return deleted posts. */
   deletedOnly?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of publications to search from. */
   publicationId: Scalars['ObjectId']['input'];
   /** The query to be searched in post. */
-  query: Scalars['String']['input'];
+  query?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SearchUser = Node & {
@@ -3401,7 +3758,7 @@ export type StaticPage = Node & {
   ogMetaData?: Maybe<OpenGraphMetaData>;
   /** Information about the static page's SEO metadata i.e. title and description. */
   seo?: Maybe<Seo>;
-  /** The slug of the static page. Used to access static page.  Example https://johndoe.com/my-page */
+  /** The slug of the static page. Used to access static page. Example `https://johndoe.com/my-page`. */
   slug: Scalars['String']['output'];
   /** The title of the static page. Shown in nav bar. */
   title: Scalars['String']['output'];
@@ -3555,6 +3912,13 @@ export type ToggleFollowUserPayload = {
   user?: Maybe<User>;
 };
 
+/** Response to toggling role based invite links. */
+export type ToggleRoleBasedInviteLinksPayload = {
+  __typename?: 'ToggleRoleBasedInviteLinksPayload';
+  /** Signifies the status of invite links after toggling. */
+  areRoleBasedInviteLinksActive: Scalars['Boolean']['output'];
+};
+
 export type TriggerWebhookTestInput = {
   webhookId: Scalars['ID']['input'];
 };
@@ -3669,6 +4033,28 @@ export type UpdateReplyInput = {
 export type UpdateReplyPayload = {
   __typename?: 'UpdateReplyPayload';
   reply?: Maybe<Reply>;
+};
+
+/** Input to update a role based invite. */
+export type UpdateRoleBasedInviteInput = {
+  /** The capacity of how many members to be invited by the link. */
+  capacity?: InputMaybe<Scalars['Int']['input']>;
+  /** Boolean to enable unlimited capacity. */
+  enableUnlimitedCapacity?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The expiry date of the invite. */
+  expiryDate?: InputMaybe<Scalars['DateTime']['input']>;
+  /** The ID of the role based invite. */
+  inviteId: Scalars['ID']['input'];
+  publicationId: Scalars['ID']['input'];
+  /** The role to assign to the user in the publication. */
+  role?: InputMaybe<UserPublicationInviteRole>;
+};
+
+/** Response to updating a role based invite for a publication. */
+export type UpdateRoleBasedInvitePayload = {
+  __typename?: 'UpdateRoleBasedInvitePayload';
+  /** The updated role based invite. */
+  invite: RoleBasedInvite;
 };
 
 export type UpdateSeriesInput = {
@@ -3851,6 +4237,15 @@ export type UserEdge = Edge & {
   node: User;
 };
 
+export type UserInviteInput = {
+  /** The email of the user to invite to the publication. */
+  email?: InputMaybe<Scalars['String']['input']>;
+  /** The role to assign to the user in the publication. */
+  role: UserPublicationInviteRole;
+  /** Username of the user to invite to the publication. */
+  username?: InputMaybe<Scalars['String']['input']>;
+};
+
 /**
  * Connection for posts written by a single user. Contains a list of edges containing nodes.
  * Each node is a post.
@@ -3914,6 +4309,17 @@ export enum UserPostsSort {
   DatePublishedDesc = 'DATE_PUBLISHED_DESC'
 }
 
+/** The invited role of the user in the publication. */
+export enum UserPublicationInviteRole {
+  /** Contributors can join the publication and contribute an article. They cannot directly publish a new article. */
+  Contributor = 'CONTRIBUTOR',
+  /**
+   * The editor has access to the publication dashboard to customize the blog and approve/reject posts.
+   * They also have access to the member panel to add/modify/remove members. Editors cannot remove other editors or update their roles.
+   */
+  Editor = 'EDITOR'
+}
+
 /** The role of the user in the publication. */
 export enum UserPublicationRole {
   /** Contributors can join the publication and contribute an article. They cannot directly publish a new article. */
@@ -3975,6 +4381,10 @@ export type UserRecommendingPublicationEdge = {
   /** The amount of followers the publication has gained by recommendations from the publication referenced in `node`. */
   totalFollowersGained: Scalars['Int']['output'];
 };
+
+export enum ValidationMethod {
+  Id = 'ID'
+}
 
 /**
  * Contains the flag indicating if the view count feature is enabled or not.
@@ -4109,28 +4519,19 @@ export type WidgetPinSettings = {
   location: WidgetPinLocation;
 };
 
+export type FeedPostsFieldsFragment = { __typename?: 'Post', id: string, title: string, url: string, slug: string, publishedAt: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, content: { __typename?: 'Content', html: string }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, author: { __typename?: 'User', name: string, username: string } };
+
 export type PageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null };
 
-export type PostFragment = { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, comments: { __typename?: 'PostCommentConnection', totalDocuments: number } };
+export type PostFragment = { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, comments: { __typename?: 'PostCommentConnection', totalDocuments: number } };
+
+export type PostFullFragment = { __typename?: 'Post', id: string, slug: string, url: string, canonicalUrl?: string | null, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, series?: { __typename?: 'Series', id: string, name: string, slug: string, coverImage?: string | null } | null, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } };
 
 export type PublicationFragment = { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null };
 
-export type DraftByIdQueryVariables = Exact<{
-  id: Scalars['ObjectId']['input'];
-}>;
+export type SeriesFragment = { __typename?: 'Series', id: string, name: string, slug: string, coverImage?: string | null };
 
-
-export type DraftByIdQuery = { __typename?: 'Query', draft?: { __typename?: 'Draft', id: string, title?: string | null, dateUpdated: string, content?: { __typename?: 'Content', markdown: string } | null, author: { __typename?: 'User', id: string, name: string, username: string }, tags: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> } | null };
-
-export type PageByPublicationQueryVariables = Exact<{
-  slug: Scalars['String']['input'];
-  host: Scalars['String']['input'];
-}>;
-
-
-export type PageByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, staticPage?: { __typename?: 'StaticPage', id: string, title: string, slug: string, content: { __typename?: 'Content', markdown: string } } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
-
-export type StaticPageFragment = { __typename?: 'StaticPage', id: string, title: string, slug: string, content: { __typename?: 'Content', markdown: string } };
+export type SitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null };
 
 export type PostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4139,16 +4540,7 @@ export type PostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type PostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
-
-export type MorePostsByPublicationQueryVariables = Exact<{
-  host: Scalars['String']['input'];
-  first: Scalars['Int']['input'];
-  after?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type MorePostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
+export type PostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type PublicationByHostQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4164,7 +4556,17 @@ export type RssFeedQueryVariables = Exact<{
 }>;
 
 
-export type RssFeedQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, slug: string, content: { __typename?: 'Content', html: string }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, author: { __typename?: 'User', name: string, username: string } } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
+export type RssFeedQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, slug: string, publishedAt: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, content: { __typename?: 'Content', html: string }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, author: { __typename?: 'User', name: string, username: string } } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
+
+export type SeriesPostsByPublicationQueryVariables = Exact<{
+  host: Scalars['String']['input'];
+  series: Scalars['String']['input'];
+  first: Scalars['Int']['input'];
+  after?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type SeriesPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', series?: { __typename?: 'Series', id: string, name: string, slug: string, coverImage?: string | null, posts: { __typename?: 'SeriesPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null } | null };
 
 export type SinglePostByPublicationQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -4172,39 +4574,16 @@ export type SinglePostByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type SinglePostByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, post?: { __typename?: 'Post', id: string, slug: string, url: string, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
-
-export type PostFullFragment = { __typename?: 'Post', id: string, slug: string, url: string, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } };
+export type SinglePostByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, post?: { __typename?: 'Post', id: string, slug: string, url: string, canonicalUrl?: string | null, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, series?: { __typename?: 'Series', id: string, name: string, slug: string, coverImage?: string | null } | null, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null } } }> } } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
 
 export type SitemapQueryVariables = Exact<{
-  host: Scalars['String']['input'];
-  postsCount: Scalars['Int']['input'];
-  postsAfter?: InputMaybe<Scalars['String']['input']>;
-  staticPagesCount: Scalars['Int']['input'];
-}>;
-
-
-export type SitemapQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, url: string, staticPages: { __typename?: 'StaticPageConnection', edges: Array<{ __typename?: 'StaticPageEdge', node: { __typename?: 'StaticPage', slug: string } }> }, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
-
-export type MoreSitemapPostsQueryVariables = Exact<{
-  host: Scalars['String']['input'];
-  postsCount: Scalars['Int']['input'];
-  postsAfter?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type MoreSitemapPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
-
-export type RequiredSitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null };
-
-export type SlugPostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
   first: Scalars['Int']['input'];
   after?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type SlugPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', slug: string } }> }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
+export type SitemapQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type TagPostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4214,22 +4593,699 @@ export type TagPostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type TagPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, comments: { __typename?: 'PostCommentConnection', totalDocuments: number } } }> }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
+export type TagPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
-export const PageInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]} as unknown as DocumentNode<PageInfoFragment, unknown>;
-export const PostFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Post"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}}]} as unknown as DocumentNode<PostFragment, unknown>;
-export const PublicationFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}}]} as unknown as DocumentNode<PublicationFragment, unknown>;
-export const StaticPageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"StaticPage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"StaticPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}}]}}]} as unknown as DocumentNode<StaticPageFragment, unknown>;
-export const PostFullFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PostFull"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"hasLatexInPost"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"readTimeInMinutes"}},{"kind":"Field","name":{"kind":"Name","value":"reactionCount"}},{"kind":"Field","name":{"kind":"Name","value":"responseCount"}},{"kind":"Field","name":{"kind":"Name","value":"publication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"seo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}},{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tableOfContents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parentId"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"disableComments"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"25"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"totalReactions"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PostFullFragment, unknown>;
-export const RequiredSitemapPostFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequiredSitemapPostFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<RequiredSitemapPostFieldsFragment, unknown>;
-export const DraftByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DraftById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ObjectId"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"draft"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dateUpdated"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<DraftByIdQuery, DraftByIdQueryVariables>;
-export const PageByPublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageByPublication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"staticPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"StaticPage"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"StaticPage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"StaticPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}}]}}]} as unknown as DocumentNode<PageByPublicationQuery, PageByPublicationQueryVariables>;
-export const PostsByPublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PostsByPublication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Post"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Post"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]} as unknown as DocumentNode<PostsByPublicationQuery, PostsByPublicationQueryVariables>;
-export const MorePostsByPublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MorePostsByPublication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Post"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Post"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]} as unknown as DocumentNode<MorePostsByPublicationQuery, MorePostsByPublicationQueryVariables>;
-export const PublicationByHostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PublicationByHost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}}]} as unknown as DocumentNode<PublicationByHostQuery, PublicationByHostQueryVariables>;
-export const RssFeedDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"RSSFeed"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]} as unknown as DocumentNode<RssFeedQuery, RssFeedQueryVariables>;
-export const SinglePostByPublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SinglePostByPublication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PostFull"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PostFull"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"hasLatexInPost"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"readTimeInMinutes"}},{"kind":"Field","name":{"kind":"Name","value":"reactionCount"}},{"kind":"Field","name":{"kind":"Name","value":"responseCount"}},{"kind":"Field","name":{"kind":"Name","value":"publication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"seo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}},{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tableOfContents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parentId"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"disableComments"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"25"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"totalReactions"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SinglePostByPublicationQuery, SinglePostByPublicationQueryVariables>;
-export const SitemapDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Sitemap"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postsCount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postsAfter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"staticPagesCount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"staticPages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"staticPagesCount"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postsCount"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postsAfter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequiredSitemapPostFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequiredSitemapPostFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]} as unknown as DocumentNode<SitemapQuery, SitemapQueryVariables>;
-export const MoreSitemapPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MoreSitemapPosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postsCount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postsAfter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postsCount"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postsAfter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequiredSitemapPostFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequiredSitemapPostFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]} as unknown as DocumentNode<MoreSitemapPostsQuery, MoreSitemapPostsQueryVariables>;
-export const SlugPostsByPublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SlugPostsByPublication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}}]} as unknown as DocumentNode<SlugPostsByPublicationQuery, SlugPostsByPublicationQueryVariables>;
-export const TagPostsByPublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"TagPostsByPublication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"tagSlug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Publication"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"tagSlugs"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"tagSlug"}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Post"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Publication"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Publication"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"metaTags"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"isTeam"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}},{"kind":"Field","name":{"kind":"Name","value":"descriptionSEO"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"followersCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ogMetaData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"darkMode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"navbarItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twitter"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}}]}},{"kind":"Field","name":{"kind":"Name","value":"integrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"umamiWebsiteUUID"}},{"kind":"Field","name":{"kind":"Name","value":"gaTrackingID"}},{"kind":"Field","name":{"kind":"Name","value":"fbPixelID"}},{"kind":"Field","name":{"kind":"Name","value":"hotjarSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"matomoURL"}},{"kind":"Field","name":{"kind":"Name","value":"matomoSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomSiteID"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomain"}},{"kind":"Field","name":{"kind":"Name","value":"fathomCustomDomainEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"plausibleAnalyticsEnabled"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Post"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalDocuments"}}]}}]}}]} as unknown as DocumentNode<TagPostsByPublicationQuery, TagPostsByPublicationQueryVariables>;
+export class TypedDocumentString<TResult, TVariables>
+  extends String
+  implements DocumentTypeDecoration<TResult, TVariables>
+{
+  __apiType?: DocumentTypeDecoration<TResult, TVariables>['__apiType'];
+
+  constructor(private value: string, public __meta__?: Record<string, any>) {
+    super(value);
+  }
+
+  toString(): string & DocumentTypeDecoration<TResult, TVariables> {
+    return this.value;
+  }
+}
+export const FeedPostsFieldsFragmentDoc = new TypedDocumentString(`
+    fragment FeedPostsFields on Post {
+  id
+  title
+  url
+  slug
+  coverImage {
+    url
+  }
+  content {
+    html
+  }
+  tags {
+    id
+    name
+    slug
+  }
+  author {
+    name
+    username
+  }
+  publishedAt
+}
+    `, {"fragmentName":"FeedPostsFields"}) as unknown as TypedDocumentString<FeedPostsFieldsFragment, unknown>;
+export const PageInfoFragmentDoc = new TypedDocumentString(`
+    fragment PageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+    `, {"fragmentName":"PageInfo"}) as unknown as TypedDocumentString<PageInfoFragment, unknown>;
+export const PostFragmentDoc = new TypedDocumentString(`
+    fragment Post on Post {
+  id
+  title
+  url
+  author {
+    name
+    profilePicture
+  }
+  coverImage {
+    url
+  }
+  publishedAt
+  slug
+  brief
+  views
+  comments(first: 0) {
+    totalDocuments
+  }
+}
+    `, {"fragmentName":"Post"}) as unknown as TypedDocumentString<PostFragment, unknown>;
+export const SeriesFragmentDoc = new TypedDocumentString(`
+    fragment Series on Series {
+  id
+  name
+  slug
+  coverImage
+}
+    `, {"fragmentName":"Series"}) as unknown as TypedDocumentString<SeriesFragment, unknown>;
+export const PostFullFragmentDoc = new TypedDocumentString(`
+    fragment PostFull on Post {
+  id
+  slug
+  url
+  canonicalUrl
+  brief
+  title
+  subtitle
+  series {
+    ...Series
+  }
+  hasLatexInPost
+  publishedAt
+  updatedAt
+  readTimeInMinutes
+  reactionCount
+  responseCount
+  publication {
+    id
+  }
+  seo {
+    title
+    description
+  }
+  coverImage {
+    url
+  }
+  author {
+    name
+    username
+    profilePicture
+  }
+  title
+  content {
+    markdown
+    html
+  }
+  ogMetaData {
+    image
+  }
+  tags {
+    id
+    name
+    slug
+  }
+  features {
+    tableOfContents {
+      isEnabled
+      items {
+        id
+        level
+        parentId
+        slug
+        title
+      }
+    }
+  }
+  preferences {
+    disableComments
+  }
+  comments(first: 25) {
+    totalDocuments
+    edges {
+      node {
+        id
+        totalReactions
+        content {
+          markdown
+        }
+        author {
+          name
+          username
+          profilePicture
+        }
+      }
+    }
+  }
+}
+    fragment Series on Series {
+  id
+  name
+  slug
+  coverImage
+}`, {"fragmentName":"PostFull"}) as unknown as TypedDocumentString<PostFullFragment, unknown>;
+export const PublicationFragmentDoc = new TypedDocumentString(`
+    fragment Publication on Publication {
+  id
+  title
+  displayTitle
+  url
+  metaTags
+  favicon
+  isTeam
+  followersCount
+  descriptionSEO
+  author {
+    name
+    username
+    profilePicture
+    followersCount
+  }
+  ogMetaData {
+    image
+  }
+  preferences {
+    logo
+    darkMode {
+      logo
+    }
+    navbarItems {
+      id
+      type
+      label
+      url
+    }
+  }
+  links {
+    twitter
+    github
+    linkedin
+    hashnode
+  }
+  integrations {
+    umamiWebsiteUUID
+    gaTrackingID
+    fbPixelID
+    hotjarSiteID
+    matomoURL
+    matomoSiteID
+    fathomSiteID
+    fathomCustomDomain
+    fathomCustomDomainEnabled
+    plausibleAnalyticsEnabled
+  }
+}
+    `, {"fragmentName":"Publication"}) as unknown as TypedDocumentString<PublicationFragment, unknown>;
+export const SitemapPostFieldsFragmentDoc = new TypedDocumentString(`
+    fragment SitemapPostFields on Post {
+  id
+  url
+  slug
+  publishedAt
+  updatedAt
+  tags {
+    id
+    name
+    slug
+  }
+  series {
+    id
+    name
+    slug
+  }
+}
+    `, {"fragmentName":"SitemapPostFields"}) as unknown as TypedDocumentString<SitemapPostFieldsFragment, unknown>;
+export const PostsByPublicationDocument = new TypedDocumentString(`
+    query PostsByPublication($host: String!, $first: Int!, $after: String) {
+  publication(host: $host) {
+    posts(first: $first, after: $after) {
+      totalDocuments
+      edges {
+        node {
+          ...Post
+          comments(first: 0) {
+            totalDocuments
+          }
+        }
+      }
+      pageInfo {
+        ...PageInfo
+      }
+    }
+  }
+}
+    fragment PageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+fragment Post on Post {
+  id
+  title
+  url
+  author {
+    name
+    profilePicture
+  }
+  coverImage {
+    url
+  }
+  publishedAt
+  slug
+  brief
+  views
+  comments(first: 0) {
+    totalDocuments
+  }
+}`) as unknown as TypedDocumentString<PostsByPublicationQuery, PostsByPublicationQueryVariables>;
+export const PublicationByHostDocument = new TypedDocumentString(`
+    query PublicationByHost($host: String!) {
+  publication(host: $host) {
+    ...Publication
+    posts(first: 0) {
+      totalDocuments
+    }
+  }
+}
+    fragment Publication on Publication {
+  id
+  title
+  displayTitle
+  url
+  metaTags
+  favicon
+  isTeam
+  followersCount
+  descriptionSEO
+  author {
+    name
+    username
+    profilePicture
+    followersCount
+  }
+  ogMetaData {
+    image
+  }
+  preferences {
+    logo
+    darkMode {
+      logo
+    }
+    navbarItems {
+      id
+      type
+      label
+      url
+    }
+  }
+  links {
+    twitter
+    github
+    linkedin
+    hashnode
+  }
+  integrations {
+    umamiWebsiteUUID
+    gaTrackingID
+    fbPixelID
+    hotjarSiteID
+    matomoURL
+    matomoSiteID
+    fathomSiteID
+    fathomCustomDomain
+    fathomCustomDomainEnabled
+    plausibleAnalyticsEnabled
+  }
+}`) as unknown as TypedDocumentString<PublicationByHostQuery, PublicationByHostQueryVariables>;
+export const RssFeedDocument = new TypedDocumentString(`
+    query RSSFeed($host: String!, $first: Int!, $after: String) {
+  publication(host: $host) {
+    ...Publication
+    posts(first: $first, after: $after) {
+      edges {
+        node {
+          ...FeedPostsFields
+        }
+      }
+      pageInfo {
+        ...PageInfo
+      }
+    }
+  }
+}
+    fragment FeedPostsFields on Post {
+  id
+  title
+  url
+  slug
+  coverImage {
+    url
+  }
+  content {
+    html
+  }
+  tags {
+    id
+    name
+    slug
+  }
+  author {
+    name
+    username
+  }
+  publishedAt
+}
+fragment PageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+fragment Publication on Publication {
+  id
+  title
+  displayTitle
+  url
+  metaTags
+  favicon
+  isTeam
+  followersCount
+  descriptionSEO
+  author {
+    name
+    username
+    profilePicture
+    followersCount
+  }
+  ogMetaData {
+    image
+  }
+  preferences {
+    logo
+    darkMode {
+      logo
+    }
+    navbarItems {
+      id
+      type
+      label
+      url
+    }
+  }
+  links {
+    twitter
+    github
+    linkedin
+    hashnode
+  }
+  integrations {
+    umamiWebsiteUUID
+    gaTrackingID
+    fbPixelID
+    hotjarSiteID
+    matomoURL
+    matomoSiteID
+    fathomSiteID
+    fathomCustomDomain
+    fathomCustomDomainEnabled
+    plausibleAnalyticsEnabled
+  }
+}`) as unknown as TypedDocumentString<RssFeedQuery, RssFeedQueryVariables>;
+export const SeriesPostsByPublicationDocument = new TypedDocumentString(`
+    query SeriesPostsByPublication($host: String!, $series: String!, $first: Int!, $after: String) {
+  publication(host: $host) {
+    series(slug: $series) {
+      ...Series
+      posts(first: $first, after: $after) {
+        totalDocuments
+        edges {
+          node {
+            ...Post
+            comments(first: 0) {
+              totalDocuments
+            }
+          }
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
+    }
+  }
+}
+    fragment PageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+fragment Post on Post {
+  id
+  title
+  url
+  author {
+    name
+    profilePicture
+  }
+  coverImage {
+    url
+  }
+  publishedAt
+  slug
+  brief
+  views
+  comments(first: 0) {
+    totalDocuments
+  }
+}
+fragment Series on Series {
+  id
+  name
+  slug
+  coverImage
+}`) as unknown as TypedDocumentString<SeriesPostsByPublicationQuery, SeriesPostsByPublicationQueryVariables>;
+export const SinglePostByPublicationDocument = new TypedDocumentString(`
+    query SinglePostByPublication($slug: String!, $host: String!) {
+  publication(host: $host) {
+    ...Publication
+    post(slug: $slug) {
+      ...PostFull
+    }
+  }
+}
+    fragment PostFull on Post {
+  id
+  slug
+  url
+  canonicalUrl
+  brief
+  title
+  subtitle
+  series {
+    ...Series
+  }
+  hasLatexInPost
+  publishedAt
+  updatedAt
+  readTimeInMinutes
+  reactionCount
+  responseCount
+  publication {
+    id
+  }
+  seo {
+    title
+    description
+  }
+  coverImage {
+    url
+  }
+  author {
+    name
+    username
+    profilePicture
+  }
+  title
+  content {
+    markdown
+    html
+  }
+  ogMetaData {
+    image
+  }
+  tags {
+    id
+    name
+    slug
+  }
+  features {
+    tableOfContents {
+      isEnabled
+      items {
+        id
+        level
+        parentId
+        slug
+        title
+      }
+    }
+  }
+  preferences {
+    disableComments
+  }
+  comments(first: 25) {
+    totalDocuments
+    edges {
+      node {
+        id
+        totalReactions
+        content {
+          markdown
+        }
+        author {
+          name
+          username
+          profilePicture
+        }
+      }
+    }
+  }
+}
+fragment Publication on Publication {
+  id
+  title
+  displayTitle
+  url
+  metaTags
+  favicon
+  isTeam
+  followersCount
+  descriptionSEO
+  author {
+    name
+    username
+    profilePicture
+    followersCount
+  }
+  ogMetaData {
+    image
+  }
+  preferences {
+    logo
+    darkMode {
+      logo
+    }
+    navbarItems {
+      id
+      type
+      label
+      url
+    }
+  }
+  links {
+    twitter
+    github
+    linkedin
+    hashnode
+  }
+  integrations {
+    umamiWebsiteUUID
+    gaTrackingID
+    fbPixelID
+    hotjarSiteID
+    matomoURL
+    matomoSiteID
+    fathomSiteID
+    fathomCustomDomain
+    fathomCustomDomainEnabled
+    plausibleAnalyticsEnabled
+  }
+}
+fragment Series on Series {
+  id
+  name
+  slug
+  coverImage
+}`) as unknown as TypedDocumentString<SinglePostByPublicationQuery, SinglePostByPublicationQueryVariables>;
+export const SitemapDocument = new TypedDocumentString(`
+    query Sitemap($host: String!, $first: Int!, $after: String) {
+  publication(host: $host) {
+    posts(first: $first, after: $after) {
+      edges {
+        node {
+          ...SitemapPostFields
+        }
+      }
+      pageInfo {
+        ...PageInfo
+      }
+    }
+  }
+}
+    fragment PageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+fragment SitemapPostFields on Post {
+  id
+  url
+  slug
+  publishedAt
+  updatedAt
+  tags {
+    id
+    name
+    slug
+  }
+  series {
+    id
+    name
+    slug
+  }
+}`) as unknown as TypedDocumentString<SitemapQuery, SitemapQueryVariables>;
+export const TagPostsByPublicationDocument = new TypedDocumentString(`
+    query TagPostsByPublication($host: String!, $tagSlug: String!, $first: Int!, $after: String) {
+  publication(host: $host) {
+    posts(first: $first, filter: {tagSlugs: [$tagSlug]}, after: $after) {
+      totalDocuments
+      edges {
+        node {
+          ...Post
+          comments(first: 0) {
+            totalDocuments
+          }
+        }
+      }
+      pageInfo {
+        ...PageInfo
+      }
+    }
+  }
+}
+    fragment PageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+fragment Post on Post {
+  id
+  title
+  url
+  author {
+    name
+    profilePicture
+  }
+  coverImage {
+    url
+  }
+  publishedAt
+  slug
+  brief
+  views
+  comments(first: 0) {
+    totalDocuments
+  }
+}`) as unknown as TypedDocumentString<TagPostsByPublicationQuery, TagPostsByPublicationQueryVariables>;
