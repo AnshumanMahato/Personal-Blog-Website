@@ -5,7 +5,6 @@ query TagPostsByPublication(
   $after: String
 ) {
   publication(host: $host) {
-    ...Publication
     posts(first: $first, filter: { tagSlugs: [$tagSlug] }, after: $after) {
       totalDocuments
       edges {

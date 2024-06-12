@@ -1,24 +1,6 @@
 query Sitemap($host: String!, $first: Int!, $after: String) {
   publication(host: $host) {
-    id
-    url
     posts(first: $first, after: $after) {
-      edges {
-        node {
-          ...SitemapPostFields
-        }
-      }
-      pageInfo {
-        ...PageInfo
-      }
-    }
-  }
-}
-
-query MoreSitemapPosts($host: String!, $postsCount: Int!, $postsAfter: String) {
-  publication(host: $host) {
-    id
-    posts(first: $postsCount, after: $postsAfter) {
       edges {
         node {
           ...SitemapPostFields

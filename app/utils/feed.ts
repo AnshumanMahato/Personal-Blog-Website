@@ -9,6 +9,7 @@ export const constructRSSFeedFromPosts = (
   currentCursor?: string | null,
   nextCursor?: string | null
 ) => {
+  //TODO: Change base url to use environment data
   const baseUrl = publication.url;
 
   const customElements = [

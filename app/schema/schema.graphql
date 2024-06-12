@@ -3336,10 +3336,12 @@ enum Scope {
   assign_pro_publications
   change_pro_subscription
   create_pro
+  delete_draft
   docs_editor_or_owner
   docs_owner
   import_subscribers_to_publication
   invited_team_user
+  move_draft
   publication_admin
   publication_member
   publish_comment
@@ -3353,6 +3355,7 @@ enum Scope {
   signup
   team_hashnode
   update_comment
+  update_draft
   update_post
   update_reply
   webhook_admin
@@ -3522,7 +3525,7 @@ type StaticPage implements Node {
   """
   seo: SEO
   """
-  The slug of the static page. Used to access static page.  Example https://johndoe.com/my-page
+  The slug of the static page. Used to access static page. Example `https://johndoe.com/my-page`.
   """
   slug: String!
   """The title of the static page. Shown in nav bar."""

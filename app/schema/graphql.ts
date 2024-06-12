@@ -3573,10 +3573,12 @@ export enum Scope {
   AssignProPublications = 'assign_pro_publications',
   ChangeProSubscription = 'change_pro_subscription',
   CreatePro = 'create_pro',
+  DeleteDraft = 'delete_draft',
   DocsEditorOrOwner = 'docs_editor_or_owner',
   DocsOwner = 'docs_owner',
   ImportSubscribersToPublication = 'import_subscribers_to_publication',
   InvitedTeamUser = 'invited_team_user',
+  MoveDraft = 'move_draft',
   PublicationAdmin = 'publication_admin',
   PublicationMember = 'publication_member',
   PublishComment = 'publish_comment',
@@ -3590,6 +3592,7 @@ export enum Scope {
   Signup = 'signup',
   TeamHashnode = 'team_hashnode',
   UpdateComment = 'update_comment',
+  UpdateDraft = 'update_draft',
   UpdatePost = 'update_post',
   UpdateReply = 'update_reply',
   WebhookAdmin = 'webhook_admin',
@@ -3755,7 +3758,7 @@ export type StaticPage = Node & {
   ogMetaData?: Maybe<OpenGraphMetaData>;
   /** Information about the static page's SEO metadata i.e. title and description. */
   seo?: Maybe<Seo>;
-  /** The slug of the static page. Used to access static page.  Example https://johndoe.com/my-page */
+  /** The slug of the static page. Used to access static page. Example `https://johndoe.com/my-page`. */
   slug: Scalars['String']['output'];
   /** The title of the static page. Shown in nav bar. */
   title: Scalars['String']['output'];
@@ -4530,23 +4533,6 @@ export type SeriesFragment = { __typename?: 'Series', id: string, name: string, 
 
 export type SitemapPostFieldsFragment = { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null };
 
-export type DraftByIdQueryVariables = Exact<{
-  id: Scalars['ObjectId']['input'];
-}>;
-
-
-export type DraftByIdQuery = { __typename?: 'Query', draft?: { __typename?: 'Draft', id: string, title?: string | null, dateUpdated: string, content?: { __typename?: 'Content', markdown: string } | null, author: { __typename?: 'User', id: string, name: string, username: string }, tags: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> } | null };
-
-export type PageByPublicationQueryVariables = Exact<{
-  slug: Scalars['String']['input'];
-  host: Scalars['String']['input'];
-}>;
-
-
-export type PageByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, staticPage?: { __typename?: 'StaticPage', id: string, title: string, slug: string, content: { __typename?: 'Content', markdown: string } } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
-
-export type StaticPageFragment = { __typename?: 'StaticPage', id: string, title: string, slug: string, content: { __typename?: 'Content', markdown: string } };
-
 export type PostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
   first: Scalars['Int']['input'];
@@ -4554,16 +4540,7 @@ export type PostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type PostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
-
-export type MorePostsByPublicationQueryVariables = Exact<{
-  host: Scalars['String']['input'];
-  first: Scalars['Int']['input'];
-  after?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type MorePostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
+export type PostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type PublicationByHostQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4606,25 +4583,7 @@ export type SitemapQueryVariables = Exact<{
 }>;
 
 
-export type SitemapQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, url: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
-
-export type MoreSitemapPostsQueryVariables = Exact<{
-  host: Scalars['String']['input'];
-  postsCount: Scalars['Int']['input'];
-  postsAfter?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type MoreSitemapPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
-
-export type SlugPostsByPublicationQueryVariables = Exact<{
-  host: Scalars['String']['input'];
-  first: Scalars['Int']['input'];
-  after?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type SlugPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', slug: string } }> }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
+export type SitemapQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, url: string, slug: string, publishedAt: string, updatedAt?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, series?: { __typename?: 'Series', id: string, name: string, slug: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type TagPostsByPublicationQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -4634,7 +4593,7 @@ export type TagPostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type TagPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, title: string, displayTitle?: string | null, url: string, metaTags?: string | null, favicon?: string | null, isTeam: boolean, followersCount?: number | null, descriptionSEO?: string | null, posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } }, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null, followersCount: number }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, preferences: { __typename?: 'Preferences', logo?: string | null, darkMode?: { __typename?: 'DarkModePreferences', logo?: string | null } | null, navbarItems: Array<{ __typename?: 'PublicationNavbarItem', id: string, type: PublicationNavigationType, label?: string | null, url?: string | null }> }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, github?: string | null, linkedin?: string | null, hashnode?: string | null } | null, integrations?: { __typename?: 'PublicationIntegrations', umamiWebsiteUUID?: string | null, gaTrackingID?: string | null, fbPixelID?: string | null, hotjarSiteID?: string | null, matomoURL?: string | null, matomoSiteID?: string | null, fathomSiteID?: string | null, fathomCustomDomain?: string | null, fathomCustomDomainEnabled?: boolean | null, plausibleAnalyticsEnabled?: boolean | null } | null } | null };
+export type TagPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -4865,109 +4824,9 @@ export const SitemapPostFieldsFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"SitemapPostFields"}) as unknown as TypedDocumentString<SitemapPostFieldsFragment, unknown>;
-export const StaticPageFragmentDoc = new TypedDocumentString(`
-    fragment StaticPage on StaticPage {
-  id
-  title
-  slug
-  content {
-    markdown
-  }
-}
-    `, {"fragmentName":"StaticPage"}) as unknown as TypedDocumentString<StaticPageFragment, unknown>;
-export const DraftByIdDocument = new TypedDocumentString(`
-    query DraftById($id: ObjectId!) {
-  draft(id: $id) {
-    id
-    title
-    content {
-      markdown
-    }
-    author {
-      id
-      name
-      username
-    }
-    dateUpdated
-    tags {
-      id
-      name
-      slug
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<DraftByIdQuery, DraftByIdQueryVariables>;
-export const PageByPublicationDocument = new TypedDocumentString(`
-    query PageByPublication($slug: String!, $host: String!) {
-  publication(host: $host) {
-    ...Publication
-    staticPage(slug: $slug) {
-      ...StaticPage
-    }
-  }
-}
-    fragment Publication on Publication {
-  id
-  title
-  displayTitle
-  url
-  metaTags
-  favicon
-  isTeam
-  followersCount
-  descriptionSEO
-  author {
-    name
-    username
-    profilePicture
-    followersCount
-  }
-  ogMetaData {
-    image
-  }
-  preferences {
-    logo
-    darkMode {
-      logo
-    }
-    navbarItems {
-      id
-      type
-      label
-      url
-    }
-  }
-  links {
-    twitter
-    github
-    linkedin
-    hashnode
-  }
-  integrations {
-    umamiWebsiteUUID
-    gaTrackingID
-    fbPixelID
-    hotjarSiteID
-    matomoURL
-    matomoSiteID
-    fathomSiteID
-    fathomCustomDomain
-    fathomCustomDomainEnabled
-    plausibleAnalyticsEnabled
-  }
-}
-fragment StaticPage on StaticPage {
-  id
-  title
-  slug
-  content {
-    markdown
-  }
-}`) as unknown as TypedDocumentString<PageByPublicationQuery, PageByPublicationQueryVariables>;
 export const PostsByPublicationDocument = new TypedDocumentString(`
     query PostsByPublication($host: String!, $first: Int!, $after: String) {
   publication(host: $host) {
-    ...Publication
     posts(first: $first, after: $after) {
       totalDocuments
       edges {
@@ -5006,98 +4865,7 @@ fragment Post on Post {
   comments(first: 0) {
     totalDocuments
   }
-}
-fragment Publication on Publication {
-  id
-  title
-  displayTitle
-  url
-  metaTags
-  favicon
-  isTeam
-  followersCount
-  descriptionSEO
-  author {
-    name
-    username
-    profilePicture
-    followersCount
-  }
-  ogMetaData {
-    image
-  }
-  preferences {
-    logo
-    darkMode {
-      logo
-    }
-    navbarItems {
-      id
-      type
-      label
-      url
-    }
-  }
-  links {
-    twitter
-    github
-    linkedin
-    hashnode
-  }
-  integrations {
-    umamiWebsiteUUID
-    gaTrackingID
-    fbPixelID
-    hotjarSiteID
-    matomoURL
-    matomoSiteID
-    fathomSiteID
-    fathomCustomDomain
-    fathomCustomDomainEnabled
-    plausibleAnalyticsEnabled
-  }
 }`) as unknown as TypedDocumentString<PostsByPublicationQuery, PostsByPublicationQueryVariables>;
-export const MorePostsByPublicationDocument = new TypedDocumentString(`
-    query MorePostsByPublication($host: String!, $first: Int!, $after: String) {
-  publication(host: $host) {
-    posts(first: $first, after: $after) {
-      edges {
-        node {
-          ...Post
-          comments(first: 0) {
-            totalDocuments
-          }
-        }
-      }
-      pageInfo {
-        ...PageInfo
-      }
-    }
-  }
-}
-    fragment PageInfo on PageInfo {
-  endCursor
-  hasNextPage
-}
-fragment Post on Post {
-  id
-  title
-  url
-  author {
-    name
-    profilePicture
-  }
-  coverImage {
-    url
-  }
-  publishedAt
-  slug
-  brief
-  views
-  comments(first: 0) {
-    totalDocuments
-  }
-}`) as unknown as TypedDocumentString<MorePostsByPublicationQuery, MorePostsByPublicationQueryVariables>;
 export const PublicationByHostDocument = new TypedDocumentString(`
     query PublicationByHost($host: String!) {
   publication(host: $host) {
@@ -5446,8 +5214,6 @@ fragment Series on Series {
 export const SitemapDocument = new TypedDocumentString(`
     query Sitemap($host: String!, $first: Int!, $after: String) {
   publication(host: $host) {
-    id
-    url
     posts(first: $first, after: $after) {
       edges {
         node {
@@ -5481,110 +5247,9 @@ fragment SitemapPostFields on Post {
     slug
   }
 }`) as unknown as TypedDocumentString<SitemapQuery, SitemapQueryVariables>;
-export const MoreSitemapPostsDocument = new TypedDocumentString(`
-    query MoreSitemapPosts($host: String!, $postsCount: Int!, $postsAfter: String) {
-  publication(host: $host) {
-    id
-    posts(first: $postsCount, after: $postsAfter) {
-      edges {
-        node {
-          ...SitemapPostFields
-        }
-      }
-      pageInfo {
-        ...PageInfo
-      }
-    }
-  }
-}
-    fragment PageInfo on PageInfo {
-  endCursor
-  hasNextPage
-}
-fragment SitemapPostFields on Post {
-  id
-  url
-  slug
-  publishedAt
-  updatedAt
-  tags {
-    id
-    name
-    slug
-  }
-  series {
-    id
-    name
-    slug
-  }
-}`) as unknown as TypedDocumentString<MoreSitemapPostsQuery, MoreSitemapPostsQueryVariables>;
-export const SlugPostsByPublicationDocument = new TypedDocumentString(`
-    query SlugPostsByPublication($host: String!, $first: Int!, $after: String) {
-  publication(host: $host) {
-    ...Publication
-    posts(first: $first, after: $after) {
-      edges {
-        node {
-          slug
-        }
-      }
-    }
-  }
-}
-    fragment Publication on Publication {
-  id
-  title
-  displayTitle
-  url
-  metaTags
-  favicon
-  isTeam
-  followersCount
-  descriptionSEO
-  author {
-    name
-    username
-    profilePicture
-    followersCount
-  }
-  ogMetaData {
-    image
-  }
-  preferences {
-    logo
-    darkMode {
-      logo
-    }
-    navbarItems {
-      id
-      type
-      label
-      url
-    }
-  }
-  links {
-    twitter
-    github
-    linkedin
-    hashnode
-  }
-  integrations {
-    umamiWebsiteUUID
-    gaTrackingID
-    fbPixelID
-    hotjarSiteID
-    matomoURL
-    matomoSiteID
-    fathomSiteID
-    fathomCustomDomain
-    fathomCustomDomainEnabled
-    plausibleAnalyticsEnabled
-  }
-}`) as unknown as TypedDocumentString<SlugPostsByPublicationQuery, SlugPostsByPublicationQueryVariables>;
 export const TagPostsByPublicationDocument = new TypedDocumentString(`
     query TagPostsByPublication($host: String!, $tagSlug: String!, $first: Int!, $after: String) {
   publication(host: $host) {
-    ...Publication
     posts(first: $first, filter: {tagSlugs: [$tagSlug]}, after: $after) {
       totalDocuments
       edges {
@@ -5622,55 +5287,5 @@ fragment Post on Post {
   views
   comments(first: 0) {
     totalDocuments
-  }
-}
-fragment Publication on Publication {
-  id
-  title
-  displayTitle
-  url
-  metaTags
-  favicon
-  isTeam
-  followersCount
-  descriptionSEO
-  author {
-    name
-    username
-    profilePicture
-    followersCount
-  }
-  ogMetaData {
-    image
-  }
-  preferences {
-    logo
-    darkMode {
-      logo
-    }
-    navbarItems {
-      id
-      type
-      label
-      url
-    }
-  }
-  links {
-    twitter
-    github
-    linkedin
-    hashnode
-  }
-  integrations {
-    umamiWebsiteUUID
-    gaTrackingID
-    fbPixelID
-    hotjarSiteID
-    matomoURL
-    matomoSiteID
-    fathomSiteID
-    fathomCustomDomain
-    fathomCustomDomainEnabled
-    plausibleAnalyticsEnabled
   }
 }`) as unknown as TypedDocumentString<TagPostsByPublicationQuery, TagPostsByPublicationQueryVariables>;
