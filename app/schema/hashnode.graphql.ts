@@ -2011,6 +2011,8 @@ export type MyUser = IUser & Node & {
   /** Whether or not the user is deactivated. */
   deactivated: Scalars['Boolean']['output'];
   drafts: UserDraftConnection;
+  /** Email address of the user. Only available to the authenticated user. */
+  email: Scalars['String']['output'];
   /** The users who are following this user */
   followers: UserConnection;
   /** The number of users that follow the requested user. Visible in the user's profile. */
@@ -2032,6 +2034,8 @@ export type MyUser = IUser & Node & {
   provider?: Maybe<Scalars['String']['output']>;
   /** Publications associated with the user. Includes personal and team publications. */
   publications: UserPublicationsConnection;
+  /** Returns the user's role if any. */
+  role: UserRole;
   /** The social media links of the user. Shown on the user's profile. */
   socialMediaLinks?: Maybe<SocialMediaLinks>;
   /** The tagline of the user. Shown on the user's profile below the name. */
@@ -4381,6 +4385,13 @@ export type UserRecommendingPublicationEdge = {
   /** The amount of followers the publication has gained by recommendations from the publication referenced in `node`. */
   totalFollowersGained: Scalars['Int']['output'];
 };
+
+/** Role of the user within Hashnode */
+export enum UserRole {
+  Moderator = 'MODERATOR',
+  Superuser = 'SUPERUSER',
+  User = 'USER'
+}
 
 export enum ValidationMethod {
   Id = 'ID'
