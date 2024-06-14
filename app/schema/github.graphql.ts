@@ -31121,12 +31121,21 @@ export type WorkflowsParametersInput = {
   workflows: Array<WorkflowFileReferenceInput>;
 };
 
+export type RepositoryFragment = { __typename?: 'Repository', name: string, nameWithOwner: string, description?: string | null, homepageUrl?: any | null, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null } };
+
 export type UserByLoginQueryVariables = Exact<{
   login: Scalars['String']['input'];
 }>;
 
 
 export type UserByLoginQuery = { __typename?: 'Query', user?: { __typename?: 'User', name?: string | null } | null };
+
+export type PinnedReposByUserQueryVariables = Exact<{
+  login: Scalars['String']['input'];
+}>;
+
+
+export type PinnedReposByUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', pinnedItems: { __typename?: 'PinnableItemConnection', totalCount: number, nodes?: Array<{ __typename?: 'Gist' } | { __typename?: 'Repository', name: string, nameWithOwner: string, description?: string | null, homepageUrl?: any | null, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null } } | null> | null } } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -31142,7 +31151,27 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
-
+export const RepositoryFragmentDoc = new TypedDocumentString(`
+    fragment Repository on Repository {
+  name
+  nameWithOwner
+  description
+  languages(first: 4) {
+    nodes {
+      name
+      color
+    }
+  }
+  homepageUrl
+  repositoryTopics(first: 10) {
+    nodes {
+      topic {
+        name
+      }
+    }
+  }
+}
+    `, {"fragmentName":"Repository"}) as unknown as TypedDocumentString<RepositoryFragment, unknown>;
 export const UserByLoginDocument = new TypedDocumentString(`
     query UserByLogin($login: String!) {
   user(login: "AnshumanMahato") {
@@ -31150,3 +31179,33 @@ export const UserByLoginDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<UserByLoginQuery, UserByLoginQueryVariables>;
+export const PinnedReposByUserDocument = new TypedDocumentString(`
+    query PinnedReposByUser($login: String!) {
+  user(login: $login) {
+    pinnedItems(first: 10, types: REPOSITORY) {
+      totalCount
+      nodes {
+        ...Repository
+      }
+    }
+  }
+}
+    fragment Repository on Repository {
+  name
+  nameWithOwner
+  description
+  languages(first: 4) {
+    nodes {
+      name
+      color
+    }
+  }
+  homepageUrl
+  repositoryTopics(first: 10) {
+    nodes {
+      topic {
+        name
+      }
+    }
+  }
+}`) as unknown as TypedDocumentString<PinnedReposByUserQuery, PinnedReposByUserQueryVariables>;

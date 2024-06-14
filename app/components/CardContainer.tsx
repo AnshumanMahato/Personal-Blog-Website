@@ -2,8 +2,8 @@ import Section from "./Section";
 
 type Props = Readonly<{
   children: React.ReactNode;
-  hasNextPage: boolean | null | undefined;
-  getNextPage: () => void;
+  hasNextPage?: boolean | null;
+  getNextPage?: () => void;
 }>;
 
 function CardContainer({ children, hasNextPage, getNextPage }: Props) {
