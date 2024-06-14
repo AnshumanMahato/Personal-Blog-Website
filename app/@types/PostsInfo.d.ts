@@ -1,4 +1,4 @@
-import { PageInfo, PostFragment } from "../schema/graphql";
+import { PageInfo, PostFragment } from "../schema/hashnode.graphql";
 
 type PostsInfo = {
   posts: PostFragment[];

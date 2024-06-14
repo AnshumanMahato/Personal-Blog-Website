@@ -2,7 +2,7 @@ import {
   FeedPostsFieldsFragment,
   PageInfo,
   PublicationFragment,
-} from "../schema/graphql";
+} from "../schema/hashnode.graphql";
 
 type PostsFeedInfo = {
   publication: PublicationFragment;

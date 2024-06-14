@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PostFullFragment } from "@/app/schema/graphql";
+import { PostFullFragment } from "@/app/schema/hashnode.graphql";
 import { MarkdownToHtml } from "@/app/components/MarkdownToHTML";
 import { useEmbeds } from "@/app/utils/renderer/hooks/useEmbeds";
 import handleMathJax from "@/app/utils/handle-math-jax";

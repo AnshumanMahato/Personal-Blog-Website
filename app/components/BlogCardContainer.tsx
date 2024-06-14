@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { PageInfo, PostFragment } from "@/app/schema/graphql";
+import { PageInfo, PostFragment } from "@/app/schema/hashnode.graphql";
 import BlogCard from "@/app/components/BlogCard";
 import CardContainer from "@/app/components/CardContainer";
 import PostsInfo from "../@types/PostsInfo";

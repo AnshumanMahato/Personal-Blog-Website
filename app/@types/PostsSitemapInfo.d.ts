@@ -1,4 +1,7 @@
-import { PageInfo, SitemapPostFieldsFragment } from "../schema/graphql";
+import {
+  PageInfo,
+  SitemapPostFieldsFragment,
+} from "../schema/hashnode.graphql";
 
 type PostsSitemapInfo = {
   posts: SitemapPostFieldsFragment[];

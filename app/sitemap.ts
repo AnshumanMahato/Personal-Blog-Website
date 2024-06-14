@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { SitemapPostFieldsFragment } from "./schema/graphql";
+import { SitemapPostFieldsFragment } from "./schema/hashnode.graphql";
 import getPostsSitemapData from "./actions/getPostsSitemapData";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
