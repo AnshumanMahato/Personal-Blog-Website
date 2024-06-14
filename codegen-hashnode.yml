@@ -1,8 +1,12 @@
-overwrite: true
-schema: "app/schema/schema.github.graphql"
-documents: "./app/lib/graphql/github/**/*.graphql"
+schema: https://gql.hashnode.com
+documents: "./app/lib/graphql/hashnode/**/*.graphql"
 generates:
-  ./app/schema/github.graphql.ts:
+  ./app/schema/schema.hashnode.graphql:
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true
+  ./app/schema/hashnode.graphql.ts:
     plugins:
       - typescript
       - typescript-operations
