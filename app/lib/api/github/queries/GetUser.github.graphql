@@ -1,0 +1,5 @@
+query UserByLogin($login: String!) {
+  user(login: "AnshumanMahato") {
+    name
+  }
+}

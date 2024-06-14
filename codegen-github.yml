@@ -1,0 +1,20 @@
+overwrite: true
+schema: "app/schema/schema.github.graphql"
+documents: "./**/*.github.graphql"
+generates:
+  ./app/schema/github.graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+    config:
+      documentMode: string
+      scalars:
+        Date: string
+        DateTime: string
+        ObjectId: string
+        JSONObject: Record<string, unknown>
+        Decimal: string
+        CurrencyCode: string
+        ImageContentType: string
+        ImageUrl: string
