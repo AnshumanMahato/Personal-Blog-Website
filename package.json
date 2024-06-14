@@ -7,8 +7,8 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next\" \"pnpm codegen --watch\" \"pnpm codegen-github --watch\" --names next,codegen,cogeden-github --prefix-colors yellow,green,blue",
-    "codegen": "graphql-codegen --config codegen.yml",
+    "dev": "concurrently \"next\" \"pnpm codegen-hashnode --watch\" \"pnpm codegen-github --watch\" --names next,codegen-hashnode,cogeden-github --prefix-colors yellow,green,blue",
+    "codegen-hashnode": "graphql-codegen --config codegen-hashnode.yml",
     "load-skills": "ts-node ./scripts/loadSkills.ts",
     "build": "next build",
     "start": "next start",
