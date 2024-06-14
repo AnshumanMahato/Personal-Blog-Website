@@ -1,0 +1,19 @@
+fragment Repository on Repository {
+  name
+  nameWithOwner
+  description
+  languages(first: 4) {
+    nodes {
+      name
+      color
+    }
+  }
+  homepageUrl
+  repositoryTopics(first: 10) {
+    nodes {
+      topic {
+        name
+      }
+    }
+  }
+}
