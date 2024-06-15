@@ -7,7 +7,7 @@ import {
   RepositoryFragment,
 } from "../schema/github.graphql";
 
-async function getPinnedRepos(after?: string): Promise<Project[] | null> {
+async function getPinnedRepos(): Promise<Project[] | null> {
   const GH_ENDPOINT: string = process.env.GITHUB_API_ENDPOINT!;
   const token = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
 
@@ -44,10 +44,8 @@ async function getPinnedRepos(after?: string): Promise<Project[] | null> {
 
     return {
       ...item,
-      nameWithOwner: item.nameWithOwner.split("/").join(" / "),
       languages,
       repositoryTopics,
-      slug: item.name.toLowerCase(),
     };
   });
 
