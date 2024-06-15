@@ -1,0 +1,43 @@
+fragment RepositoryDetails on Repository {
+  name
+  description
+  stargazerCount
+  forkCount
+  watchers(first: 0) {
+    totalCount
+  }
+  resourcePath
+  url
+  homepageUrl
+  openGraphImageUrl
+  owner {
+    login
+  }
+  repositoryTopics(first: 10) {
+    nodes {
+      topic {
+        name
+      }
+    }
+  }
+  languages(first: 5) {
+    nodes {
+      name
+      color
+    }
+  }
+  upCase: object(expression: "HEAD:README.md") {
+    ... on Blob {
+      byteSize
+      text
+      isBinary
+    }
+  }
+  object(expression: "HEAD:readme.md") {
+    ... on Blob {
+      byteSize
+      text
+      isBinary
+    }
+  }
+}

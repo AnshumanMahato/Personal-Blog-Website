@@ -1,6 +1,9 @@
 fragment Repository on Repository {
+  id
   name
-  nameWithOwner
+  owner {
+    login
+  }
   description
   languages(first: 4) {
     nodes {
