@@ -27,7 +27,7 @@ async function Projects() {
   if (!projects) notFound();
 
   const projectCards = projects.map((project) => (
-    <ProjectCard key={project.slug} project={project} />
+    <ProjectCard key={project.id} project={project} />
   ));
 
   return (

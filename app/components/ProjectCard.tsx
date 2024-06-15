@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FaGithub, FaGlobe } from "react-icons/fa6";
 import Project from "../@types/Project";
 
 function ProjectCard({ project }: { project: Project }) {
@@ -8,13 +7,13 @@ function ProjectCard({ project }: { project: Project }) {
       {/* <div className="h-full  bg-secondary-light dark:bg-secondary-dark"></div> */}
       <div className="flex flex-col gap-[5px] sm:gap-[2rem] text-secondary-light dark:text-secondary-dark">
         <h3 className="text-black dark:text-white text-[1.6rem] xs:text-[2rem] leading-[150%]">
-          {project.nameWithOwner}
+          {`${project.owner.login} / ${project.name}`}
         </h3>
         <p className="text-[1rem] xs:text-[1.2rem] sm:text-[1.4rem] leading-[150%]">
           {project.description}
         </p>
         <Link
-          href={`/projects/${project.slug}`}
+          href={`/projects/${project.id}`}
           className="text-accent-light dark:text-accent-dark text-[1.2rem] xs:text-[1.6rem] font-medium"
         >
           Read More {"-->"}
