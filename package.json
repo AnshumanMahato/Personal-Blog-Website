@@ -33,17 +33,21 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/client-preset": "4.2.6",
+    "@graphql-codegen/introspection": "4.0.3",
     "@graphql-codegen/typed-document-node": "^5.0.6",
     "@graphql-codegen/typescript": "^4.0.6",
     "@graphql-codegen/typescript-operations": "^4.2.0",
     "@parcel/watcher": "^2.4.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.13",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/rss": "^0.0.32",
     "@types/sanitize-html": "^2.11.0",
+    "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
     "eslint": "^8",
@@ -51,8 +55,6 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5",
-    "@graphql-codegen/introspection": "4.0.3",
-    "@graphql-codegen/client-preset": "4.2.6"
+    "typescript": "^5"
   }
 }
