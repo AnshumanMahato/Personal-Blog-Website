@@ -13,6 +13,9 @@ fragment RepositoryDetails on Repository {
   owner {
     login
   }
+  defaultBranchRef {
+    name
+  }
   repositoryTopics(first: 10) {
     nodes {
       topic {

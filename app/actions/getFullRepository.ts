@@ -53,6 +53,23 @@ async function getFullRepository(id: string): Promise<Repodata | null> {
     }
   }
 
+  if (readme) {
+    readme = readme
+      .replaceAll(
+        "./",
+        `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${repo.defaultBranchRef?.name}/`
+      )
+      .replaceAll(
+        '"/',
+        `"https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${repo.defaultBranchRef?.name}/`
+      )
+      .replaceAll(
+        "(/",
+        `(https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${repo.defaultBranchRef?.name}/`
+      )
+      .replaceAll("(#", "(#heading-");
+  }
+
   const fullRepo: Repodata = {
     ...repo,
     languages,
