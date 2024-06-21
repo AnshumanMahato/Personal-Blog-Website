@@ -5,9 +5,16 @@ import PageCTA from "@/app/components/PageCTA";
 import PageHeading from "@/app/components/PageHeading";
 import ProjectCard from "@/app/components/ProjectCard";
 import Section from "@/app/components/Section";
+import { addProjectJsonLd } from "@/app/utils/seo/addProjectsJsonLd";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa6";
 import { SiFrontendmentor } from "react-icons/si";
+
+export const metadata: Metadata = {
+  title: `Projects | ${process.env.AUTHOR}`,
+  description: "Check out some of the projects I have worked on.",
+};
 
 async function Projects() {
   const socials = [
@@ -48,6 +55,13 @@ async function Projects() {
       </Section>
       <CardContainer>{projectCards}</CardContainer>
       <PageCTA links={socials} />
+      <script
+        id="projects-json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(addProjectJsonLd()),
+        }}
+      />
     </>
   );
 }
