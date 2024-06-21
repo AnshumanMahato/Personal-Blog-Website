@@ -31121,7 +31121,7 @@ export type WorkflowsParametersInput = {
   workflows: Array<WorkflowFileReferenceInput>;
 };
 
-export type RepositoryFragment = { __typename?: 'Repository', id: string, name: string, description?: string | null, homepageUrl?: any | null, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string }, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null } };
+export type RepositoryFragment = { __typename?: 'Repository', id: string, name: string, description?: string | null, url: any, homepageUrl?: any | null, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string }, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null } };
 
 export type RepositoryDetailsFragment = { __typename?: 'Repository', name: string, description?: string | null, stargazerCount: number, forkCount: number, resourcePath: any, url: any, homepageUrl?: any | null, openGraphImageUrl: any, watchers: { __typename?: 'UserConnection', totalCount: number }, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string }, defaultBranchRef?: { __typename?: 'Ref', name: string } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null }, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, upCase?: { __typename?: 'Blob', byteSize: number, text?: string | null, isBinary?: boolean | null } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree' } | null, object?: { __typename?: 'Blob', byteSize: number, text?: string | null, isBinary?: boolean | null } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree' } | null };
 
@@ -31137,7 +31137,7 @@ export type PinnedReposByUserQueryVariables = Exact<{
 }>;
 
 
-export type PinnedReposByUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', pinnedItems: { __typename?: 'PinnableItemConnection', totalCount: number, nodes?: Array<{ __typename?: 'Gist' } | { __typename?: 'Repository', id: string, name: string, description?: string | null, homepageUrl?: any | null, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string }, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null } } | null> | null } } | null };
+export type PinnedReposByUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', pinnedItems: { __typename?: 'PinnableItemConnection', totalCount: number, nodes?: Array<{ __typename?: 'Gist' } | { __typename?: 'Repository', id: string, name: string, description?: string | null, url: any, homepageUrl?: any | null, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string }, languages?: { __typename?: 'LanguageConnection', nodes?: Array<{ __typename?: 'Language', name: string, color?: string | null } | null> | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string } } | null> | null } } | null> | null } } | null };
 
 export type RepositoryByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -31174,6 +31174,7 @@ export const RepositoryFragmentDoc = new TypedDocumentString(`
       color
     }
   }
+  url
   homepageUrl
   repositoryTopics(first: 10) {
     nodes {
@@ -31263,6 +31264,7 @@ export const PinnedReposByUserDocument = new TypedDocumentString(`
       color
     }
   }
+  url
   homepageUrl
   repositoryTopics(first: 10) {
     nodes {

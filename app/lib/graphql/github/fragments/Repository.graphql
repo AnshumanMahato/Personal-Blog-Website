@@ -11,6 +11,7 @@ fragment Repository on Repository {
       color
     }
   }
+  url
   homepageUrl
   repositoryTopics(first: 10) {
     nodes {
