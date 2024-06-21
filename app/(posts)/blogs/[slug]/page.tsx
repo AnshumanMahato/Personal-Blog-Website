@@ -8,15 +8,10 @@ import { ResolvingMetadata } from "next";
 import { RiChat3Line, RiExternalLinkLine } from "react-icons/ri";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-type Props = Readonly<{
-  params: {
-    slug: string;
-  };
-}>;
+import { ParamsProps } from "@/app/@types/Props";
 
 export async function generateMetadata(
-  { params }: Props,
+  { params }: ParamsProps,
   parent: ResolvingMetadata
 ) {
   const data = await getSinglePost(params.slug);
@@ -47,7 +42,7 @@ export async function generateMetadata(
   };
 }
 
-async function BlogPost({ params }: Props) {
+async function BlogPost({ params }: ParamsProps) {
   const data = await getSinglePost(params.slug);
   if (!data) return <></>;
   const { post, publication, comments } = data;

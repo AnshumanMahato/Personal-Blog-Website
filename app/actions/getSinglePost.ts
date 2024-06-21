@@ -5,7 +5,7 @@ import {
   PublicationFragment,
   SinglePostByPublicationDocument,
   SinglePostByPublicationQuery,
-} from "@/app/schema/graphql";
+} from "@/app/schema/hashnode.graphql";
 
 type PostInfo = {
   post: PostFullFragment;

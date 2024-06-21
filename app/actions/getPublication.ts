@@ -3,7 +3,7 @@
 import {
   PublicationByHostDocument,
   PublicationByHostQuery,
-} from "../schema/graphql";
+} from "../schema/hashnode.graphql";
 
 async function getPublication(): Promise<
   PublicationByHostQuery["publication"]

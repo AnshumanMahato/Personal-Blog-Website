@@ -1,0 +1,5 @@
+query RepositoryById($id: ID!) {
+  node(id: $id) {
+    ...RepositoryDetails
+  }
+}

@@ -1,6 +1,6 @@
 "use server";
 
-import { RssFeedDocument, RssFeedQuery } from "@/app/schema/graphql";
+import { RssFeedDocument, RssFeedQuery } from "@/app/schema/hashnode.graphql";
 import PostsFeedInfo from "../@types/PostsFeedInfo";
 
 async function getPostsFeedData(

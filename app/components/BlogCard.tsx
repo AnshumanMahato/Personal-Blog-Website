@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PostFragment } from "../schema/graphql";
+import { PostFragment } from "../schema/hashnode.graphql";
 
 type Props = Readonly<{
   post: PostFragment;

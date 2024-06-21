@@ -13,7 +13,8 @@
 
   html {
     @apply text-[62.5%];
-    overflow-x: hidden;
+    @apply overflow-x-hidden;
+    @apply scroll-smooth;
   }
 
   body {

@@ -1,0 +1,10 @@
+query PinnedReposByUser($login: String!) {
+  user(login: $login) {
+    pinnedItems(first: 10, types: REPOSITORY) {
+      totalCount
+      nodes {
+        ...Repository
+      }
+    }
+  }
+}

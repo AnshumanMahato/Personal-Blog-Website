@@ -1,4 +1,5 @@
 /* This component has been pulled from Hashnode Blog Starterkit. */
+"use client";
 
 import { markdownToHtml } from "../utils/renderer/markdownToHtml";
 import { useEmbeds } from "../utils/renderer/hooks/useEmbeds";

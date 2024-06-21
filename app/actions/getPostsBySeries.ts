@@ -3,7 +3,7 @@
 import {
   SeriesPostsByPublicationDocument,
   SeriesPostsByPublicationQuery,
-} from "@/app/schema/graphql";
+} from "@/app/schema/hashnode.graphql";
 import PostsInfo from "../@types/PostsInfo";
 
 async function getPostsBySeries(

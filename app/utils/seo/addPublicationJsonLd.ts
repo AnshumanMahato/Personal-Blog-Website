@@ -1,4 +1,4 @@
-import { PublicationFragment } from "@/app/schema/graphql";
+import { PublicationFragment } from "@/app/schema/hashnode.graphql";
 
 export const addPublicationJsonLd = (publication: PublicationFragment) => {
   const schema = {
