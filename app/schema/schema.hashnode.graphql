@@ -3387,6 +3387,7 @@ enum Scope {
   invited_team_user
   move_draft
   publication_admin
+  publication_author
   publication_member
   publish_comment
   publish_draft

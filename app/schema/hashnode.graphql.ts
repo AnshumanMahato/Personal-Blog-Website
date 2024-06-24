@@ -3644,6 +3644,7 @@ export enum Scope {
   InvitedTeamUser = 'invited_team_user',
   MoveDraft = 'move_draft',
   PublicationAdmin = 'publication_admin',
+  PublicationAuthor = 'publication_author',
   PublicationMember = 'publication_member',
   PublishComment = 'publish_comment',
   PublishDraft = 'publish_draft',
