@@ -7,6 +7,7 @@ import Section from "@/app/components/Section";
 import PageCTA from "@/app/components/PageCTA";
 import { Metadata } from "next";
 import { addAboutJsonLd } from "@/app/utils/seo/addAboutJsonLd";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: `About Me | ${process.env.AUTHOR}`,
@@ -42,23 +43,44 @@ function About() {
         <PageHeading>I&apos;m Anshuman.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
           <p>
-            I am a full-stack developer with a passion for building web
-            applications. I have experience in building web applications using
-            React, Node.js, and MongoDB. I am currently working as a full-stack
-            developer at a startup in Bangalore, India.
+            Hi 👋 My name is Anshuman Mahato. I am a full-stack web developer
+            specializing in the MERN stack. I&apos;m also a passionate blogger
+            who loves sharing insights on web development, technology, and my
+            personal experiences as a developer. You can read my articles&nbsp;
+            <Link
+              className=" font-bold dark:hover:text-accent-dark hover:text-accent-light"
+              href="/blogs"
+            >
+              here.
+            </Link>
           </p>
+          <p>A little bit about myself:</p>
+          <ul className="list-disc pl-[2.5rem] flex flex-col gap-[2rem] [&>li]:pl-[8px]">
+            <li>
+              I am from Jamshedpur, Jharkhand. I am pursuing my Master&apos;s in
+              Computer Applications at the National Institute of Technology,
+              Jamshedpur, and I&apos;m in my final year.
+            </li>
+            <li>
+              I&apos;m an open-source enthusiast, actively contributing to
+              various projects and collaborating with the developer community.
+            </li>
+            <li>
+              I enjoy sketching in my free time, which helps me to relax and
+              stay creative.
+            </li>
+            <li>
+              I also enjoy bike rides, a great way to unwind and explore new
+              places.
+            </li>
+            <li>I like reading about psychology and philosophy.</li>
+          </ul>
+
           <p>
-            I have a bachelor&apos;s degree in Computer Science from the Indian
-            Institute of Technology, Roorkee. I have been working as a software
-            developer for the past 3 years and have experience in building
-            scalable web applications.
-          </p>
-          <p>
-            I am passionate about building web applications that are user
-            friendly and easy to use. I believe that the best web applications
-            are the ones that are simple and intuitive to use. I am always
-            looking for new challenges and opportunities to learn and grow as a
-            developer.
+            I&apos;m passionate about solving problems through code and
+            continuously learning new technologies. I&apos;m excited about the
+            future of web development and look forward to connecting with
+            like-minded individuals in the tech community.
           </p>
         </div>
       </Section>
