@@ -48,12 +48,10 @@ async function Projects() {
         <PageHeading>Project Portfolio.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
           <p>
-            Here, you&apos;ll find a showcase of my work, including web
-            development projects, open-source contributions, and other creative
-            endeavours. Check out my GitHub and Frontend Mentor profiles for
-            detailed examples of my code and design skills. I am passionate
-            about building efficient, scalable applications and continuously
-            improving my craft.
+            I am passionate about building efficient, scalable applications and
+            continuously improving my craft. Here, you&apos;ll find a showcase
+            of my work, including web development projects, open-source
+            contributions, and other creative endeavours.
           </p>
         </div>
       </Section>

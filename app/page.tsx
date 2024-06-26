@@ -24,8 +24,8 @@ export default function Home() {
           </h1>
           <p>
             I am a Computer Science Student who aspires to be a Software
-            Developer. Here, I share about myself and stuff I learn through
-            blogs and articles.
+            Developer. I write blogs and articles about web dev, computer
+            science and my experiences in general.
           </p>
           <SectionLink href="/blogs">My Blogs {"-->"}</SectionLink>
         </Section>
@@ -63,10 +63,10 @@ export default function Home() {
         <Section>
           <SectionHeading>Connect With Me</SectionHeading>
           <p>
-            Currently, I am open for Web Developer roles. I am open to
-            internships, jobs and freelance opportunities. So, if you have
-            anything and think I might be appropriate for the task, please reach
-            out.
+            Looking for a web developer? I am open to internships, jobs,
+            freelance projects and open-source collaboration. Reach out if you
+            have anything and think I might be appropriate. I would love to hear
+            from you.
           </p>
           <p>You can find me here.</p>
           <div className="flex gap-[3rem] text-[2rem] xs:text-[2.5rem] text-accent-light dark:text-accent-dark">
