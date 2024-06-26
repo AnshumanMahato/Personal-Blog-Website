@@ -29,18 +29,21 @@ async function Blogs() {
         <PageHeading>Blogs &amp; Articles.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
           <p>
-            These are some awesome projects that I have made. Some for fun, some
-            for learning and some to showcase my skillset.
+            Welcome to my blog! Here, you&apos;ll find articles on web dev,
+            technology trends, and my personal experiences as a developer.
+            Whether you&apos;re here to learn, get inspired, or explore new
+            ideas, I hope you enjoy reading my posts as much as I enjoy writing
+            them!
           </p>
         </div>
       </Section>
+      <PageCTA links={socials} />
       <BlogCardContainer
         initialBlogs={posts?.posts ?? []}
         initialPageInfo={
           posts?.pageInfo ?? { hasNextPage: false, endCursor: "" }
         }
       />
-      <PageCTA links={socials} />
     </>
   );
 }

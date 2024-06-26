@@ -48,13 +48,17 @@ async function Projects() {
         <PageHeading>Project Portfolio.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
           <p>
-            These are some awesome projects that I have made. Some for fun, some
-            for learning and some to showcase my skillset.
+            Here, you&apos;ll find a showcase of my work, including web
+            development projects, open-source contributions, and other creative
+            endeavours. Check out my GitHub and Frontend Mentor profiles for
+            detailed examples of my code and design skills. I am passionate
+            about building efficient, scalable applications and continuously
+            improving my craft.
           </p>
         </div>
       </Section>
-      <CardContainer>{projectCards}</CardContainer>
       <PageCTA links={socials} />
+      <CardContainer>{projectCards}</CardContainer>
       <script
         id="projects-json-ld"
         type="application/ld+json"
