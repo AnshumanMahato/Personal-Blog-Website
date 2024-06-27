@@ -2532,6 +2532,8 @@ type Publication implements Node {
   Returns true if GitHub backup is configured and active and false otherwise.
   """
   isGitHubBackupEnabled: Boolean!
+  """Returns whether the publication's GitHub source repo is connected."""
+  isGithubAsSourceConnected: Boolean!
   """
   A flag to indicate if the publication is using Headless CMS. This can be used to check if the post redirect needs authentication.
   """

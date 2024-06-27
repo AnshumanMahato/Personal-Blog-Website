@@ -2699,6 +2699,8 @@ export type Publication = Node & {
   invites?: Maybe<PublicationInvite>;
   /** Returns true if GitHub backup is configured and active and false otherwise. */
   isGitHubBackupEnabled: Scalars['Boolean']['output'];
+  /** Returns whether the publication's GitHub source repo is connected. */
+  isGithubAsSourceConnected: Scalars['Boolean']['output'];
   /** A flag to indicate if the publication is using Headless CMS. This can be used to check if the post redirect needs authentication. */
   isHeadless: Scalars['Boolean']['output'];
   /** True if the publication is a team publication and false otherwise. */

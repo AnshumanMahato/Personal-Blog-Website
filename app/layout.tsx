@@ -3,6 +3,7 @@ import Footer from "@/app/components/Footer";
 import { inter } from "@/app/components/fonts";
 import Header from "@/app/components/Header";
 import "./globals.css";
+import DarkModeSwitch from "./components/DarkModeSwitch";
 
 export const metadata: Metadata = {
   title: process.env.AUTHOR,
@@ -25,12 +26,13 @@ export default function RootLayout({ children }: Props) {
       <body className={`${inter.className} antialiased`}>
         <div
           id="root"
-          className="flex flex-col justify-between items-center min-h-screen w-full"
+          className="relative flex flex-col justify-between items-center min-h-screen w-full"
         >
           <Header />
           {children}
-          <Footer />
+          <DarkModeSwitch />
         </div>
+        <Footer />
       </body>
     </html>
   );
