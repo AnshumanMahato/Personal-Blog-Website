@@ -34,10 +34,11 @@ function DarkModeSwitch() {
   }, [darkMode]);
 
   const classes = classNames(
-    "hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200 cursor-pointer",
-    "p-[1.5rem] rounded-full bg-background-light dark:bg-background-dark text-[3.5rem] lg:text-[4rem] text-secondary-light/75 dark:text-secondary-dark/75",
-    "fixed bottom-[2rem] right-[2rem] xs:bottom-[3rem] xs:right-[3rem] lg:bottom-[5rem] lg:right-[5rem] z-50",
-    "shadow-lg border border-secondary-light/30 dark:border-secondary-dark/30 shadow-secondary-light/30 dark:shadow-secondary-dark/30"
+    "cursor-pointer rounded-full bg-background-light dark:bg-background-dark",
+    "text-[3rem] lg:text-[4rem] text-accent-light dark:text-accent-dark font-bold",
+    "p-[1.25rem] fixed bottom-[2rem] right-[2rem] xs:bottom-[3rem] xs:right-[3rem] lg:bottom-[5rem] lg:right-[5rem] z-50",
+    "bg-white dark:bg-black rounded-[1rem] shadow-lg shadow-black/15 dark:shadow-white/15 border border-black/20 dark:border-white/20",
+    "hover:scale-110 transition-transform duration-100"
   );
 
   return (
