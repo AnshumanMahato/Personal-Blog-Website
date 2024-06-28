@@ -30,9 +30,9 @@ export default function RootLayout({ children }: Props) {
         >
           <Header />
           {children}
+          <Footer />
           <DarkModeSwitch />
         </div>
-        <Footer />
       </body>
     </html>
   );
