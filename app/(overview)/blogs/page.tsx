@@ -24,7 +24,11 @@ async function Blogs() {
 
   return (
     <>
-      <PageBanner title="Blogs" coverImage="/next.svg" coverImageAlt="next" />
+      <PageBanner
+        title="Blogs"
+        coverImage="/assets/images/blogcover1.jpg"
+        coverImageAlt="blogs-cover"
+      />
       <Section>
         <PageHeading>Blogs &amp; Articles.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
