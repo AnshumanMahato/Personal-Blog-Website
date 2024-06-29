@@ -41,7 +41,7 @@ async function Projects() {
     <>
       <PageBanner
         title="Projects"
-        coverImage="/next.svg"
+        coverImage="/assets/images/projectscover.jpg"
         coverImageAlt="next"
       />
       <Section>
