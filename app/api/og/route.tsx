@@ -23,9 +23,23 @@ export async function GET(req: Request) {
     });
   }
 
-  let title: string;
-  if (tag) title = `Blogs tagged #${tag}`;
-  else title = `Blogs in series ${series}`;
+  let title: JSX.Element;
+  if (tag)
+    title = (
+      <h1 tw="text-black font-light text-[36px] text-center flex flex-col items-center justify-center">
+        Blogs tagged with
+        <br />
+        <span tw="text-[#17c964] text-[72px] font-medium">#{tag}</span>
+      </h1>
+    );
+  else
+    title = (
+      <h1 tw="text-black font-light text-[36px] text-center flex flex-col items-center justify-center">
+        Blogs in series
+        <br />
+        <span tw="text-[#17c964] text-[72px] font-medium">{series}</span>
+      </h1>
+    );
 
   const imageJsx = (
     <div tw="flex items-center justify-center w-full h-full relative">
@@ -36,11 +50,7 @@ export async function GET(req: Request) {
         style={{ objectFit: "cover", objectPosition: "center" }}
       />
       <div tw="flex shadow-2xl shadow-black/40 absolute bg-white/90 p-[5rem] rounded-[5rem] h-[450px] w-[1050px] justify-center items-center text-center">
-        <h1 tw="text-black font-light text-[36px] text-center flex flex-col items-center justify-center">
-          Blogs tagged with
-          <br />
-          <span tw="text-[#17c964] text-[72px] font-medium">#Tagname</span>
-        </h1>
+        {title}
       </div>
       <div
         tw="flex absolute w-[360px] h-[300px] top-0 left-0 "
