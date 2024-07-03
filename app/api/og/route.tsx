@@ -28,7 +28,6 @@ export async function GET(req: Request) {
     title = (
       <h1 tw="text-black font-light text-[36px] text-center flex flex-col items-center justify-center">
         Blogs tagged with
-        <br />
         <span tw="text-[#17c964] text-[72px] font-medium">#{tag}</span>
       </h1>
     );
@@ -49,7 +48,7 @@ export async function GET(req: Request) {
         alt={"test"}
         style={{ objectFit: "cover", objectPosition: "center" }}
       />
-      <div tw="flex shadow-2xl shadow-black/40 absolute bg-white/90 p-[5rem] rounded-[5rem] h-[450px] w-[1050px] justify-center items-center text-center">
+      <div tw="flex shadow-2xl shadow-black/40 absolute bg-white/90 p-[5rem] rounded-[2rem] h-[450px] w-[1050px] justify-center items-center text-center">
         {title}
       </div>
       <div
