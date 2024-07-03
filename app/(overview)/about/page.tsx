@@ -7,28 +7,31 @@ import Section from "@/app/components/Section";
 import PageCTA from "@/app/components/PageCTA";
 import { Metadata } from "next";
 import { addAboutJsonLd } from "@/app/utils/seo/addAboutJsonLd";
+import profile from "@/app/lib/profile.json";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: `About Me | ${process.env.AUTHOR}`,
+  title: `About Me | ${profile.name}`,
 };
+
+const { twitter, linkedin } = profile.handles.socials;
 
 function About() {
   const socials = [
     {
-      href: "https://twitter.com/AnshumanMahato_",
+      href: twitter,
       icon: <FaXTwitter />,
-      handle: "@AnshumanMahato_",
+      handle: `@${twitter.split("/").pop()}`,
     },
     {
-      href: "https://www.linkedin.com/in/anshuman-mahato/",
+      href: linkedin,
       icon: <FiLinkedin />,
-      handle: "/anshuman-mahato",
+      handle: `/${linkedin.split("/").pop()}`,
     },
     {
-      href: "mailto:anshuman.mahato0935@gmail.com",
+      href: `mailto:${profile.email}`,
       icon: <MdOutlineEmail />,
-      handle: "hi@anshumanmahato.me",
+      handle: profile.email,
     },
   ];
 

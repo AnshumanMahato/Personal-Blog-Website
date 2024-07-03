@@ -5,18 +5,21 @@ import PageHeading from "@/app/components/PageHeading";
 import Section from "@/app/components/Section";
 import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getAllPosts from "@/app/actions/getAllPosts";
+import profile from "@/app/lib/profile.json";
 
 async function Blogs() {
+  const { dev, hashnode } = profile.handles.blogs;
+
   const socials = [
     {
-      href: "https://dev.to/anshumanmahato",
+      href: dev,
       icon: <FaDev />,
-      handle: "/anshumanmahato",
+      handle: `/${dev.split("/").pop()}`,
     },
     {
-      href: "https://hashnode.com/@AnshumanMahato",
+      href: hashnode,
       icon: <FaHashnode />,
-      handle: "@AnshumanMahato",
+      handle: `${hashnode.split("/").pop()}`,
     },
   ];
 

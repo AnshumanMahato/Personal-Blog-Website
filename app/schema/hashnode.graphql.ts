@@ -2666,6 +2666,8 @@ export type Publication = Node & {
   about?: Maybe<Content>;
   /** Returns the list of drafts in the publication */
   allDrafts: DraftConnection;
+  /** Returns all the scheduled drafts of the publication. */
+  allScheduledDrafts: DraftConnection;
   /** Boolean flag indicating if the publication allows edits by contributors */
   allowContributorEdits: Scalars['Boolean']['output'];
   /** The author who owns the publication. */
@@ -2743,7 +2745,7 @@ export type Publication = Node & {
   redirectedPost?: Maybe<Post>;
   /** Configured redirection rules for the publication. */
   redirectionRules: Array<RedirectionRule>;
-  /** Returns the scheduled drafts of the publication. */
+  /** Returns the scheduled drafts of the publication by the authenticated user. */
   scheduledDrafts: DraftConnection;
   /** Returns series by slug in the publication. */
   series?: Maybe<Series>;
@@ -2776,6 +2778,16 @@ export type Publication = Node & {
  * A publication is a blog that can be created for a user or a team.
  */
 export type PublicationAllDraftsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  first: Scalars['Int']['input'];
+};
+
+
+/**
+ * Contains basic information about the publication.
+ * A publication is a blog that can be created for a user or a team.
+ */
+export type PublicationAllScheduledDraftsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   first: Scalars['Int']['input'];
 };

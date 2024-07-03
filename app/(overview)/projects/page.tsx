@@ -6,27 +6,30 @@ import PageHeading from "@/app/components/PageHeading";
 import ProjectCard from "@/app/components/ProjectCard";
 import Section from "@/app/components/Section";
 import { addProjectJsonLd } from "@/app/utils/seo/addProjectsJsonLd";
+import profile from "@/app/lib/profile.json";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa6";
 import { SiFrontendmentor } from "react-icons/si";
 
 export const metadata: Metadata = {
-  title: `Projects | ${process.env.AUTHOR}`,
+  title: `Projects | ${profile.name}`,
   description: "Check out some of the projects I have worked on.",
 };
+
+const { github, frontendmentor } = profile.handles.portfolios;
 
 async function Projects() {
   const socials = [
     {
-      href: "https://www.frontendmentor.io/profile/AnshumanMahato",
+      href: frontendmentor,
       icon: <SiFrontendmentor />,
-      handle: "/AnshumanMahato",
+      handle: `/${frontendmentor.split("/").pop()}`,
     },
     {
-      href: "https://github.com/AnshumanMahato",
+      href: github,
       icon: <FaGithub />,
-      handle: "/AnshumanMahato",
+      handle: `/${github.split("/").pop()}`,
     },
   ];
 

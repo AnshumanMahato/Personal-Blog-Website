@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import Footer from "@/app/components/Footer";
 import { inter } from "@/app/components/fonts";
 import Header from "@/app/components/Header";
+import profile from "@/app/lib/profile.json";
 import "./globals.css";
 import DarkModeSwitch from "./components/DarkModeSwitch";
 
 export const metadata: Metadata = {
-  title: process.env.AUTHOR,
-  description: "Web Developer | Blogger | Open Source Enthusiast",
+  title: profile.name,
+  description: profile.headline,
   twitter: {
     card: "summary_large_image",
-    site: "@AnshumanMahato_",
-    title: "Anshuman Mahato",
-    description: "Web Developer | Blogger | Open Source Enthusiast",
+    site: profile.handles.socials.twitter,
+    title: profile.name,
+    description: profile.headline,
   },
 };
 

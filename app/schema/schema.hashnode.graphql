@@ -2477,6 +2477,13 @@ type Publication implements Node {
     """The number of drafts to return."""
     first: Int!
   ): DraftConnection!
+  """Returns all the scheduled drafts of the publication."""
+  allScheduledDrafts(
+    """A cursor to the last item in the previous page."""
+    after: String
+    """The number of scheduled drafts to return."""
+    first: Int!
+  ): DraftConnection!
   """
   Boolean flag indicating if the publication allows edits by contributors
   """
@@ -2599,7 +2606,9 @@ type Publication implements Node {
   redirectedPost(slug: String!): Post
   """Configured redirection rules for the publication."""
   redirectionRules: [RedirectionRule!]!
-  """Returns the scheduled drafts of the publication."""
+  """
+  Returns the scheduled drafts of the publication by the authenticated user.
+  """
   scheduledDrafts(
     """A cursor to the last item in the previous page."""
     after: String
