@@ -1800,6 +1800,8 @@ type Mutation {
   Toggles role based invite links' active status. Users can join the publication by the invite link only if it is active.
   """
   toggleRoleBasedInviteLinks(publicationId: ID!): ToggleRoleBasedInviteLinksPayload!
+  """Toggle text selection sharer feature."""
+  toggleTextSelectionSharer(input: ToggleTextSelectionSharerInput!): ToggleTextSelectionSharerPayload!
   triggerWebhookTest(input: TriggerWebhookTestInput!): TriggerWebhookTestPayload!
   unsubscribeFromNewsletter(input: UnsubscribeFromNewsletterInput!): UnsubscribeFromNewsletterPayload!
   """Updates a comment on a post."""
@@ -3764,6 +3766,14 @@ type ToggleFollowUserPayload {
 type ToggleRoleBasedInviteLinksPayload {
   """Signifies the status of invite links after toggling."""
   areRoleBasedInviteLinksActive: Boolean!
+}
+
+input ToggleTextSelectionSharerInput {
+  publicationId: ID!
+}
+
+type ToggleTextSelectionSharerPayload {
+  publication: Publication
 }
 
 input TriggerWebhookTestInput {

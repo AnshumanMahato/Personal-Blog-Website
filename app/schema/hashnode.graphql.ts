@@ -1769,6 +1769,8 @@ export type Mutation = {
   toggleFollowUser: ToggleFollowUserPayload;
   /** Toggles role based invite links' active status. Users can join the publication by the invite link only if it is active. */
   toggleRoleBasedInviteLinks: ToggleRoleBasedInviteLinksPayload;
+  /** Toggle text selection sharer feature. */
+  toggleTextSelectionSharer: ToggleTextSelectionSharerPayload;
   triggerWebhookTest: TriggerWebhookTestPayload;
   unsubscribeFromNewsletter: UnsubscribeFromNewsletterPayload;
   /** Updates a comment on a post. */
@@ -1978,6 +1980,11 @@ export type MutationToggleFollowUserArgs = {
 
 export type MutationToggleRoleBasedInviteLinksArgs = {
   publicationId: Scalars['ID']['input'];
+};
+
+
+export type MutationToggleTextSelectionSharerArgs = {
+  input: ToggleTextSelectionSharerInput;
 };
 
 
@@ -4024,6 +4031,15 @@ export type ToggleRoleBasedInviteLinksPayload = {
   __typename?: 'ToggleRoleBasedInviteLinksPayload';
   /** Signifies the status of invite links after toggling. */
   areRoleBasedInviteLinksActive: Scalars['Boolean']['output'];
+};
+
+export type ToggleTextSelectionSharerInput = {
+  publicationId: Scalars['ID']['input'];
+};
+
+export type ToggleTextSelectionSharerPayload = {
+  __typename?: 'ToggleTextSelectionSharerPayload';
+  publication?: Maybe<Publication>;
 };
 
 export type TriggerWebhookTestInput = {
