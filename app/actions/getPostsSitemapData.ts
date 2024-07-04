@@ -1,7 +1,7 @@
 "use server";
 
 import { SitemapDocument, SitemapQuery } from "@/app/schema/hashnode.graphql";
-import PostsSitemapInfo from "../@types/PostsSitemapInfo";
+import PostsSitemapInfo from "../../@types/PostsSitemapInfo";
 
 async function getPostsSitemapData(
   after?: string

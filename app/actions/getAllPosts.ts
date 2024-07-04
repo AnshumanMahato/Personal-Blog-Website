@@ -4,7 +4,7 @@ import {
   PostsByPublicationDocument,
   PostsByPublicationQuery,
 } from "@/app/schema/hashnode.graphql";
-import PostsInfo from "../@types/PostsInfo";
+import PostsInfo from "../../@types/PostsInfo";
 
 async function getAllPosts(after?: string): Promise<PostsInfo | null> {
   const GQL_ENDPOINT: string = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT!;

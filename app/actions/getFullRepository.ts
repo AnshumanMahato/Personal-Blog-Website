@@ -1,6 +1,6 @@
 "use server";
 
-import { Repodata } from "../@types/RepoData";
+import { Repodata } from "../../@types/RepoData";
 import {
   Blob,
   RepositoryByIdDocument,

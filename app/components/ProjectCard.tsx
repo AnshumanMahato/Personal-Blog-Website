@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Project from "../@types/Project";
+import Project from "../../@types/Project";
 import { FaGithub, FaGlobe } from "react-icons/fa6";
 
 function ProjectCard({ project }: { project: Project }) {

@@ -1,6 +1,6 @@
 "use server";
 
-import Project from "../@types/Project";
+import Project from "../../@types/Project";
 import {
   PinnedReposByUserDocument,
   PinnedReposByUserQuery,

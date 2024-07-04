@@ -4,7 +4,7 @@ import {
   SeriesPostsByPublicationDocument,
   SeriesPostsByPublicationQuery,
 } from "@/app/schema/hashnode.graphql";
-import PostsInfo from "../@types/PostsInfo";
+import PostsInfo from "../../@types/PostsInfo";
 
 async function getPostsBySeries(
   series: string,

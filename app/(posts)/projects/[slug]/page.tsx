@@ -1,4 +1,4 @@
-import { ParamsProps } from "@/app/@types/Props";
+import { ParamsProps } from "@/@types/Props";
 import getFullRepository from "@/app/actions/getFullRepository";
 import { MarkdownToHtml } from "@/app/components/MarkdownToHTML";
 import { notFound } from "next/navigation";

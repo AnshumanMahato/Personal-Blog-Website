@@ -8,7 +8,7 @@ import { ResolvingMetadata } from "next";
 import { RiChat3Line, RiExternalLinkLine } from "react-icons/ri";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ParamsProps } from "@/app/@types/Props";
+import { ParamsProps } from "@/@types/Props";
 
 export async function generateMetadata(
   { params }: ParamsProps,

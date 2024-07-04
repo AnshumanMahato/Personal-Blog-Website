@@ -5,7 +5,7 @@ import Header from "@/app/components/Header";
 import profile from "@/app/lib/profile.json";
 import "./globals.css";
 import DarkModeSwitch from "./components/DarkModeSwitch";
-import LayoutProps from "@/app/@types/LayoutProps";
+import LayoutProps from "@/@types/LayoutProps";
 
 export const metadata: Metadata = {
   title: profile.name,

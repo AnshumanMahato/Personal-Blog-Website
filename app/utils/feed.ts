@@ -1,5 +1,5 @@
 import RSS from "rss";
-import PostsFeedInfo from "@/app/@types/PostsFeedInfo";
+import PostsFeedInfo from "@/@types/PostsFeedInfo";
 
 const NON_ASCII_REGEX = /[\u{0080}-\u{FFFF}]/gu;
 

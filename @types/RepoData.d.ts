@@ -1,4 +1,4 @@
-import { RepositoryDetailsFragment } from "../schema/github.graphql";
+import { RepositoryDetailsFragment } from "../app/schema/github.graphql";
 
 interface Repodata extends RepositoryDetailsFragment {
   languages?: (string | undefined)[];
