@@ -9,11 +9,7 @@ async function ProjectDetails({ params: { slug } }: ParamsProps) {
   notFound();
   //Page work in progress will be adjusted in future
   console.log(repo);
-  return (
-    <div>
-      <MarkdownToHtml contentMarkdown={repo.readme!} />
-    </div>
-  );
+  return <div>{<MarkdownToHtml contentMarkdown={repo?.readme!} />}</div>;
 }
 
 export default ProjectDetails;
