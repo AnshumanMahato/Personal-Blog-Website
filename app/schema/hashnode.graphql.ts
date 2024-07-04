@@ -1337,6 +1337,12 @@ export enum FeedType {
   Relevant = 'RELEVANT'
 }
 
+export type GptBotCrawlingFeature = Feature & {
+  __typename?: 'GPTBotCrawlingFeature';
+  /** A flag indicating if the GPT Bot Crawler feature is enabled or not. */
+  isEnabled: Scalars['Boolean']['output'];
+};
+
 /** Views implementation that will be returned if grouping by browser. */
 export type GroupedByBrowserViews = Node & Views & {
   __typename?: 'GroupedByBrowserViews';
@@ -1767,6 +1773,8 @@ export type Mutation = {
    * Only available to the authenticated user.
    */
   toggleFollowUser: ToggleFollowUserPayload;
+  /** Toggle GPT bot crawling feature. */
+  toggleGPTBotCrawling: ToggleGptBotCrawlingPayload;
   /** Toggles role based invite links' active status. Users can join the publication by the invite link only if it is active. */
   toggleRoleBasedInviteLinks: ToggleRoleBasedInviteLinksPayload;
   /** Toggle text selection sharer feature. */
@@ -1975,6 +1983,11 @@ export type MutationToggleAllowContributorEditsArgs = {
 export type MutationToggleFollowUserArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationToggleGptBotCrawlingArgs = {
+  input: ToggleGptBotCrawlingInput;
 };
 
 
@@ -2939,6 +2952,8 @@ export type PublicationFeatures = {
   audioBlog: AudioBlogFeature;
   /** Individual styling for the publication. */
   customCSS: CustomCssFeature;
+  /** GPT Bot crawler to index the publication. */
+  gptBotCrawling: GptBotCrawlingFeature;
   /** Headless CMS for the publication. */
   headlessCMS: HeadlessCmsFeature;
   /** Newsletter feature for the publication which adds a `/newsletter` route for collecting subscribers and allows sending out newsletters. */
@@ -4024,6 +4039,15 @@ export type ToggleFollowUserPayload = {
   __typename?: 'ToggleFollowUserPayload';
   /** The user that was followed/unfollowed. */
   user?: Maybe<User>;
+};
+
+export type ToggleGptBotCrawlingInput = {
+  publicationId: Scalars['ID']['input'];
+};
+
+export type ToggleGptBotCrawlingPayload = {
+  __typename?: 'ToggleGPTBotCrawlingPayload';
+  publication?: Maybe<Publication>;
 };
 
 /** Response to toggling role based invite links. */

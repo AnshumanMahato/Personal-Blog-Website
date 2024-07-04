@@ -1343,6 +1343,11 @@ enum FeedType {
   RELEVANT
 }
 
+type GPTBotCrawlingFeature implements Feature {
+  """A flag indicating if the GPT Bot Crawler feature is enabled or not."""
+  isEnabled: Boolean!
+}
+
 """Views implementation that will be returned if grouping by browser."""
 type GroupedByBrowserViews implements Node & Views {
   """The browser that these views belong to."""
@@ -1796,6 +1801,8 @@ type Mutation {
   Only available to the authenticated user.
   """
   toggleFollowUser(id: ID, username: String): ToggleFollowUserPayload!
+  """Toggle GPT bot crawling feature."""
+  toggleGPTBotCrawling(input: ToggleGPTBotCrawlingInput!): ToggleGPTBotCrawlingPayload!
   """
   Toggles role based invite links' active status. Users can join the publication by the invite link only if it is active.
   """
@@ -2681,6 +2688,8 @@ type PublicationFeatures {
   audioBlog: AudioBlogFeature! @deprecated(reason: "Audio Blogs are not supported anymore. This field will be removed 18/04/23")
   """Individual styling for the publication."""
   customCSS: CustomCSSFeature!
+  """GPT Bot crawler to index the publication."""
+  gptBotCrawling: GPTBotCrawlingFeature!
   """Headless CMS for the publication."""
   headlessCMS: HeadlessCMSFeature!
   """
@@ -3760,6 +3769,14 @@ type ToggleAllowContributorEditsPayload {
 type ToggleFollowUserPayload {
   """The user that was followed/unfollowed."""
   user: User
+}
+
+input ToggleGPTBotCrawlingInput {
+  publicationId: ID!
+}
+
+type ToggleGPTBotCrawlingPayload {
+  publication: Publication
 }
 
 """Response to toggling role based invite links."""

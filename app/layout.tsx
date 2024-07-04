@@ -5,6 +5,7 @@ import Header from "@/app/components/Header";
 import profile from "@/app/lib/profile.json";
 import "./globals.css";
 import DarkModeSwitch from "./components/DarkModeSwitch";
+import LayoutProps from "@/app/@types/LayoutProps";
 
 export const metadata: Metadata = {
   title: profile.name,
@@ -17,11 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-type Props = {
-  children: Readonly<React.ReactNode>;
-};
-
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} antialiased`}>
