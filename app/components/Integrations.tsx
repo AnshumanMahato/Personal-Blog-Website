@@ -92,7 +92,7 @@ function Integrations({ publication }: Props) {
         id="google-gtag"
         async
         src={`https://ping.hashnode.com/gtag/js?id=G-72XG3F8LNJ`}
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
       />
       <Script
         id="google-analytics"

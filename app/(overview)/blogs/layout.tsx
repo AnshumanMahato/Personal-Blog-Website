@@ -52,13 +52,13 @@ async function BlogsLayout({ children }: Props) {
               __html: JSON.stringify(addPublicationJsonLd(publication)),
             }}
           />
-          <Analytics publication={{ id: publication.id }} />
           <Integrations
             publication={{
               integrations: publication.integrations,
               url: publication.url,
             }}
           />
+          <Analytics publication={{ id: publication.id }} />
         </>
       )}
     </>
