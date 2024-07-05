@@ -39,7 +39,7 @@ function About() {
     <>
       <PageBanner
         title="About Me"
-        coverImage="/next.svg"
+        coverImage="/assets/images/aboutcover.png"
         coverImageAlt="next"
       />
       <Section>

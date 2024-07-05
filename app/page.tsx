@@ -7,13 +7,21 @@ import skills from "@/app/lib/skills.json";
 import Image from "next/image";
 import Link from "next/link";
 import { addHomeJsonLd } from "./utils/seo/addHomeJsonLd";
+import profile from "@/app/lib/profile.json";
 
 export default function Home() {
   return (
     <>
       <main className="flex flex-col items-center w-full max-w-[830px] px-[2rem] xs:px-[3rem] text-center gap-[10rem] mt-[3.5rem] mb-[6rem]">
         <Section>
-          <div className="w-[10rem] h-[10rem] xs:w-[15rem] xs:h-[15rem] sm:w-[20rem] sm:h-[20rem] bg-secondary-light dark:bg-secondary-dark rounded-full"></div>
+          <div className="relative w-[10rem] h-[10rem] xs:w-[15rem] xs:h-[15rem] sm:w-[20rem] sm:h-[20rem] bg-secondary-light dark:bg-secondary-dark rounded-full overflow-hidden">
+            <Image
+              src="/assets/images/profile.jpg"
+              alt={profile.name}
+              fill
+              className="object-cover object-center"
+            />
+          </div>
           <h1 className="text-black dark:text-white text-[1.8rem] xs:text-[2.4rem] font-semibold leading-[150%]">
             Hey! 👋 Myself{" "}
             <span className="text-accent-light dark:text-accent-dark">

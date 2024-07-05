@@ -1,4 +1,4 @@
-import { FaHashnode, FaDev } from "react-icons/fa6";
+import { FaHashnode, FaDev, FaRss, FaSquareRss } from "react-icons/fa6";
 import PageBanner from "@/app/components/PageBanner";
 import PageCTA from "@/app/components/PageCTA";
 import PageHeading from "@/app/components/PageHeading";
@@ -20,6 +20,11 @@ async function Blogs() {
       href: hashnode,
       icon: <FaHashnode />,
       handle: `${hashnode.split("/").pop()}`,
+    },
+    {
+      href: "/blogs/feed.xml",
+      icon: <FaSquareRss />,
+      handle: "/feed.xml",
     },
   ];
 
