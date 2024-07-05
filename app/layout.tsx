@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/app/components/Footer";
 import { inter } from "@/app/components/fonts";
 import Header from "@/app/components/Header";
@@ -31,6 +33,8 @@ export default function RootLayout({ children }: LayoutProps) {
           <Footer />
           <DarkModeSwitch />
         </div>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
