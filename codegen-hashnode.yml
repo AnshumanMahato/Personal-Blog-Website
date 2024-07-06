@@ -1,0 +1,24 @@
+schema: https://gql.hashnode.com
+documents: "./app/lib/graphql/hashnode/**/*.graphql"
+generates:
+  ./app/schema/schema.hashnode.graphql:
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true
+  ./app/schema/hashnode.graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+    config:
+      documentMode: string
+      scalars:
+        Date: string
+        DateTime: string
+        ObjectId: string
+        JSONObject: Record<string, unknown>
+        Decimal: string
+        CurrencyCode: string
+        ImageContentType: string
+        ImageUrl: string

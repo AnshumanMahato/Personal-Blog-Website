@@ -1,0 +1,8 @@
+query SinglePostByPublication($slug: String!, $host: String!) {
+  publication(host: $host) {
+    ...Publication
+    post(slug: $slug) {
+      ...PostFull
+    }
+  }
+}
