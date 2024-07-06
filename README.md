@@ -1,4 +1,4 @@
-# Personal Website 
+# Personal Blog Website 
 
 My peronal website, portfolio and blog. Blog is powered by Headless Hashnode CMS.
 
