@@ -22,7 +22,7 @@ If you like this, do consider giving it a star ⭐. Feel free to fork and use it
 
 This website uses Headless Hashnode CMS to fetch and display blog posts. You can use it for free. It consumes [Hashnode's Public APIs](https://apidocs.hashnode.com/), and gives you a fully customizable blog that can be deployed anywhere, including a subpath of a custom domain. Combined with [Hashnode's headless](https://hashnode.com/headless) mode, it unlocks entirely new possibilities. You can now use [Hashnode's world class editor](https://hashnode.com/neptune) and dashboard to author content and collaborate.
 
-## How to deploy for yourself
+## Local Development
 
 1. Fork and clone this repository
 2. Create a Hashnode account and create a blog. (ignore if you already have one) 
@@ -38,8 +38,27 @@ This website uses Headless Hashnode CMS to fetch and display blog posts. You can
     GITHUB_API_ENDPOINT=https://api.github.com/graphql
     GITHUB_PERSONAL_ACCESS_TOKEN="your-github-personal-access-token"
     ```
-5. Make required adjustments. Most of the personal information can be updated from [app/lib/profile.json](/app/lib/profile.json). You can test locally by running `npm run dev`.
-6. 
+5. Make required adjustments. Most of the personal information can be updated from [app/lib/profile.json](/app/lib/profile.json).
+6. To test locally, first install dependencies with `npm install` and then run `npm run dev`.
+
+## Deployment to Vercel
+
+1. Follow the steps mentioned in the [Local Development](#local-development) section.
+2. Create a new Vercel account and connect your Github account. Skip if you already have one.
+3. Import this repository to Vercel.
+4. Add the environment variables mentioned in the [Local Development](#local-development) section to Vercel's environment variables. Make the following adjustments:
+    
+    ```bash
+    NEXT_PUBLIC_MODE=production
+    HOST_URL="https://your-website-url"
+    ```
+5. Deploy the project.
+6. Your website should be live now.
+7. If you want to use a custom domain, you can add it from the Vercel dashboard. Read more about it [here](https://vercel.com/docs/projects/domains/add-a-domain).
+8. Go to your hashnode blog settings.
+9. In the domain section, enable headless mode and add blog base url as `your-website-url/blogs`.
+
+Your blog should be live now.
 
 ## Getting Started
 
