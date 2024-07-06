@@ -1,10 +1,51 @@
-testThis is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Website 
+
+My peronal website, portfolio and blog. Blog is powered by Headless Hashnode CMS.
+
+If you like this, do consider giving it a star ⭐. Feel free to fork and use it for your own website.
+
+## Features
+
+- [x] Simple and clean UI
+- [x] Blog via Headless Hashnode CMS
+- [x] Portfolio with Github pinned projects
+- [x] Responsive design
+- [x] Dark mode
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [GraphQL](https://graphql.org/) (for requests)
+
+# Headless Hashnode CMS
+
+This website uses Headless Hashnode CMS to fetch and display blog posts. You can use it for free. It consumes [Hashnode's Public APIs](https://apidocs.hashnode.com/), and gives you a fully customizable blog that can be deployed anywhere, including a subpath of a custom domain. Combined with [Hashnode's headless](https://hashnode.com/headless) mode, it unlocks entirely new possibilities. You can now use [Hashnode's world class editor](https://hashnode.com/neptune) and dashboard to author content and collaborate.
+
+## How to deploy for yourself
+
+1. Fork and clone this repository
+2. Create a Hashnode account and create a blog. (ignore if you already have one) 
+3. Create a new Github Personal Access Token with `repo` scope. [Here's how](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token). This will be used to fetch your Github pinned projects.
+4. For testing locally. Create a `.env.local` file in the root of the project and add the following environment variables:
+    
+    ```bash
+    NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT=https://gql.hashnode.com
+    NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST="your-blog-name.hashnode.dev"
+    NEXT_PUBLIC_BASE_URL="/blogs"
+    NEXT_PUBLIC_MODE=development
+    HOST_URL="http://localhost:3000"
+    GITHUB_API_ENDPOINT=https://api.github.com/graphql
+    GITHUB_PERSONAL_ACCESS_TOKEN="your-github-personal-access-token"
+    ```
+5. Make required adjustments. Most of the personal information can be updated from [app/lib/profile.json](/app/lib/profile.json). You can test locally by running `npm run dev`.
+6. 
 
 ## Getting Started
 
 First, run the development server:
 
-```bash
+```bash {"id":"01J21MEVQTB8WMQ07AWE7J0DJY"}
 npm run dev
 # or
 yarn dev
@@ -12,6 +53,7 @@ yarn dev
 pnpm dev
 # or
 bun dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
