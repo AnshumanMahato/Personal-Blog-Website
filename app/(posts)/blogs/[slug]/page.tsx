@@ -10,10 +10,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ParamsProps } from "@/@types/Props";
 
-export async function generateMetadata(
-  { params }: ParamsProps,
-  parent: ResolvingMetadata
-) {
+export async function generateMetadata(props: ParamsProps, parent: ResolvingMetadata) {
+  const params = await props.params;
   const data = await getSinglePost(params.slug);
   if (!data) notFound();
   const { post, publication } = data;
@@ -42,7 +40,8 @@ export async function generateMetadata(
   };
 }
 
-async function BlogPost({ params }: ParamsProps) {
+async function BlogPost(props: ParamsProps) {
+  const params = await props.params;
   const data = await getSinglePost(params.slug);
   if (!data) return <></>;
   const { post, publication, comments } = data;

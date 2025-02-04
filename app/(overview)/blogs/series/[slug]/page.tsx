@@ -4,12 +4,13 @@ import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getPostsBySeries from "@/app/actions/getPostsBySeries";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-async function BlogsBySeries({ params }: Props) {
+async function BlogsBySeries(props: Props) {
+  const params = await props.params;
   const posts = await getPostsBySeries(params.slug);
 
   if (!posts?.posts.length) {

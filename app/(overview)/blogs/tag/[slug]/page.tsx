@@ -4,12 +4,13 @@ import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getPostsByTag from "@/app/actions/getPostsByTag";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-async function BlogsByTag({ params }: Props) {
+async function BlogsByTag(props: Props) {
+  const params = await props.params;
   const posts = await getPostsByTag(params.slug);
 
   if (!posts?.posts.length) {

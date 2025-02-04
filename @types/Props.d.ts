@@ -1,5 +1,5 @@
 export type ParamsProps = Readonly<{
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }>;

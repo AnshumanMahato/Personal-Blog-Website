@@ -3,7 +3,13 @@ import getFullRepository from "@/app/actions/getFullRepository";
 import { MarkdownToHtml } from "@/app/components/MarkdownToHTML";
 import { notFound } from "next/navigation";
 
-async function ProjectDetails({ params: { slug } }: ParamsProps) {
+async function ProjectDetails(props: ParamsProps) {
+  const params = await props.params;
+
+  const {
+    slug
+  } = params;
+
   const repo = await getFullRepository(decodeURIComponent(slug));
   if (!repo) notFound();
   notFound();
