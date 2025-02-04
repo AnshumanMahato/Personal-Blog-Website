@@ -15,7 +15,7 @@ const MarkdownToHtmlBase = ({ contentMarkdown }: Props) => {
 
   return (
     <article
-      className="hashnode-content-style mx-auto w-full md:max-w-screen-md"
+      className="hashnode-content-style mx-auto w-full md:max-w-(--breakpoint-md)"
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );

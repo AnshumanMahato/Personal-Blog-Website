@@ -10,7 +10,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ParamsProps } from "@/@types/Props";
 
-export async function generateMetadata(props: ParamsProps, parent: ResolvingMetadata) {
+export async function generateMetadata(
+  props: ParamsProps,
+  parent: ResolvingMetadata
+) {
   const params = await props.params;
   const data = await getSinglePost(params.slug);
   if (!data) notFound();
@@ -82,7 +85,7 @@ async function BlogPost(props: ParamsProps) {
         </Link>
       }
       {tagsList.length > 0 && (
-        <div className="mx-auto w-full text-slate-600 dark:text-neutral-300 md:max-w-screen-md">
+        <div className="mx-auto w-full text-slate-600 dark:text-neutral-300 md:max-w-oint-md)">
           <ul className="flex flex-row flex-wrap items-center gap-[1rem]">
             {tagsList}
           </ul>

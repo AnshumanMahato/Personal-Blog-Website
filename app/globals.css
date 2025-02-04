@@ -1,6 +1,150 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/aspect-ratio";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-primary-dark: #d4d4d8;
+  --color-primary-light: #52525b;
+
+  --color-secondary-dark: #a1a1aa;
+  --color-secondary-light: #71717a;
+
+  --color-background-dark: #18181b;
+  --color-background-light: #fafafa;
+
+  --color-accent-light: #17c964;
+  --color-accent-dark: #45d483;
+
+  --breakpoint-*: initial;
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility hashnode-content-style {
+  @apply prose;
+  @apply break-words;
+  @apply text-primary-light;
+  @apply dark:text-primary-dark;
+  @apply prose-p:first:mt-0;
+  @apply prose-img:max-w-full;
+  @apply prose-p:leading-snug;
+  @apply prose-a:underline;
+  @apply prose-a:hover:text-accent-light;
+  @apply dark:prose-a:hover:text-accent-dark;
+  @apply prose-blockquote:leading-snug;
+  @apply prose-a:leading-snug;
+  @apply prose-figure:leading-snug;
+  @apply prose-figcaption:leading-snug;
+  @apply prose-pre:leading-snug;
+  @apply prose-li:leading-snug;
+  @apply prose-ul:leading-snug;
+  @apply prose-ol:leading-snug;
+  @apply prose-th:leading-snug;
+  @apply prose-td:leading-snug;
+  @apply lg:prose-xl;
+  @apply dark:prose-invert;
+  @apply prose-h1:first:mt-0;
+  @apply prose-h2:first:mt-0;
+  @apply prose-h3:first:mt-0;
+  @apply prose-h4:first:mt-0;
+  @apply prose-h5:first:mt-0;
+  @apply text-[1.2rem];
+  @apply xs:text-[1.6rem];
+
+  /* Override to remove the backtick */
+  &
+    :where(code):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::before {
+    content: none;
+  }
+  &
+    :where(code):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::after {
+    content: none;
+  }
+}
+
+@utility prose {
+  & code {
+    border-radius: 0.25rem;
+    font-weight: 400 !important;
+    padding: 0.25rem;
+    --tw-text-opacity: 1;
+    color: rgba(0, 0, 0, var(--tw-text-opacity));
+    font-size: 80%;
+    background: #f0efed;
+  }
+
+  .dark & code {
+    --tw-bg-opacity: 1;
+    background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgba(238, 238, 238, var(--tw-text-opacity));
+  }
+
+  & pre {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    background-color: #1f2937;
+  }
+
+  & pre code {
+    background-color: transparent;
+    border-radius: 0px;
+    font-weight: 500 !important;
+    padding: 0px;
+    font-size: 100%;
+    color: #fafafa;
+  }
+
+  .dark & pre code {
+    background-color: transparent;
+    color: #ddd;
+  }
+}
+
+@utility dark {
+  & .prose code {
+    --tw-bg-opacity: 1;
+    background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgba(238, 238, 238, var(--tw-text-opacity));
+  }
+
+  & .prose pre code {
+    background-color: transparent;
+    color: #ddd;
+  }
+}
 
 @layer base {
   *,
@@ -56,86 +200,5 @@
   ::sc ::-webkit-scrollbar-track {
     @apply bg-background-light;
     @apply dark:bg-background-dark;
-  }
-
-  .hashnode-content-style {
-    @apply prose;
-    @apply break-words;
-    @apply text-primary-light;
-    @apply dark:text-primary-dark;
-    @apply first:prose-p:mt-0;
-    @apply prose-img:max-w-full;
-    @apply prose-p:leading-snug;
-    @apply prose-a:underline;
-    @apply hover:prose-a:text-accent-light;
-    @apply dark:hover:prose-a:text-accent-dark;
-    @apply prose-blockquote:leading-snug;
-    @apply prose-a:leading-snug;
-    @apply prose-figure:leading-snug;
-    @apply prose-figcaption:leading-snug;
-    @apply prose-pre:leading-snug;
-    @apply prose-li:leading-snug;
-    @apply prose-ul:leading-snug;
-    @apply prose-ol:leading-snug;
-    @apply prose-th:leading-snug;
-    @apply prose-td:leading-snug;
-    @apply lg:prose-xl;
-    @apply dark:prose-invert;
-    @apply first:prose-h1:mt-0;
-    @apply first:prose-h2:mt-0;
-    @apply first:prose-h3:mt-0;
-    @apply first:prose-h4:mt-0;
-    @apply first:prose-h5:mt-0;
-    @apply text-[1.2rem];
-    @apply xs:text-[1.6rem];
-  }
-
-  /* Override to remove the backtick */
-  .hashnode-content-style
-    :where(code):not(
-      :where([class~="not-prose"], [class~="not-prose"] *)
-    )::before,
-  .hashnode-content-style
-    :where(code):not(
-      :where([class~="not-prose"], [class~="not-prose"] *)
-    )::after {
-    content: none;
-  }
-
-  .prose code {
-    border-radius: 0.25rem;
-    font-weight: 400 !important;
-    padding: 0.25rem;
-    --tw-text-opacity: 1;
-    color: rgba(0, 0, 0, var(--tw-text-opacity));
-    font-size: 80%;
-    background: #f0efed;
-  }
-
-  .dark .prose code {
-    --tw-bg-opacity: 1;
-    background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgba(238, 238, 238, var(--tw-text-opacity));
-  }
-
-  .prose pre {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-    background-color: #1f2937;
-  }
-
-  .prose pre code {
-    background-color: transparent;
-    border-radius: 0px;
-    font-weight: 500 !important;
-    padding: 0px;
-    font-size: 100%;
-    color: #fafafa;
-  }
-
-  .dark .prose pre code {
-    background-color: transparent;
-    color: #ddd;
   }
 }

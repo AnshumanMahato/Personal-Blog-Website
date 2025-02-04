@@ -10,8 +10,8 @@ type Props = Readonly<{
 
 function BlogBanner({ title, series, coverImage }: Props) {
   return (
-    <section className="col-span-full flex flex-col gap-[2rem]">
-      <div className="flex flex-col gap-[1rem] sm:gap-[2rem]">
+    <section className="col-span-full flex flex-col gap-(2rem)">
+      <div className="flex flex-col gap-(1rem) sm:gap-(2rem)">
         {series && (
           <h3 className="capitalize leading-[150%] text-[1.2rem] xs:text-[1.6rem] sm:text-[2rem] pl-[5px] xs:pl-[1rem]">
             Series:&nbsp;
@@ -23,7 +23,7 @@ function BlogBanner({ title, series, coverImage }: Props) {
             </Link>
           </h3>
         )}
-        <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden rounded-[1rem] sm:rounded-[2rem] drop-shadow-sm">
+        <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden rounded-[1rem] sm:rounded-[2rem] drop-shadow-xs">
           {coverImage && (
             <Image
               src={coverImage}

@@ -8,7 +8,7 @@ type Props = Readonly<{
 
 function CardContainer({ children, hasNextPage, getNextPage }: Props) {
   return (
-    <Section className="!gap-[1rem] xs:!gap-[2rem] sm:!gap-[3rem] col-span-full">
+    <Section className="gap-[1rem]! xs:gap-[2rem]! sm:gap-[3rem]! col-span-full">
       {children}
       {hasNextPage && (
         <button
