@@ -68,22 +68,6 @@ async function BlogPost(props: ParamsProps) {
         coverImage={post.coverImage?.url!}
       />
       <Article post={post} />
-      {
-        <Link
-          href={`https://hashnode.com/discussions/post/${post.id}`}
-          target="_blank"
-          className="w-full bg-white/50 dark:bg-black/50 rounded-[1rem] shadow-lg shadow-black/5 dark:shadow-white/5 border border-black/10 dark:border-white/10 p-[2rem] flex justify-between items-center"
-        >
-          <span className="flex items-center gap-[5px]">
-            {comments} {comments === 1 ? "Comment" : "Comments"}
-            <RiExternalLinkLine />
-          </span>
-          <span className="flex items-center gap-[5px]">
-            Add a Comment
-            <RiChat3Line />
-          </span>
-        </Link>
-      }
       {tagsList.length > 0 && (
         <div className="mx-auto w-full text-slate-600 dark:text-neutral-300 md:max-w-oint-md)">
           <ul className="flex flex-row flex-wrap items-center gap-[1rem]">
