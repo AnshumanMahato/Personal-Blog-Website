@@ -11,6 +11,7 @@ fragment SitemapPostFields on Post {
   }
   series {
     id
+    cuid
     name
     slug
   }

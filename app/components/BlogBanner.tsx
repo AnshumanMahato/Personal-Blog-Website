@@ -10,10 +10,10 @@ type Props = Readonly<{
 
 function BlogBanner({ title, series, coverImage }: Props) {
   return (
-    <section className="col-span-full flex flex-col gap-(2rem)">
-      <div className="flex flex-col gap-(1rem) sm:gap-(2rem)">
+    <section className="col-span-full flex flex-col gap-[2rem]">
+      <div className="flex flex-col gap-[1rem] sm:gap-[2rem]">
         {series && (
-          <h3 className="capitalize leading-[150%] text-[1.2rem] xs:text-[1.6rem] sm:text-[2rem] pl-[5px] xs:pl-[1rem]">
+          <h3 className="capitalize leading-[150%] tracking-wider text-[1.2rem] xs:text-[1.6rem] sm:text-[2rem] pl-[5px] xs:pl-[1rem]">
             Series:&nbsp;
             <Link
               className="hover:text-accent-light dark:hover:text-accent-dark"
@@ -23,16 +23,16 @@ function BlogBanner({ title, series, coverImage }: Props) {
             </Link>
           </h3>
         )}
-        <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden rounded-[1rem] sm:rounded-[2rem] drop-shadow-xs">
-          {coverImage && (
+        {coverImage && (
+          <div className="relative w-full aspect-w-2 aspect-h-1 sm:aspect-w-7 sm:aspect-h-3 overflow-hidden rounded-[1rem] sm:rounded-[2rem] drop-shadow-xs">
             <Image
               src={coverImage}
               alt={title}
               fill
               className="object-cover object-center"
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <h1 className="sm:mt-[2rem] w-full text-black dark:text-white font-semibold text-[3rem] xs:text-[3.6rem] sm:text-[4.8rem] leading-[120%]">
         {title}

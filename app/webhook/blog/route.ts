@@ -174,6 +174,7 @@ export async function POST(req: Request) {
       revalidatePath("/(posts)/blogs/[slug]", "page");
     case "post_published":
       revalidatePath("/(overview)/blogs", "layout");
+      revalidatePath("/blogs/feed.xml");
       revalidatePath("/sitemap.xml");
   }
 

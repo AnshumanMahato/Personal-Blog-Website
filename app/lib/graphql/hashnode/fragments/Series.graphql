@@ -1,5 +1,6 @@
 fragment Series on Series {
   id
+  cuid
   name
   slug
   coverImage
