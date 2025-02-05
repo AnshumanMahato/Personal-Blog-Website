@@ -3,6 +3,7 @@ fragment Post on Post {
   title
   url
   author {
+    id
     name
     profilePicture
   }

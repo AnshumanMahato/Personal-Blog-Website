@@ -15,6 +15,7 @@ fragment FeedPostsFields on Post {
     slug
   }
   author {
+    id
     name
     username
   }

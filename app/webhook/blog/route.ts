@@ -1,6 +1,5 @@
-import getSlugByPostId from "@/app/actions/getSlugByPostId";
 import crypto from "crypto";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const MILLISECONDS_PER_SECOND = 1_000;
 const SIGNATURE_VERSION = "1";
@@ -168,13 +167,14 @@ export async function POST(req: Request) {
       status: 400,
     });
 
-  // Handle the webhook event
-  revalidatePath("(overview)/blogs", "layout");
-  if (payload.data.eventType === "post_updated") {
-    const slug = await getSlugByPostId(payload.data.post.id);
-    if (slug) {
-      revalidatePath(`/blogs/${slug}`, "page");
-    }
+  // Handle revalidation
+  switch (payload.data.eventType) {
+    case "post_updated":
+    case "post_deleted":
+      revalidatePath("/(posts)/blogs/[slug]", "page");
+    case "post_published":
+      revalidatePath("/(overview)/blogs", "layout");
+      revalidatePath("/sitemap.xml");
   }
 
   return new Response("OK", {

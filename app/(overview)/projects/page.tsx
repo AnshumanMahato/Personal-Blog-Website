@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Check out some of the projects I have worked on.",
 };
 
+export const revalidate = 86400;
+
 const { github, frontendmentor } = profile.handles.portfolios;
 
 async function Projects() {

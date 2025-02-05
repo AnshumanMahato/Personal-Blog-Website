@@ -1,6 +1,0 @@
-query SlugByPostId($id: ID!) {
-  post(id: $id) {
-    id
-    slug
-  }
-}

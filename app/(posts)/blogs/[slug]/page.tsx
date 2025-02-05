@@ -4,16 +4,11 @@ import BlogBanner from "@/app/components/BlogBanner";
 import Analytics from "@/app/components/Analytics";
 import Integrations from "@/app/components/Integrations";
 import { addArticleJsonLd } from "@/app/utils/seo/addArticleJsonLd";
-import { ResolvingMetadata } from "next";
-import { RiChat3Line, RiExternalLinkLine } from "react-icons/ri";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ParamsProps } from "@/@types/Props";
 
-export async function generateMetadata(
-  props: ParamsProps,
-  parent: ResolvingMetadata
-) {
+export async function generateMetadata(props: ParamsProps) {
   const params = await props.params;
   const data = await getSinglePost(params.slug);
   if (!data) notFound();
@@ -47,7 +42,7 @@ async function BlogPost(props: ParamsProps) {
   const params = await props.params;
   const data = await getSinglePost(params.slug);
   if (!data) return <></>;
-  const { post, publication, comments } = data;
+  const { post, publication } = data;
 
   const tagsList = (post.tags ?? []).map((tag) => (
     <li key={tag.id}>

@@ -26,6 +26,7 @@ fragment PostFull on Post {
     url
   }
   author {
+    id
     name
     username
     profilePicture
@@ -68,6 +69,7 @@ fragment PostFull on Post {
           markdown
         }
         author {
+          id
           name
           username
           profilePicture
