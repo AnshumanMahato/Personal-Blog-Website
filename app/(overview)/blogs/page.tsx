@@ -1,4 +1,8 @@
-import { FaHashnode, FaDev, FaRss, FaSquareRss } from "react-icons/fa6";
+import { FaHashnode, FaDev, FaSquareRss } from "react-icons/fa6";
+import getPublication from "@/app/actions/getPublication";
+import Analytics from "@/app/components/Analytics";
+import Integrations from "@/app/components/Integrations";
+import { addPublicationJsonLd } from "@/app/utils/seo/addPublicationJsonLd";
 import PageBanner from "@/app/components/PageBanner";
 import PageCTA from "@/app/components/PageCTA";
 import PageHeading from "@/app/components/PageHeading";
@@ -28,6 +32,7 @@ async function Blogs() {
     },
   ];
 
+  const publication = await getPublication();
   const posts = await getAllPosts();
 
   return (
@@ -56,6 +61,24 @@ async function Blogs() {
           posts?.pageInfo ?? { hasNextPage: false, endCursor: "" }
         }
       />
+      {publication && (
+        <>
+          <script
+            id="publication-json-ld"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(addPublicationJsonLd(publication)),
+            }}
+          />
+          <Integrations
+            publication={{
+              integrations: publication.integrations,
+              url: publication.url,
+            }}
+          />
+          <Analytics publication={{ id: publication.id }} />
+        </>
+      )}
     </>
   );
 }

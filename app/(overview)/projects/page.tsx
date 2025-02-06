@@ -11,6 +11,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa6";
 import { SiFrontendmentor } from "react-icons/si";
+import GoogleAnalytics from "@/app/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: `Projects | ${profile.name}`,
@@ -44,6 +45,7 @@ async function Projects() {
 
   return (
     <>
+      <GoogleAnalytics />
       <PageBanner
         title="Projects"
         coverImage="/assets/images/projectscover.jpg"

@@ -1,7 +1,4 @@
 import getPublication from "@/app/actions/getPublication";
-import Analytics from "@/app/components/Analytics";
-import Integrations from "@/app/components/Integrations";
-import { addPublicationJsonLd } from "@/app/utils/seo/addPublicationJsonLd";
 import profile from "@/app/lib/profile.json";
 import { Metadata } from "next";
 
@@ -39,30 +36,7 @@ async function generatePublicationMetadata(): Promise<Metadata> {
 export const metadata: Promise<Metadata> = generatePublicationMetadata();
 
 async function BlogsLayout({ children }: Props) {
-  const publication = await getPublication();
-  return (
-    <>
-      {children}
-      {publication && (
-        <>
-          <script
-            id="publication-json-ld"
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(addPublicationJsonLd(publication)),
-            }}
-          />
-          <Integrations
-            publication={{
-              integrations: publication.integrations,
-              url: publication.url,
-            }}
-          />
-          <Analytics publication={{ id: publication.id }} />
-        </>
-      )}
-    </>
-  );
+  return <>{children}</>;
 }
 
 export default BlogsLayout;

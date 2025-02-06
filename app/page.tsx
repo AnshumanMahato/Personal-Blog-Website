@@ -8,10 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { addHomeJsonLd } from "./utils/seo/addHomeJsonLd";
 import profile from "@/app/lib/profile.json";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 export default function Home() {
   return (
     <>
+      <GoogleAnalytics />
       <main className="flex flex-col items-center w-full max-w-[830px] px-[2rem] xs:px-[3rem] text-center gap-[10rem] mt-[3.5rem] mb-[6rem]">
         <Section>
           <div className="relative w-[10rem] h-[10rem] xs:w-[15rem] xs:h-[15rem] sm:w-[20rem] sm:h-[20rem] bg-secondary-light dark:bg-secondary-dark rounded-full overflow-hidden">

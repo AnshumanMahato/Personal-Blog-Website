@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import { addAboutJsonLd } from "@/app/utils/seo/addAboutJsonLd";
 import profile from "@/app/lib/profile.json";
 import Link from "next/link";
+import GoogleAnalytics from "@/app/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: `About Me | ${profile.name}`,
@@ -37,6 +38,7 @@ function About() {
 
   return (
     <>
+      <GoogleAnalytics />
       <PageBanner
         title="About Me"
         coverImage="/assets/images/aboutcover.png"
