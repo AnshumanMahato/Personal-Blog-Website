@@ -22,7 +22,7 @@ function GoogleAnalytics() {
       <Script
         id="google-gtag"
         async
-        src={`https://ping.hashnode.com/gtag/js?id=G-72XG3F8LNJ`}
+        src={`https://www.googletagmanager.com/gtag/js?id=G-GH038RM6GX`}
         strategy="beforeInteractive"
       />
       <Script

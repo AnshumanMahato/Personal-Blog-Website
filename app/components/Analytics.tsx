@@ -141,7 +141,7 @@ function Analytics({ publication, post, page }: Props) {
   }, [publication, post, page]);
 
   useEffect(() => {
-    // if (!isProd) return;
+    if (!isProd) return;
 
     _sendPageViewsToHashnodeGoogleAnalytics();
     _sendViewsToHashnodeInternalAnalytics();
