@@ -25,7 +25,7 @@ async function BlogsBySeries(props: Props) {
   return (
     <>
       <PageBanner
-        title="Blogs"
+        title="Series"
         coverImage={
           posts.series?.coverImage || `/api/og?series=${posts.series?.name}`
         }
