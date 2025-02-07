@@ -16,6 +16,18 @@ import GoogleAnalytics from "@/app/components/GoogleAnalytics";
 export const metadata: Metadata = {
   title: `Projects | ${profile.name}`,
   description: "Check out some of the projects I have worked on.",
+  twitter: {
+    card: "summary_large_image",
+    site: profile.handles.socials.twitter,
+    title: `Projects | ${profile.name}`,
+    description: "Check out some of the projects I have worked on.",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: `Projects | ${profile.name}`,
+    description: "Check out some of the projects I have worked on.",
+  },
 };
 
 export const revalidate = 86400;

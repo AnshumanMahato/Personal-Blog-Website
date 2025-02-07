@@ -18,6 +18,12 @@ export const metadata: Metadata = {
     title: profile.name,
     description: profile.headline,
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: profile.name,
+    description: profile.headline,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps) {

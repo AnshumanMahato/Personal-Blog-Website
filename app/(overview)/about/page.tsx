@@ -13,6 +13,19 @@ import GoogleAnalytics from "@/app/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: `About Me | ${profile.name}`,
+  description: profile.headline,
+  twitter: {
+    card: "summary_large_image",
+    site: profile.handles.socials.twitter,
+    title: `About Me | ${profile.name}`,
+    description: profile.headline,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: `About Me | ${profile.name}`,
+    description: profile.headline,
+  },
 };
 
 const { twitter, linkedin } = profile.handles.socials;
