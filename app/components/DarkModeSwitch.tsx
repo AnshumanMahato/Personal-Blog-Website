@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CiDark, CiLight } from "react-icons/ci";
 
 function DarkModeSwitch() {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const toggleDarkMode = useCallback(
     () =>
