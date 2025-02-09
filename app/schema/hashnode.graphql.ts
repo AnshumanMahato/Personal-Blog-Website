@@ -206,6 +206,20 @@ export type Badge = Node & {
   suppressed?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** Contains information about banner image options of the post. Like URL of the banner image, attribution, etc. */
+export type BannerImageOptionsInput = {
+  /** Information about the banner image attribution. */
+  bannerImageAttribution?: InputMaybe<Scalars['String']['input']>;
+  /** The name of the banner image photographer, used when banner was chosen from unsplash. */
+  bannerImagePhotographer?: InputMaybe<Scalars['String']['input']>;
+  /** The URL of the banner image. */
+  bannerImageURL?: InputMaybe<Scalars['String']['input']>;
+  /** A flag to indicate if the banner attribution is hidden, used when cover was chosen from unsplash. */
+  isBannerAttributionHidden?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A flag to indicate if the banner image is sticked to bottom. */
+  stickBannerToBottom?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /**
  * Contains basic information about the beta feature.
  * A beta feature is a feature that is not yet released to all users.
@@ -4211,6 +4225,11 @@ export type Post = Node & {
   /** Returns the user details of the author of the post. */
   author: User;
   /**
+   * The banner image preference of the post. Contains banner image URL and other details.
+   * It is similar to cover image but users can decide to render banner image of single post view.
+   */
+  bannerImage?: Maybe<PostBannerImage>;
+  /**
    * Flag to indicate if the post is bookmarked by the requesting user.
    *
    * Returns `false` if the user is not authenticated.
@@ -4368,6 +4387,19 @@ export type PostBadgesFeature = Feature & {
   items: Array<PostBadge>;
 };
 
+/** Contains information about the banner image of the post. */
+export type PostBannerImage = {
+  __typename?: 'PostBannerImage';
+  /** Provides attribution information for the banner image, if available. */
+  attribution?: Maybe<Scalars['String']['output']>;
+  /** True if the image attribution should be hidden. */
+  isAttributionHidden: Scalars['Boolean']['output'];
+  /** The name of the photographer who captured the banner image. */
+  photographer?: Maybe<Scalars['String']['output']>;
+  /** The URL of the banner image. */
+  url: Scalars['String']['output'];
+};
+
 /**
  * Connection for comments. Contains a list of edges containing nodes.
  * Each node holds a comment.
@@ -4505,6 +4537,8 @@ export type PostPreferences = {
   isDelisted: Scalars['Boolean']['output'];
   /** A flag to indicate if the post is pinned to blog. Pinned post is shown on top of the blog. */
   pinnedToBlog: Scalars['Boolean']['output'];
+  /** A flag to indicate if the banner image is shown below title of the post. Default position of banner is top of title. */
+  stickBannerToBottom: Scalars['Boolean']['output'];
   /** A flag to indicate if the cover image is shown below title of the post. Default position of cover is top of title. */
   stickCoverToBottom: Scalars['Boolean']['output'];
 };
@@ -5419,6 +5453,11 @@ export type PublishDraftPayload = {
 
 /** Contains information about the post to be published. */
 export type PublishPostInput = {
+  /**
+   * Options for the banner image of the post.
+   * It is similar to cover image but users can decide to render banner image of single post view.
+   */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /** Ids of the co-authors of the post. */
   coAuthors?: InputMaybe<Array<Scalars['ObjectId']['input']>>;
   /** Content of the post in markdown format. */
@@ -6690,6 +6729,8 @@ export type UpdateDocumentationSectionPayload = {
 };
 
 export type UpdatePostInput = {
+  /** Options for the banner image of the post. */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /**
    * Update co-authors of the post.
    * Must be a member of the publication.
@@ -7324,7 +7365,7 @@ export type FeedPostsFieldsFragment = { __typename?: 'Post', id: string, title: 
 
 export type PageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null };
 
-export type PostFragment = { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, comments: { __typename?: 'PostCommentConnection', totalDocuments: number } };
+export type PostFragment = { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, readTimeInMinutes: number, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, comments: { __typename?: 'PostCommentConnection', totalDocuments: number } };
 
 export type PostFullFragment = { __typename?: 'Post', id: string, slug: string, url: string, canonicalUrl?: string | null, brief: string, title: string, subtitle?: string | null, hasLatexInPost: boolean, publishedAt: string, updatedAt?: string | null, readTimeInMinutes: number, reactionCount: number, responseCount: number, series?: { __typename?: 'Series', id: string, cuid?: string | null, name: string, slug: string, coverImage?: string | null } | null, publication?: { __typename?: 'Publication', id: string } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', id: string, name: string, username: string, profilePicture?: string | null }, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, features: { __typename?: 'PostFeatures', tableOfContents: { __typename?: 'TableOfContentsFeature', isEnabled: boolean, items: Array<{ __typename?: 'TableOfContentsItem', id: string, level: number, parentId?: string | null, slug: string, title: string }> } }, preferences: { __typename?: 'PostPreferences', disableComments: boolean }, comments: { __typename?: 'PostCommentConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostCommentEdge', node: { __typename?: 'Comment', id: string, totalReactions: number, content: { __typename?: 'Content', markdown: string }, author: { __typename?: 'User', id: string, name: string, username: string, profilePicture?: string | null } } }> } };
 
@@ -7341,7 +7382,7 @@ export type PostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type PostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
+export type PostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, readTimeInMinutes: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export type PublicationByHostQueryVariables = Exact<{
   host: Scalars['String']['input'];
@@ -7367,7 +7408,7 @@ export type SeriesPostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type SeriesPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', series?: { __typename?: 'Series', id: string, cuid?: string | null, name: string, slug: string, coverImage?: string | null, posts: { __typename?: 'SeriesPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null } | null };
+export type SeriesPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', series?: { __typename?: 'Series', id: string, cuid?: string | null, name: string, slug: string, coverImage?: string | null, posts: { __typename?: 'SeriesPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, readTimeInMinutes: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null } | null };
 
 export type SinglePostByPublicationQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -7394,7 +7435,7 @@ export type TagPostsByPublicationQueryVariables = Exact<{
 }>;
 
 
-export type TagPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
+export type TagPostsByPublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, title: string, url: string, publishedAt: string, slug: string, brief: string, views: number, readTimeInMinutes: number, comments: { __typename?: 'PostCommentConnection', totalDocuments: number }, author: { __typename?: 'User', id: string, name: string, profilePicture?: string | null }, tags?: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> | null, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null } } } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -7451,6 +7492,11 @@ export const PostFragmentDoc = new TypedDocumentString(`
     name
     profilePicture
   }
+  tags {
+    id
+    name
+    slug
+  }
   coverImage {
     url
   }
@@ -7458,6 +7504,7 @@ export const PostFragmentDoc = new TypedDocumentString(`
   slug
   brief
   views
+  readTimeInMinutes
   comments(first: 0) {
     totalDocuments
   }
@@ -7665,6 +7712,11 @@ fragment Post on Post {
     name
     profilePicture
   }
+  tags {
+    id
+    name
+    slug
+  }
   coverImage {
     url
   }
@@ -7672,6 +7724,7 @@ fragment Post on Post {
   slug
   brief
   views
+  readTimeInMinutes
   comments(first: 0) {
     totalDocuments
   }
@@ -7865,6 +7918,11 @@ fragment Post on Post {
     name
     profilePicture
   }
+  tags {
+    id
+    name
+    slug
+  }
   coverImage {
     url
   }
@@ -7872,6 +7930,7 @@ fragment Post on Post {
   slug
   brief
   views
+  readTimeInMinutes
   comments(first: 0) {
     totalDocuments
   }
@@ -8099,6 +8158,11 @@ fragment Post on Post {
     name
     profilePicture
   }
+  tags {
+    id
+    name
+    slug
+  }
   coverImage {
     url
   }
@@ -8106,6 +8170,7 @@ fragment Post on Post {
   slug
   brief
   views
+  readTimeInMinutes
   comments(first: 0) {
     totalDocuments
   }

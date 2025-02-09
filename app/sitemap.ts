@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${hostUrl}/`,
       lastModified: new Date().toISOString(),
       changeFrequency: "yearly",
-      priority: 1,
+      priority: 1.0,
     },
     {
       url: `${hostUrl}/about`,
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${hostUrl}/blogs`,
     lastModified: posts[0].updatedAt || posts[0].publishedAt,
     changeFrequency: "always",
-    priority: 1,
+    priority: 9.0,
   });
 
   posts.forEach((post) => {
@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${hostUrl}/blogs/${post.slug}`,
       lastModified: post.updatedAt || post.publishedAt,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 1.0,
     });
   });
 
@@ -62,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemap.push({
       url: `${hostUrl}/blogs/tag/${tag}`,
       changeFrequency: "always",
-      priority: 1,
+      priority: 0.5,
     });
   });
 
@@ -76,7 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemap.push({
       url: `${hostUrl}/blogs/series/${series}`,
       changeFrequency: "always",
-      priority: 1,
+      priority: 0.5,
     });
   });
 
