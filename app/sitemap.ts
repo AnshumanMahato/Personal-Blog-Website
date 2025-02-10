@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${hostUrl}/blogs`,
     lastModified: posts[0].updatedAt || posts[0].publishedAt,
     changeFrequency: "always",
-    priority: 9.0,
+    priority: 0.9,
   });
 
   posts.forEach((post) => {
