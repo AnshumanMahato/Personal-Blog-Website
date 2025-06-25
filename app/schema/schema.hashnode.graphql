@@ -194,20 +194,8 @@ type Badge implements Node {
 Contains information about banner image options of the post. Like URL of the banner image, attribution, etc.
 """
 input BannerImageOptionsInput {
-  """Information about the banner image attribution."""
-  bannerImageAttribution: String
-  """
-  The name of the banner image photographer, used when banner was chosen from unsplash.
-  """
-  bannerImagePhotographer: String
   """The URL of the banner image."""
   bannerImageURL: String
-  """
-  A flag to indicate if the banner attribution is hidden, used when cover was chosen from unsplash.
-  """
-  isBannerAttributionHidden: Boolean
-  """A flag to indicate if the banner image is sticked to bottom."""
-  stickBannerToBottom: Boolean
 }
 
 """
@@ -1037,6 +1025,8 @@ type CreateDocumentationSectionPayload {
 }
 
 input CreateDraftInput {
+  """Options for the banner image of the resulting draft."""
+  bannerImageOptions: BannerImageOptionsInput
   """Ids of the co-authors of the resulting draft."""
   coAuthors: [ObjectId!]
   """Content of the resulting draft in markdown format."""
@@ -2088,6 +2078,11 @@ A draft is a post that is not published yet.
 type Draft implements Node {
   """The author of the draft."""
   author: User!
+  """
+  The banner image preference of the draft. Contains banner image URL and other details.
+  Similar to cover image but user can use banner image as alternate cover on single post page.
+  """
+  bannerImage: DraftBannerImage
   canonicalUrl: String
   """
   Returns the user details of the co-authors of the post.
@@ -2162,6 +2157,12 @@ type DraftBackup {
   at: DateTime
   """The status of the backup i.e., success or failure."""
   status: BackupStatus
+}
+
+"""Contains information about the banner image of the draft."""
+type DraftBannerImage {
+  """The URL of the banner image."""
+  url: String!
 }
 
 """
@@ -3880,12 +3881,6 @@ type PostBadgesFeature implements Feature {
 
 """Contains information about the banner image of the post."""
 type PostBannerImage {
-  """Provides attribution information for the banner image, if available."""
-  attribution: String
-  """True if the image attribution should be hidden."""
-  isAttributionHidden: Boolean!
-  """The name of the photographer who captured the banner image."""
-  photographer: String
   """The URL of the banner image."""
   url: String!
 }
@@ -4031,10 +4026,6 @@ type PostPreferences {
   A flag to indicate if the post is pinned to blog. Pinned post is shown on top of the blog.
   """
   pinnedToBlog: Boolean!
-  """
-  A flag to indicate if the banner image is shown below title of the post. Default position of banner is top of title.
-  """
-  stickBannerToBottom: Boolean!
   """
   A flag to indicate if the cover image is shown below title of the post. Default position of cover is top of title.
   """

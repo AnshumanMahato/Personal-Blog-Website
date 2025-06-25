@@ -12,7 +12,7 @@ function GoogleAnalytics() {
     gtag('js', new Date());`;
 
   useEffect(() => {
-    console.log("GA_TRACKING_ID", gaTrackingID);
+    // console.log("GA_TRACKING_ID", gaTrackingID);
     // @ts-ignore
     window.gtag("config", gaTrackingID);
   }, [gaTrackingID]);

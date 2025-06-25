@@ -208,16 +208,8 @@ export type Badge = Node & {
 
 /** Contains information about banner image options of the post. Like URL of the banner image, attribution, etc. */
 export type BannerImageOptionsInput = {
-  /** Information about the banner image attribution. */
-  bannerImageAttribution?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the banner image photographer, used when banner was chosen from unsplash. */
-  bannerImagePhotographer?: InputMaybe<Scalars['String']['input']>;
   /** The URL of the banner image. */
   bannerImageURL?: InputMaybe<Scalars['String']['input']>;
-  /** A flag to indicate if the banner attribution is hidden, used when cover was chosen from unsplash. */
-  isBannerAttributionHidden?: InputMaybe<Scalars['Boolean']['input']>;
-  /** A flag to indicate if the banner image is sticked to bottom. */
-  stickBannerToBottom?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /**
@@ -1054,6 +1046,8 @@ export type CreateDocumentationSectionPayload = {
 };
 
 export type CreateDraftInput = {
+  /** Options for the banner image of the resulting draft. */
+  bannerImageOptions?: InputMaybe<BannerImageOptionsInput>;
   /** Ids of the co-authors of the resulting draft. */
   coAuthors?: InputMaybe<Array<Scalars['ObjectId']['input']>>;
   /** Content of the resulting draft in markdown format. */
@@ -2132,6 +2126,11 @@ export type Draft = Node & {
   __typename?: 'Draft';
   /** The author of the draft. */
   author: User;
+  /**
+   * The banner image preference of the draft. Contains banner image URL and other details.
+   * Similar to cover image but user can use banner image as alternate cover on single post page.
+   */
+  bannerImage?: Maybe<DraftBannerImage>;
   canonicalUrl?: Maybe<Scalars['String']['output']>;
   /**
    * Returns the user details of the co-authors of the post.
@@ -2199,6 +2198,13 @@ export type DraftBackup = {
   at?: Maybe<Scalars['DateTime']['output']>;
   /** The status of the backup i.e., success or failure. */
   status?: Maybe<BackupStatus>;
+};
+
+/** Contains information about the banner image of the draft. */
+export type DraftBannerImage = {
+  __typename?: 'DraftBannerImage';
+  /** The URL of the banner image. */
+  url: Scalars['String']['output'];
 };
 
 /**
@@ -4390,12 +4396,6 @@ export type PostBadgesFeature = Feature & {
 /** Contains information about the banner image of the post. */
 export type PostBannerImage = {
   __typename?: 'PostBannerImage';
-  /** Provides attribution information for the banner image, if available. */
-  attribution?: Maybe<Scalars['String']['output']>;
-  /** True if the image attribution should be hidden. */
-  isAttributionHidden: Scalars['Boolean']['output'];
-  /** The name of the photographer who captured the banner image. */
-  photographer?: Maybe<Scalars['String']['output']>;
   /** The URL of the banner image. */
   url: Scalars['String']['output'];
 };
@@ -4537,8 +4537,6 @@ export type PostPreferences = {
   isDelisted: Scalars['Boolean']['output'];
   /** A flag to indicate if the post is pinned to blog. Pinned post is shown on top of the blog. */
   pinnedToBlog: Scalars['Boolean']['output'];
-  /** A flag to indicate if the banner image is shown below title of the post. Default position of banner is top of title. */
-  stickBannerToBottom: Scalars['Boolean']['output'];
   /** A flag to indicate if the cover image is shown below title of the post. Default position of cover is top of title. */
   stickCoverToBottom: Scalars['Boolean']['output'];
 };

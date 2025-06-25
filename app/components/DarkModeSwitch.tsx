@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { CiDark, CiLight } from "react-icons/ci";
 
