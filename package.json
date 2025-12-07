@@ -31,7 +31,7 @@
     "sanitize-html": "^2.13.0",
     "slug": "^9.0.0",
     "uuid": "^9.0.1",
-    "validator": "^13.12.0"
+    "validator": "^13.15.22"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
