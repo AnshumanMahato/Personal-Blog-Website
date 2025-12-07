@@ -197,7 +197,7 @@
     @apply rounded-full;
   }
 
-  ::sc ::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     @apply bg-background-light;
     @apply dark:bg-background-dark;
   }
