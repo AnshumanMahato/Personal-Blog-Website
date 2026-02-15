@@ -8,6 +8,7 @@ import profile from "@/app/lib/profile.json";
 import "./globals.css";
 import DarkModeSwitch from "./components/DarkModeSwitch";
 import LayoutProps from "@/@types/LayoutProps";
+import { ThemeProvider } from "@/app/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: profile.name,
@@ -28,17 +29,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" className="">
+    <html lang="en" className="" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <div
-          id="root"
-          className="relative flex flex-col justify-between items-center min-h-screen w-full"
-        >
-          <Header />
-          {children}
-          <Footer />
-          <DarkModeSwitch />
-        </div>
+        <ThemeProvider>
+          <div
+            id="root"
+            className="relative flex flex-col justify-between items-center min-h-screen w-full"
+          >
+            <Header />
+            {children}
+            <Footer />
+            <DarkModeSwitch />
+          </div>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

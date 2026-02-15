@@ -2,36 +2,11 @@
 
 import classNames from "classnames";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
 import { CiDark, CiLight } from "react-icons/ci";
+import { useTheme } from "@/app/providers/ThemeProvider";
 
 function DarkModeSwitch() {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-
-  const toggleDarkMode = useCallback(
-    () =>
-      setDarkMode((prev) => {
-        localStorage.setItem("darkMode--anshuman", JSON.stringify(!prev));
-        return !prev;
-      }),
-    []
-  );
-
-  useEffect(() => {
-    const localDarkMode = localStorage.getItem("darkMode--anshuman");
-    if (localDarkMode) {
-      setDarkMode(JSON.parse(localDarkMode));
-    }
-  }, []);
-
-  useEffect(() => {
-    const hasDarkClass = document.documentElement.classList.contains("dark");
-    if (darkMode && !hasDarkClass) {
-      document.documentElement.classList.add("dark");
-    } else if (!darkMode && hasDarkClass) {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
+  const { darkMode, toggleDarkMode } = useTheme();
 
   const classes = classNames(
     "cursor-pointer rounded-full bg-background-light dark:bg-background-dark",
