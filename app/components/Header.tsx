@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoHomeOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "motion/react";
+import NavLink from "./Navlink";
 import Link from "next/link";
 
 function Header() {
@@ -36,29 +37,17 @@ function Header() {
           <nav className="hidden md:block">
             <ul className="flex text-[1.6rem] gap-[3rem]">
               <li>
-                <Link
-                  href="/about"
-                  className="hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200"
-                >
-                  About Me
-                </Link>
+                <NavLink href="/about">About</NavLink>
               </li>
               <li>
-                <Link
-                  href="/projects"
-                  className="hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200"
-                >
-                  Projects
-                </Link>
+                <NavLink href="/blogs">Blogs</NavLink>
               </li>
               <li>
-                <Link
-                  href="/blogs"
-                  className="hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200"
-                >
-                  Blogs
-                </Link>
+                <NavLink href="/artbook">Artbook</NavLink>
               </li>
+              {/* <li>
+                <NavLink href="/projects">Projects</NavLink>
+              </li> */}
             </ul>
           </nav>
         </div>
@@ -80,29 +69,17 @@ function Header() {
               onClick={handleNavClose}
             >
               <li>
-                <Link
-                  href="/about"
-                  className="hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200"
-                >
-                  About
-                </Link>
+                <NavLink href="/about">About</NavLink>
               </li>
               <li>
-                <Link
-                  href="/projects"
-                  className="hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200"
-                >
-                  Projects
-                </Link>
+                <NavLink href="/blogs">Blogs</NavLink>
               </li>
               <li>
-                <Link
-                  href="/blogs"
-                  className="hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200"
-                >
-                  Blogs
-                </Link>
+                <NavLink href="/artbook">Artbook</NavLink>
               </li>
+              {/* <li>
+                <NavLink href="/projects">Projects</NavLink>
+              </li> */}
             </ul>
           </motion.nav>
         )}
