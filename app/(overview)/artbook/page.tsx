@@ -11,6 +11,7 @@ import profile from "@/app/lib/profile.json";
 import Link from "next/link";
 import Image from "next/image";
 import GoogleAnalytics from "@/app/components/GoogleAnalytics";
+import artworks from "@/app/lib/artworks.json";
 
 export const metadata: Metadata = {
   title: `Artbook | ${profile.name}`,
@@ -61,48 +62,16 @@ function About() {
       <Section className="col-span-full">
         <PageHeading>I&apos;m Anshuman.</PageHeading>
         <div className="columns-xs gap-[1rem]">
-          <Image
-            src="/assets/images/aboutcover.png"
-            width="700"
-            height={500}
-            alt="Artbook"
-            className=" mb-[1rem]"
-          />
-          <Image
-            src="/assets/images/aboutcover.png"
-            width="700"
-            height={500}
-            alt="Artbook"
-            className=" mb-[1rem]"
-          />
-          <Image
-            src="/assets/images/aboutcover.png"
-            width="700"
-            height={500}
-            alt="Artbook"
-            className=" mb-[1rem]"
-          />
-          <Image
-            src="/assets/images/aboutcover.png"
-            width="700"
-            height={500}
-            alt="Artbook"
-            className=" mb-[1rem]"
-          />
-          <Image
-            src="/assets/images/aboutcover.png"
-            width="700"
-            height={500}
-            alt="Artbook"
-            className=" mb-[1rem]"
-          />
-          <Image
-            src="/assets/images/aboutcover.png"
-            width="700"
-            height={500}
-            alt="Artbook"
-            className=" mb-[1rem]"
-          />
+          {artworks.map((artwork) => (
+            <Image
+              key={artwork.filename}
+              src={`/assets/art/${artwork.filename}`}
+              width={artwork.dimensions.width}
+              height={artwork.dimensions.height}
+              alt={artwork.alt}
+              className=" mb-[1rem]"
+            />
+          ))}
         </div>
       </Section>
       <script

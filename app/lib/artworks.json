@@ -1,0 +1,98 @@
+[
+  {
+    "dimensions": {
+      "width": 1536,
+      "height": 2048
+    },
+    "alt": "image1",
+    "filename": "1.jpeg"
+  },
+  {
+    "dimensions": {
+      "width": 1536,
+      "height": 2048
+    },
+    "alt": "image2",
+    "filename": "2.jpeg"
+  },
+  {
+    "dimensions": {
+      "width": 2512,
+      "height": 3349
+    },
+    "alt": "image3",
+    "filename": "3.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 1337,
+      "height": 2015
+    },
+    "alt": "image4",
+    "filename": "4.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 1080,
+      "height": 1080
+    },
+    "alt": "image5",
+    "filename": "5.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 720,
+      "height": 900
+    },
+    "alt": "image6",
+    "filename": "6.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 2581,
+      "height": 1937
+    },
+    "alt": "image7",
+    "filename": "7.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 4608,
+      "height": 3456
+    },
+    "alt": "image8",
+    "filename": "8.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 3456,
+      "height": 4608
+    },
+    "alt": "image9",
+    "filename": "9.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 1507,
+      "height": 2146
+    },
+    "alt": "image10",
+    "filename": "10.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 2895,
+      "height": 3748
+    },
+    "alt": "image11",
+    "filename": "11.jpg"
+  },
+  {
+    "dimensions": {
+      "width": 1632,
+      "height": 1136
+    },
+    "alt": "image12",
+    "filename": "12.jpg"
+  }
+]
