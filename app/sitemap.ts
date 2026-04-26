@@ -23,6 +23,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.7,
     },
+    {
+      url: `${hostUrl}/sketchbook`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
   ];
 
   // Add blog posts to sitemap

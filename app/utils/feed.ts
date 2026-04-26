@@ -7,7 +7,7 @@ export const constructRSSFeedFromPosts = (
   publication: PostsFeedInfo["publication"],
   posts: PostsFeedInfo["posts"],
   currentCursor?: string | null,
-  nextCursor?: string | null
+  nextCursor?: string | null,
 ) => {
   //TODO: Change base url to use environment data
   const baseUrl = publication.url;
@@ -36,8 +36,8 @@ export const constructRSSFeedFromPosts = (
   }
 
   const feedConfig = {
-    title: `${publication.title || `${publication.author!.name}'s blog`}`,
-    description: publication.descriptionSEO || publication.title,
+    title: `${publication.author!.name}'s Journal`,
+    description: `${publication.author!.name}'s Journal`,
     feed_url: `${baseUrl}/feed.xml${
       currentCursor ? `?after=${currentCursor}` : ""
     }`,
