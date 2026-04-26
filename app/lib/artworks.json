@@ -25,6 +25,14 @@
   },
   {
     "dimensions": {
+      "width": 4608,
+      "height": 3456
+    },
+    "alt": "image8",
+    "filename": "8.jpg"
+  },
+  {
+    "dimensions": {
       "width": 1337,
       "height": 2015
     },
@@ -54,14 +62,6 @@
     },
     "alt": "image7",
     "filename": "7.jpg"
-  },
-  {
-    "dimensions": {
-      "width": 4608,
-      "height": 3456
-    },
-    "alt": "image8",
-    "filename": "8.jpg"
   },
   {
     "dimensions": {

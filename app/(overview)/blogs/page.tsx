@@ -38,19 +38,19 @@ async function Blogs() {
   return (
     <>
       <PageBanner
-        title="Blogs"
+        title="Journals"
         coverImage="/assets/images/blogcover1.jpg"
         coverImageAlt="blogs-cover"
       />
       <Section>
-        <PageHeading>Blogs &amp; Articles.</PageHeading>
+        <PageHeading>Notes &amp; Journals.</PageHeading>
         <div className="flex flex-col gap-[2rem]">
           <p>
-            Welcome to my blog! Here, you&apos;ll find articles on web dev,
-            technology trends, and my personal experiences as a developer.
-            Whether you&apos;re here to learn, get inspired, or explore new
-            ideas, I hope you enjoy reading my posts as much as I enjoy writing
-            them!
+            Welcome to my blog! This is where I write about learnings,
+            experiences, ideas and everything in between that I find
+            interesting. It’s not always perfect - just things I’ve found worth
+            exploring and putting down.I hope you enjoy reading my posts as much
+            as I enjoy writing them!
           </p>
         </div>
       </Section>

@@ -1,14 +1,15 @@
 {
   "name": "Anshuman Mahato",
-  "headline": "Web Developer | Blogger | Open Source Enthusiast",
+  "headline": "Software Developer | Blogger | Artist",
   "location": "India",
   "photo": "",
   "email": "hi@anshumanmahato.me",
   "profession": [
     "Web Developer",
-    "Frontend DEveloper",
+    "Frontend Developer",
     "Backend Developer",
-    "Full Stack Developer"
+    "Full Stack Developer",
+    "Data Scientist"
   ],
   "skills": [
     "HTML",

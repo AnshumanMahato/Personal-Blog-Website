@@ -40,10 +40,10 @@ function Header() {
                 <NavLink href="/about">About</NavLink>
               </li>
               <li>
-                <NavLink href="/blogs">Blogs</NavLink>
+                <NavLink href="/blogs">Journal</NavLink>
               </li>
               <li>
-                <NavLink href="/artbook">Artbook</NavLink>
+                <NavLink href="/sketchbook">Sketchbook</NavLink>
               </li>
               {/* <li>
                 <NavLink href="/projects">Projects</NavLink>
@@ -72,10 +72,10 @@ function Header() {
                 <NavLink href="/about">About</NavLink>
               </li>
               <li>
-                <NavLink href="/blogs">Blogs</NavLink>
+                <NavLink href="/blogs">Journal</NavLink>
               </li>
               <li>
-                <NavLink href="/artbook">Artbook</NavLink>
+                <NavLink href="/sketchbook">Sketchbook</NavLink>
               </li>
               {/* <li>
                 <NavLink href="/projects">Projects</NavLink>

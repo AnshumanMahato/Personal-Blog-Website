@@ -14,32 +14,32 @@ async function generatePublicationMetadata(): Promise<Metadata> {
   if (!publication) return {};
 
   return {
-    title: `Blogs | ${profile.name}`,
+    title: `Journals | ${profile.name}`,
     description:
       publication.descriptionSEO ||
       publication.title ||
-      `${profile.name}'s Blog`,
+      `${profile.name}'s Journal`,
     twitter: {
       card: "summary_large_image",
       title:
         publication.displayTitle ||
         publication.title ||
-        `${profile.name}'s Blog`,
+        `${profile.name}'s Journal`,
       description:
         publication.descriptionSEO ||
         publication.title ||
-        `${publication.author.name}'s Blog`,
+        `${publication.author.name}'s Journal`,
       site: profile.handles.socials.twitter,
       images: [publication.ogMetaData?.image || ""],
     },
     openGraph: {
       type: "website",
       locale: "en_US",
-      title: `Blogs | ${profile.name}`,
+      title: `Journals | ${profile.name}`,
       description:
         publication.descriptionSEO ||
         publication.title ||
-        `${publication.author.name}'s Blog`,
+        `${publication.author.name}'s Journal`,
       images: [
         {
           url: publication.ogMetaData?.image || "",

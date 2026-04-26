@@ -33,21 +33,21 @@ export default function Home() {
             It’s nice to meet you!
           </h1>
           <p>
-            I am a Computer Science Student who aspires to be a Software
-            Developer. I write blogs and articles about web dev, computer
-            science and my experiences in general.
+            I’m a data scientist who enjoys turning ideas into things -
+            sometimes code, sometimes words, sometimes visuals. Welcome to my
+            space where I share my experiences, document what I learn, and
+            showcase what I create.
           </p>
-          <SectionLink href="/blogs">My Blogs {"-->"}</SectionLink>
+          <SectionLink href="/about">More About Me {"-->"}</SectionLink>
         </Section>
         <Section>
-          <SectionHeading>What I Do</SectionHeading>
+          <SectionHeading>My Journal</SectionHeading>
           <p>
-            Being focused on Web Development, my skills involve building
-            beautiful websites and robust web applications. Apart from this, I
-            can also build Telegram Chatbots and write Web Scrapping scripts.
+            A space where I think out loud. I write about what I’m learning and
+            what I’m thinking about, sometimes technical, sometimes not.
           </p>
-          <p>I usually work with these technologies.</p>
-          <div className="flex flex-wrap gap-[1.6rem] xs:gap-[2.5rem] sm:gap-[3.5rem] justify-center">
+          <p>If something stays with me, I write it down.</p>
+          {/* <div className="flex flex-wrap gap-[1.6rem] xs:gap-[2.5rem] sm:gap-[3.5rem] justify-center">
             {skills.map((skill) => {
               const [skillName, skillIcon] = skill;
               return (
@@ -64,19 +64,26 @@ export default function Home() {
                 </div>
               );
             })}
-          </div>
-          <p>Here are some of the things that I have worked on till now.</p>
-          <SectionLink href="/projects">
-            Checkout my Projects {"-->"}
+          </div> */}
+          <SectionLink href="/blogs">Checkout my Journal {"-->"}</SectionLink>
+        </Section>
+        <Section>
+          <SectionHeading>My Sketchbook</SectionHeading>
+          <p>
+            I like to draw well. It is how I slow down, pay attention, and stay
+            present for a bit. Some pieces take shape, some don’t.
+          </p>
+          <p>A small collection of things I have drawn so far.</p>
+          <SectionLink href="/sketchbook">
+            Checkout my Sketchbook{"-->"}
           </SectionLink>
         </Section>
         <Section>
           <SectionHeading>Connect With Me</SectionHeading>
           <p>
-            Looking for a web developer? I am open to internships, jobs,
-            freelance projects and open-source collaboration. Reach out if you
-            have anything and think I might be appropriate. I would love to hear
-            from you.
+            If something here caught your interest, or you would like to share
+            an idea, or just talk — feel free to reach out. I’m always open to
+            seeing where a good conversation can lead.
           </p>
           <p>You can find me here.</p>
           <div className="flex gap-[3rem] text-[2rem] xs:text-[2.5rem] text-accent-light dark:text-accent-dark">
