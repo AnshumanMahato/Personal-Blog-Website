@@ -6,16 +6,27 @@ import {
   useEffect,
   useState,
   ReactNode,
+  useSyncExternalStore,
 } from "react";
 
 interface ThemeContextType {
   darkMode: boolean;
+  mounted: boolean;
   toggleDarkMode: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function useMounted() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  const mounted = useMounted();
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     // SSR safety: only access localStorage on the client
     if (typeof window === "undefined") return false;
@@ -25,23 +36,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // Apply dark mode class to document
   useEffect(() => {
-    const hasDarkClass = document.documentElement.classList.contains("dark");
-    if (darkMode && !hasDarkClass) {
-      document.documentElement.classList.add("dark");
-    } else if (!darkMode && hasDarkClass) {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
+    if (!mounted) return;
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("darkMode--anshuman", JSON.stringify(darkMode));
+  }, [darkMode, mounted]);
 
   const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      localStorage.setItem("darkMode--anshuman", JSON.stringify(!prev));
-      return !prev;
-    });
+    setDarkMode((prev) => !prev);
   };
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <ThemeContext.Provider value={{ darkMode, mounted, toggleDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );
