@@ -42,11 +42,25 @@ export default function Home() {
         </Section>
         <Section>
           <SectionHeading>My Journal</SectionHeading>
+          <div className="relative w-[28rem] h-[28rem]">
+            <Image
+              src="/assets/images/home-blog.svg"
+              alt="My Journal"
+              fill
+              className="dark:hidden"
+            />
+            <Image
+              src="/assets/images/home-blog-dark.svg"
+              alt="My Journal"
+              fill
+              className="hidden dark:block"
+            />
+          </div>
           <p>
             A space where I think out loud. I write about what I’m learning and
-            what I’m thinking about, sometimes technical, sometimes not.
+            what I’m thinking about, sometimes technical, sometimes not. If
+            something stays with me, I write it down.
           </p>
-          <p>If something stays with me, I write it down.</p>
           {/* <div className="flex flex-wrap gap-[1.6rem] xs:gap-[2.5rem] sm:gap-[3.5rem] justify-center">
             {skills.map((skill) => {
               const [skillName, skillIcon] = skill;
@@ -69,11 +83,25 @@ export default function Home() {
         </Section>
         <Section>
           <SectionHeading>My Sketchbook</SectionHeading>
+          <div className="relative w-[28rem] h-[28rem]">
+            <Image
+              src="/assets/images/home-art.svg"
+              alt="My Sketchbook"
+              fill
+              className="dark:hidden"
+            />
+            <Image
+              src="/assets/images/home-art-dark.svg"
+              alt="My Sketchbook"
+              fill
+              className="hidden dark:block"
+            />
+          </div>
           <p>
             I like to draw well. It is how I slow down, pay attention, and stay
-            present for a bit. Some pieces take shape, some don’t.
+            present for a bit. Some pieces take shape, some don’t. A small
+            collection of things I have drawn so far.
           </p>
-          <p>A small collection of things I have drawn so far.</p>
           <SectionLink href="/sketchbook">
             Checkout my Sketchbook{"-->"}
           </SectionLink>
