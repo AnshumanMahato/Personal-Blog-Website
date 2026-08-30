@@ -1,0 +1,43 @@
+{
+  "id": "static-publication",
+  "title": "Journals & Notes",
+  "displayTitle": "Journals | Anshuman Mahato",
+  "url": "https://anshumanmahato.com/blogs",
+  "descriptionSEO": "A collection of thoughts, experiences, and learnings from software development, design, and life.",
+  "isTeam": false,
+  "favicon": "/favicon.ico",
+  "author": {
+    "id": "author-anshuman",
+    "name": "Anshuman Mahato",
+    "username": "AnshumanMahato",
+    "profilePicture": "/assets/images/profile.jpg"
+  },
+  "ogMetaData": {
+    "image": "/assets/images/og-image.png"
+  },
+  "preferences": {
+    "logo": "/assets/images/logo.png",
+    "darkMode": {
+      "logo": "/assets/images/logo.png"
+    },
+    "navbarItems": []
+  },
+  "links": {
+    "twitter": "https://twitter.com/AnshumanMahato_",
+    "github": "https://github.com/AnshumanMahato",
+    "linkedin": "https://www.linkedin.com/in/anshuman-mahato",
+    "hashnode": "https://hashnode.com/@AnshumanMahato"
+  },
+  "integrations": {
+    "gaTrackingID": "G-72XG3F8LNJ",
+    "umamiWebsiteUUID": null,
+    "fbPixelID": null,
+    "hotjarSiteID": null,
+    "matomoURL": null,
+    "matomoSiteID": null,
+    "fathomSiteID": null,
+    "fathomCustomDomain": null,
+    "fathomCustomDomainEnabled": false,
+    "plausibleAnalyticsEnabled": false
+  }
+}

@@ -1,5 +1,4 @@
 import { FaHashnode, FaDev, FaSquareRss } from "react-icons/fa6";
-import getPublication from "@/app/actions/getPublication";
 import Analytics from "@/app/components/Analytics";
 import Integrations from "@/app/components/Integrations";
 import { addPublicationJsonLd } from "@/app/utils/seo/addPublicationJsonLd";
@@ -10,6 +9,7 @@ import Section from "@/app/components/Section";
 import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getAllPosts from "@/app/actions/getAllPosts";
 import profile from "@/app/lib/profile.json";
+import publication from "@/app/lib/metadata/publication.json";
 
 async function Blogs() {
   const { dev, hashnode } = profile.handles.blogs;
@@ -32,7 +32,6 @@ async function Blogs() {
     },
   ];
 
-  const publication = await getPublication();
   const posts = await getAllPosts();
 
   return (

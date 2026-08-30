@@ -1,6 +1,6 @@
-import { PublicationFragment } from "@/app/schema/hashnode.graphql";
+import { Publication } from "@/@types/Publication";
 
-export const addPublicationJsonLd = (publication: PublicationFragment) => {
+export const addPublicationJsonLd = (publication: Publication) => {
   const schema = {
     "@context": "https://schema.org/",
     "@type": "Blog",

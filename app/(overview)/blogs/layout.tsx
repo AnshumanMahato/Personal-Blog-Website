@@ -1,4 +1,4 @@
-import getPublication from "@/app/actions/getPublication";
+import publication from "@/app/lib/metadata/publication.json";
 import profile from "@/app/lib/profile.json";
 import { Metadata } from "next";
 
@@ -9,12 +9,13 @@ type Props = Readonly<{
 export const revalidate = 86400;
 
 async function generatePublicationMetadata(): Promise<Metadata> {
-  const publication = await getPublication();
-
   if (!publication) return {};
 
   return {
-    title: `Journals | ${profile.name}`,
+    title:
+      publication.displayTitle ||
+      publication.title ||
+      `${profile.name}'s Journal`,
     description:
       publication.descriptionSEO ||
       publication.title ||
@@ -35,7 +36,10 @@ async function generatePublicationMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       locale: "en_US",
-      title: `Journals | ${profile.name}`,
+      title:
+        publication.displayTitle ||
+        publication.title ||
+        `${profile.name}'s Journal`,
       description:
         publication.descriptionSEO ||
         publication.title ||

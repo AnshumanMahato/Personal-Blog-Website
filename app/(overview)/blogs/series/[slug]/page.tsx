@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-import getPublication from "@/app/actions/getPublication";
 import Analytics from "@/app/components/Analytics";
 import Integrations from "@/app/components/Integrations";
 import { addPublicationJsonLd } from "@/app/utils/seo/addPublicationJsonLd";
 import PageBanner from "@/app/components/PageBanner";
 import BlogCardContainer from "@/app/components/BlogCardContainer";
 import getPostsBySeries from "@/app/actions/getPostsBySeries";
+import publication from "@/app/lib/metadata/publication.json";
 
 type Props = {
   params: Promise<{
@@ -15,7 +15,6 @@ type Props = {
 
 async function BlogsBySeries(props: Props) {
   const params = await props.params;
-  const publication = await getPublication();
   const posts = await getPostsBySeries(params.slug);
 
   if (!posts?.posts.length) {
